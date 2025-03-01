@@ -18,5 +18,34 @@
     <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="App\App.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="App\Cmd.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Util\Eventer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="main.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Doc\todo.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Lib\cxxopts\cxxopts.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="App\App.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="App\Cmd.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\Eventer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
