@@ -7,6 +7,7 @@ public:
 	~App();
 	static void init();
 	static void editImg(std::any& data);
+	static void screenCapture();
 private:
 };
 
