@@ -6,7 +6,7 @@
 #include <memory>
 #include <stdexcept>
 
-using EventHandler = std::function<void(std::any)>;
+using EventHandler = std::function<void(std::any&)>;
 class Eventer
 {
 public:
@@ -15,8 +15,8 @@ public:
     static Eventer* get();
     template<typename F>
     size_t on(std::string name, F&& handler) {
-        auto wrappedHandler = [h = std::forward<F>(handler)](std::any arg) {
-            if constexpr (std::is_invocable_v<F, std::any>) {
+        auto wrappedHandler = [h = std::forward<F>(handler)](std::any& arg) {
+            if constexpr (std::is_invocable_v<F, std::any&>) {
                 h(arg);
             }
             else if constexpr (std::is_invocable_v<F>) {

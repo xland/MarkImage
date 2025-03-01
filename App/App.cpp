@@ -13,7 +13,7 @@ App::~App()
 void App::init()
 {
 	
-	Eventer::get()->on("CmdImage", [](std::any data) {
+	Eventer::get()->on("CmdImage", [](std::any& data) {
 		auto str = std::any_cast<std::string>(data);
 		auto a = 1;
 		});
