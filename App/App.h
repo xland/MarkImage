@@ -6,6 +6,7 @@ public:
 	App();
 	~App();
 	static void init();
+	static void editImg(std::any& data);
 private:
 };
 

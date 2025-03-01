@@ -12,10 +12,12 @@ App::~App()
 
 void App::init()
 {
-	
-	Eventer::get()->on("CmdImage", [](std::any& data) {
-		auto str = std::any_cast<std::string>(data);
-		auto a = 1;
-		});
+	Eventer::on("CmdImage", App::editImg);
 	Cmd::init();
+}
+
+void App::editImg(std::any& data)
+{
+	auto str = std::any_cast<std::string>(data);
+	auto a = 1;
 }

@@ -14,7 +14,7 @@ public:
 	~Eventer();
     static Eventer* get();
     template<typename F>
-    size_t on(std::string name, F&& handler) {
+    static size_t on(std::string name, F&& handler) {
         auto wrappedHandler = [h = std::forward<F>(handler)](std::any& arg) {
             if constexpr (std::is_invocable_v<F, std::any&>) {
                 h(arg);
@@ -28,11 +28,11 @@ public:
         };
         static size_t handle = 0;
         handle += 1;
-        handlers[name].emplace_back(handle, std::move(wrappedHandler));
+        Eventer::get()->handlers[name].emplace_back(handle, std::move(wrappedHandler));
         return handle;
     }
-    void emit(std::string name, std::any arg = {});
-    void off(std::string name, uint64_t handle);
+    static void emit(std::string name, std::any arg = {});
+    static void off(std::string name, uint64_t handle);
 private:
     std::unordered_map<std::string, std::vector<std::pair<uint64_t, EventHandler>>> handlers;
 };
