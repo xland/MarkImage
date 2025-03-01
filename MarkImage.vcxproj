@@ -149,6 +149,10 @@
     <ClCompile Include="App\Cmd.cpp" />
     <ClCompile Include="Util\Eventer.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Window\Backend\Backend.cpp" />
+    <ClCompile Include="Window\Backend\OpenGL.cpp" />
+    <ClCompile Include="Window\Backend\Raster.cpp" />
+    <ClCompile Include="Window\WindowBase.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Manifest Include="main.manifest" />
@@ -161,6 +165,10 @@
     <ClInclude Include="App\Cmd.h" />
     <ClInclude Include="Util\Eventer.h" />
     <ClInclude Include="Lib\cxxopts\cxxopts.hpp" />
+    <ClInclude Include="Window\Backend\Backend.h" />
+    <ClInclude Include="Window\Backend\OpenGL.h" />
+    <ClInclude Include="Window\Backend\Raster.h" />
+    <ClInclude Include="Window\WindowBase.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

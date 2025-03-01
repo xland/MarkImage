@@ -27,6 +27,18 @@
     <ClCompile Include="Util\Eventer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Window\Backend\Backend.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Window\Backend\OpenGL.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Window\Backend\Raster.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Window\WindowBase.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Manifest Include="main.manifest" />
@@ -45,6 +57,18 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Util\Eventer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Window\Backend\Backend.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Window\Backend\OpenGL.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Window\Backend\Raster.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Window\WindowBase.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
