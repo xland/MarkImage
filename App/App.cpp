@@ -13,7 +13,7 @@ App::~App()
 void App::init()
 {
 	//cmd.on("CmdImage", std::function<void(std::string&)>(App::editImg));
-	//Eventer::on("CmdScreenCapture", std::function<void()>(App::screenCapture));
+	cmd.on("CmdScreenCapture", std::bind(&App::screenCapture, this));
 	cmd.on<std::string>("CmdImage", std::bind(&App::editImg, this, std::placeholders::_1));
 	//Eventer::on("CmdScreenCapture", App::screenCapture);
 	cmd.init();
