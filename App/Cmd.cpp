@@ -51,11 +51,11 @@ void Cmd::init()
     else if (result.count("Image")) {
         //编辑图像
         auto imgPath = result["Image"].as<std::string>();
-        Eventer::emit("CmdImage", imgPath);
+        emit("CmdImage", imgPath);
     }
     else if (result.count("ScreenCapture")) {
         //截屏
-        Eventer::emit("CmdScreenCapture");
+        emit("CmdScreenCapture");
     }
     else {
         //正常启动，常驻托盘

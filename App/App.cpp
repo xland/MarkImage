@@ -1,5 +1,5 @@
 #include "App.h"
-#include "Cmd.h"
+
 #include "../Util/Eventer.h"
 
 App::App()
@@ -12,14 +12,14 @@ App::~App()
 
 void App::init()
 {
-	//Eventer::on("CmdImage", std::function<void(std::string&)>(App::editImg));
+	//cmd.on("CmdImage", std::function<void(std::string&)>(App::editImg));
 	//Eventer::on("CmdScreenCapture", std::function<void()>(App::screenCapture));
-	Eventer::on("CmdImage", App::editImg);
+	cmd.on<std::string>("CmdImage", std::bind(&App::editImg, this, std::placeholders::_1));
 	//Eventer::on("CmdScreenCapture", App::screenCapture);
-	Cmd::init();
+	cmd.init();
 }
 
-void App::editImg(std::string& data)
+void App::editImg(const std::string& data)
 {
 	//auto str = std::any_cast<std::string>(data);
 	auto a = 1;

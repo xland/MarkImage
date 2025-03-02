@@ -35,6 +35,7 @@ void WindowBase::show()
 {
     ShowWindow(hwnd, SW_SHOW);
     UpdateWindow(hwnd);
+
     onShown();
 }
 

@@ -1,12 +1,14 @@
 ﻿#pragma once
 
-class Cmd
+#include "../Util/Eventer.h"
+
+class Cmd:public Eventer
 {
 public:
 	Cmd();
 	~Cmd();
-	static void init();
+	void init();
 private:
-	static void attachCmd();
+	void attachCmd();
 };
 

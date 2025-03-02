@@ -1,13 +1,15 @@
 #pragma once
+#include "Cmd.h"
 #include "../Util/Eventer.h"
 class App
 {
 public:
 	App();
 	~App();
-	static void init();
-	static void editImg(std::string& data);
-	static void screenCapture();
+	void init();
+	void editImg(const std::string& data);
+	void screenCapture();
 private:
+	Cmd cmd;
 };
 
