@@ -1,11 +1,4 @@
 ﻿#pragma once
-#include <vector>
-#include <string>
-#include <memory>
-#include <map>
-#include <array>
-#include <thread>
-#include <functional>
 #include <include/core/SkData.h>
 #include <include/core/SkPaint.h>
 #include <include/core/SkCanvas.h>
@@ -19,6 +12,7 @@
 #include <versionhelpers.h>
 #include <windowsx.h>
 
+#include "../Util/Eventer.h"
 #include "Backend/Backend.h"
 
 

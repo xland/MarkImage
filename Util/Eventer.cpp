@@ -19,17 +19,7 @@ Eventer* Eventer::get()
     return eventer.get();
 }
 
-void Eventer::emit(std::string name, std::any arg)
-{
-    auto it = eventer->handlers.find(name);
-    if (it != eventer->handlers.end()) {
-        for (const auto& [handle, handler] : it->second) {
-            handler(arg);
-        }
-    }
-}
-
-void Eventer::off(std::string name, size_t handle)
+void Eventer::off(std::string& name, size_t& handle)
 {
     auto it = eventer->handlers.find(name);
     if (it != eventer->handlers.end()) {

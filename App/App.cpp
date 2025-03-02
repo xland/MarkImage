@@ -12,14 +12,16 @@ App::~App()
 
 void App::init()
 {
+	//Eventer::on("CmdImage", std::function<void(std::string&)>(App::editImg));
+	//Eventer::on("CmdScreenCapture", std::function<void()>(App::screenCapture));
 	Eventer::on("CmdImage", App::editImg);
-	Eventer::on("CmdScreenCapture", App::screenCapture);
+	//Eventer::on("CmdScreenCapture", App::screenCapture);
 	Cmd::init();
 }
 
-void App::editImg(std::any& data)
+void App::editImg(std::string& data)
 {
-	auto str = std::any_cast<std::string>(data);
+	//auto str = std::any_cast<std::string>(data);
 	auto a = 1;
 }
 
