@@ -7,7 +7,7 @@ public:
 	App();
 	~App();
 	void init();
-	void editImg(const std::string& data);
+	void editImg(std::string& data);
 	void screenCapture();
 private:
 	Cmd cmd;

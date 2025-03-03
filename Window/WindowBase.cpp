@@ -35,8 +35,7 @@ void WindowBase::show()
 {
     ShowWindow(hwnd, SW_SHOW);
     UpdateWindow(hwnd);
-
-    onShown();
+    emit("onShown");
 }
 
 bool WindowBase::alphaWindow()
@@ -175,13 +174,13 @@ LRESULT WindowBase::processWinMsg(UINT msg, WPARAM wParam, LPARAM lParam)
     switch (msg)
     {
     case WM_TIMER: {
-        onTimer(wParam);
+        emit("onTimer",(size_t)wParam);
         return 0;
     }
     case WM_MOVE: {
         x = LOWORD(lParam);
         y = HIWORD(lParam);
-        onMove(x,y);
+        emit("onMove", x,y);
         return 0;
     }
     case WM_SIZE: {
@@ -189,7 +188,7 @@ LRESULT WindowBase::processWinMsg(UINT msg, WPARAM wParam, LPARAM lParam)
         w = LOWORD(lParam);
         h = HIWORD(lParam);
         backend->resize();
-        onSize(w,h);
+        emit("onSize", w, h);
         return 0;
     }
     //case WM_SETCURSOR: {
@@ -202,7 +201,7 @@ LRESULT WindowBase::processWinMsg(UINT msg, WPARAM wParam, LPARAM lParam)
     case WM_PAINT: {
         PAINTSTRUCT ps;
         HDC hdc = BeginPaint(hwnd, &ps);
-        onPaint(backend->getCanvas());
+        emit("onPaint", backend->getCanvas());
         backend->paint(hdc);
         ReleaseDC(hwnd, hdc);
         EndPaint(hwnd, &ps);
@@ -210,53 +209,43 @@ LRESULT WindowBase::processWinMsg(UINT msg, WPARAM wParam, LPARAM lParam)
     }
     case WM_LBUTTONDOWN:
     {
-        onMousePress(GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
+        emit("onMousePress", GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
         return 0;
     }
     case WM_MOUSEMOVE:
     {
         if (wParam & MK_LBUTTON) {
-            onMouseDrag(GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
+            emit("onMouseDrag", GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
         }
         else {
-            onMouseMove(GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
+            emit("onMouseMove", GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
         }
         return 0;
     }
     case WM_LBUTTONDBLCLK:
     {
-        onMouseDBClick(GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
+        emit("onMouseDBClick", GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
         return 0;
     }
     case WM_LBUTTONUP:
     {
-        onMouseRelease(GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
+        emit("onMouseRelease", GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
         return 0;
     }
     case WM_RBUTTONDOWN:
     {
-        onMousePressRight(GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
+        emit("onMousePressRight", GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
         return 0;
     }
     case WM_KEYDOWN:
     {
         if ((GetKeyState(VK_CONTROL) & 0x8000) != 0) {
-            onKeyDownWithCtrl(wParam);
+            emit("onKeyDownWithCtrl", (size_t)wParam);
         }
         else {
-            onKeyDown(wParam);
+            emit("onKeyDown", (size_t)wParam);
         }
         break;
-    }
-    case WM_IME_STARTCOMPOSITION:
-    {
-        onIme();
-        return 0;
-    }
-    case WM_CHAR: {
-        if (wParam <= 31 || wParam == 127) return 0;// 直接返回，不处理控制字符
-        onChar(std::wstring{ (wchar_t)wParam });
-		return 0;
     }
     default: {
         return DefWindowProc(hwnd, msg, wParam, lParam);

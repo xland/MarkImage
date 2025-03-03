@@ -16,7 +16,7 @@
 #include "Backend/Backend.h"
 
 
-class WindowBase
+class WindowBase:public Eventer
 {
 public:
 	WindowBase();

@@ -59,6 +59,7 @@ void Cmd::init()
     }
     else {
         //正常启动，常驻托盘
+        emit("CmdStart");
 
     }
     LocalFree(argvW);
