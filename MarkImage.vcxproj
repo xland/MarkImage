@@ -97,8 +97,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Window\MainHistory.cpp" />
+    <ClCompile Include="Window\MainShape.cpp" />
     <ClCompile Include="Window\MainTool.cpp" />
+    <ClCompile Include="Window\ScreenMask.cpp" />
+    <ClCompile Include="Window\WindowLayer.cpp" />
     <ClCompile Include="Window\WindowMain.cpp" />
+    <ClCompile Include="Window\WindowScreen.cpp" />
     <QtRcc Include="MarkImage.qrc" />
     <QtMoc Include="MarkImage.h" />
     <ClCompile Include="App\App.cpp" />
@@ -110,6 +115,11 @@
     <ClInclude Include="App\App.h" />
     <ClInclude Include="App\Cmd.h" />
     <ClInclude Include="Lib\cxxopts\cxxopts.hpp" />
+    <QtMoc Include="Window\WindowLayer.h" />
+    <QtMoc Include="Window\ScreenMask.h" />
+    <QtMoc Include="Window\WindowScreen.h" />
+    <QtMoc Include="Window\MainHistory.h" />
+    <QtMoc Include="Window\MainShape.h" />
     <QtMoc Include="Window\MainTool.h" />
     <QtMoc Include="Window\WindowMain.h" />
   </ItemGroup>
