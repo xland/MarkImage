@@ -63,6 +63,11 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
   </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+    </ClCompile>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
     <ClCompile>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -92,10 +97,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Window\MainTool.cpp" />
+    <ClCompile Include="Window\WindowMain.cpp" />
     <QtRcc Include="MarkImage.qrc" />
     <QtMoc Include="MarkImage.h" />
+    <ClCompile Include="App\App.cpp" />
+    <ClCompile Include="App\Cmd.cpp" />
     <ClCompile Include="MarkImage.cpp" />
     <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="App\App.h" />
+    <ClInclude Include="App\Cmd.h" />
+    <ClInclude Include="Lib\cxxopts\cxxopts.hpp" />
+    <QtMoc Include="Window\MainTool.h" />
+    <QtMoc Include="Window\WindowMain.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

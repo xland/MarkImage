@@ -1,10 +1,12 @@
 #include "MarkImage.h"
 #include <QtWidgets/QApplication>
 
+#include "App/App.h"
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    MarkImage w;
-    w.show();
+    App app;
+    app.init();
     return a.exec();
 }
