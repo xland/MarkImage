@@ -9,5 +9,7 @@ class MainTool : public QMainWindow
 public:
 	MainTool();
 	~MainTool();
+protected:
+	void paintEvent(QPaintEvent* event);
 private:
 };

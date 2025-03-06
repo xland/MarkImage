@@ -49,16 +49,10 @@
     <ClCompile Include="Window\MainTool.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Window\MainShape.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Window\MainHistory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Window\WindowScreen.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Window\ScreenMask.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Window\WindowLayer.cpp">
@@ -83,20 +77,17 @@
     <QtMoc Include="Window\MainTool.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Window\MainShape.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="Window\MainHistory.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="Window\WindowScreen.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Window\ScreenMask.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
     <QtMoc Include="Window\WindowLayer.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Doc\todo.md" />
   </ItemGroup>
 </Project>

@@ -2,13 +2,12 @@
 
 #include <QMainWindow>
 
-class WindowLayer : public QMainWindow
+class WindowPin : public QMainWindow
 {
 	Q_OBJECT
 
 public:
-	WindowLayer();
-	~WindowLayer();
-
+	WindowPin();
+	~WindowPin();
 private:
 };

@@ -1,5 +1,6 @@
 #include "MarkImage.h"
 #include <QtWidgets/QApplication>
+#include <QPainter>
 
 #include "App/App.h"
 

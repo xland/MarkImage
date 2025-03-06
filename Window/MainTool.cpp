@@ -10,3 +10,8 @@ MainTool::~MainTool()
 {
 
 }
+
+void MainTool::paintEvent(QPaintEvent* event)
+{
+	QMainWindow::paintEvent(event);
+}

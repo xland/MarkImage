@@ -41,7 +41,7 @@
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
-    <QtInstall>6.8.2_msvc2022_64</QtInstall>
+    <QtInstall>6.8.2-static_msvc2022_64</QtInstall>
     <QtModules>core;gui;opengl;widgets</QtModules>
     <QtBuildConfig>release</QtBuildConfig>
   </PropertyGroup>
@@ -66,6 +66,17 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <LanguageStandard>stdcpp20</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Link>
+      <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <ClCompile>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
@@ -98,9 +109,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Window\MainHistory.cpp" />
-    <ClCompile Include="Window\MainShape.cpp" />
     <ClCompile Include="Window\MainTool.cpp" />
-    <ClCompile Include="Window\ScreenMask.cpp" />
     <ClCompile Include="Window\WindowLayer.cpp" />
     <ClCompile Include="Window\WindowMain.cpp" />
     <ClCompile Include="Window\WindowScreen.cpp" />
@@ -116,12 +125,13 @@
     <ClInclude Include="App\Cmd.h" />
     <ClInclude Include="Lib\cxxopts\cxxopts.hpp" />
     <QtMoc Include="Window\WindowLayer.h" />
-    <QtMoc Include="Window\ScreenMask.h" />
     <QtMoc Include="Window\WindowScreen.h" />
     <QtMoc Include="Window\MainHistory.h" />
-    <QtMoc Include="Window\MainShape.h" />
     <QtMoc Include="Window\MainTool.h" />
     <QtMoc Include="Window\WindowMain.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Doc\todo.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

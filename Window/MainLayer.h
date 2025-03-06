@@ -1,12 +1,14 @@
 #pragma once
+
 #include <QMainWindow>
 
-class ScreenMask : public QMainWindow
+class MainLayer : public QMainWindow
 {
 	Q_OBJECT
 
 public:
-	ScreenMask();
-	~ScreenMask();
+	MainLayer();
+	~MainLayer();
+
 private:
 };

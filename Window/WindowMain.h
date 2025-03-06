@@ -20,4 +20,5 @@ protected:
 	void showEvent(QShowEvent*) override;
 private:
 	MainTool* mainTool;
+	QPixmap pixmap;
 };
