@@ -37,12 +37,12 @@
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
     <QtInstall>6.8.2_msvc2022_64</QtInstall>
-    <QtModules>core;gui;opengl;widgets</QtModules>
+    <QtModules>core;gui;widgets;opengl;openglwidgets</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
     <QtInstall>6.8.2-static_msvc2022_64</QtInstall>
-    <QtModules>core;gui;opengl;widgets</QtModules>
+    <QtModules>core;gui;widgets;opengl;openglwidgets</QtModules>
     <QtBuildConfig>release</QtBuildConfig>
   </PropertyGroup>
   <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
@@ -66,17 +66,21 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>D:\sdk\qwindowkit\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\sdk\qwindowkit\build\$(Configuration)\bin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Link>
       <AdditionalDependencies>opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <ClCompile>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <AdditionalIncludeDirectories>D:\sdk\qwindowkit\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
@@ -108,10 +112,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Window\MainHistory.cpp" />
+    <ClCompile Include="Window\MainProperty.cpp" />
     <ClCompile Include="Window\MainTool.cpp" />
-    <ClCompile Include="Window\WindowLayer.cpp" />
+    <ClCompile Include="Window\MainLayer.cpp" />
+    <ClCompile Include="Window\QtWidgetsClass.cpp" />
     <ClCompile Include="Window\WindowMain.cpp" />
+    <ClCompile Include="Window\WindowPin.cpp" />
     <ClCompile Include="Window\WindowScreen.cpp" />
     <QtRcc Include="MarkImage.qrc" />
     <QtMoc Include="MarkImage.h" />
@@ -124,14 +130,19 @@
     <ClInclude Include="App\App.h" />
     <ClInclude Include="App\Cmd.h" />
     <ClInclude Include="Lib\cxxopts\cxxopts.hpp" />
-    <QtMoc Include="Window\WindowLayer.h" />
+    <QtMoc Include="Window\QtWidgetsClass.h" />
+    <QtMoc Include="Window\WindowPin.h" />
+    <QtMoc Include="Window\MainProperty.h" />
+    <QtMoc Include="Window\MainLayer.h" />
     <QtMoc Include="Window\WindowScreen.h" />
-    <QtMoc Include="Window\MainHistory.h" />
     <QtMoc Include="Window\MainTool.h" />
     <QtMoc Include="Window\WindowMain.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Doc\todo.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="Window\QtWidgetsClass.ui" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

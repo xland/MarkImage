@@ -6,6 +6,7 @@
 #include <QOpenGLFunctions>
 #include <QMainWindow>
 #include "MainTool.h"
+#include "MainProperty.h"
 
 class WindowMain : public QOpenGLWindow, protected QOpenGLFunctions
 {
@@ -18,7 +19,9 @@ protected:
 	void paintGL() override;
 	void closeEvent(QCloseEvent*) override;
 	void showEvent(QShowEvent*) override;
+	void resizeEvent(QResizeEvent*) override;
 private:
 	MainTool* mainTool;
+	MainProperty* mainProperty;
 	QPixmap pixmap;
 };

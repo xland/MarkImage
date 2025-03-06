@@ -9,12 +9,20 @@ WindowMain::WindowMain()
     format.setVersion(3, 3);
     format.setProfile(QSurfaceFormat::CoreProfile);
     setFormat(format);
-
-    mainTool = new MainTool();
-    auto hwnd = (HWND)mainTool->winId();
     auto pHwnd = (HWND)winId();
-    SetParent(hwnd, pHwnd);
-    mainTool->move(100, 100);
+
+    //mainProperty = new MainProperty();
+    //auto hwnd1 = (HWND)mainProperty->winId();
+    //SetParent(hwnd1, pHwnd);
+    //mainProperty->setFixedSize(QSize(width(), 60));
+
+    //mainTool = new MainTool();
+    //auto hwnd2 = (HWND)mainTool->winId();
+    //SetParent(hwnd2, pHwnd);
+    //mainTool->move(600, 100);
+
+    setMaximumSize(QSize(1200, 800));
+    setMinimumSize(QSize(1200, 800));
 }
 
 WindowMain::~WindowMain()
@@ -41,12 +49,20 @@ void WindowMain::paintGL()
 
 void WindowMain::closeEvent(QCloseEvent*)
 {
-    mainTool->close();
-    mainTool->deleteLater();
+    //mainTool->close();
+    //mainTool->deleteLater();
     deleteLater();
 }
 
 void WindowMain::showEvent(QShowEvent*)
 {
-    mainTool->show();
+    //mainTool->show();
+    //mainProperty->show();
+}
+
+void WindowMain::resizeEvent(QResizeEvent*)
+{
+    //if (!mainProperty) return;
+    //mainProperty->setFixedWidth(width()-30);
+    //mainProperty->move(0, 0);
 }
