@@ -9,7 +9,7 @@
 #include <dwmapi.h>
 #include <ShellScalingApi.h>
 
-
+#include "PixInfo.h"
 #include "ScreenCapture.h"
 
 ScreenCapture::ScreenCapture(QWidget *parent) : QMainWindow(parent),
@@ -22,6 +22,8 @@ ScreenCapture::ScreenCapture(QWidget *parent) : QMainWindow(parent),
     initWinRect();
     shotScreen();
     showFullScreen();
+    pixInfo = new PixInfo(this);
+    setCursor(Qt::CrossCursor);
 }
 
 ScreenCapture::~ScreenCapture()
@@ -33,6 +35,7 @@ void ScreenCapture::paintEvent(QPaintEvent* event)
 {
     QPainter p(this);
     p.setRenderHint(QPainter::Antialiasing, true);
+    p.setRenderHint(QPainter::TextAntialiasing, true);
     //painter.setRenderHint(QPainter::SmoothPixmapTransform);
     p.drawPixmap(0, 0, pixScreen);
 
@@ -45,6 +48,7 @@ void ScreenCapture::paintEvent(QPaintEvent* event)
     p.drawPath(path);
     if (state != 1) return;
     if (QApplication::mouseButtons() & Qt::LeftButton) return;
+
     //绘制边框上的拖动圆点
     p.setBrush(borderColor);
     p.setPen(QPen(QBrush(QColor(255, 255, 255)), 1));
@@ -59,6 +63,29 @@ void ScreenCapture::paintEvent(QPaintEvent* event)
     p.drawEllipse(QPointF(rectMask.left() + hw, rectMask.bottom()), r, r);
     p.drawEllipse(rectMask.bottomLeft().toPointF(), r, r);
     p.drawEllipse(QPointF(rectMask.left(), rectMask.top() + hh), r, r);
+
+    //绘制截图区域位置和大小
+    auto text = QString("X:%1 Y:%2 R:%3 B:%4 W:%5 H:%6")
+        .arg(rectMask.x()).arg(rectMask.y())
+        .arg(rectMask.right()).arg(rectMask.bottom())
+        .arg(rectMask.width()).arg(rectMask.height());
+    auto font = p.font();
+    font.setPointSizeF(8.f);
+    p.setFont(font);
+    QFontMetrics fm(font);
+    QRect textRect = fm.boundingRect(text);
+    int w = textRect.width();
+    int h = textRect.height();
+    auto y = rectMask.y() - h - 12;
+    auto x = rectMask.x() + 4;
+    if (y < 0) y = rectMask.y() + 4;
+    QRect rect(x, y, w + 16, h + 8);
+    p.setBrush(QColor(0, 0, 0, 120));
+    p.setPen(Qt::NoPen);
+    p.drawRoundedRect(rect,3,3);
+    p.setPen(QPen(QBrush(Qt::white), 1));
+    p.setBrush(Qt::NoBrush);
+    p.drawText(rect, Qt::AlignCenter, text);
 }
 
 void ScreenCapture::mousePressEvent(QMouseEvent* event)
@@ -68,6 +95,9 @@ void ScreenCapture::mousePressEvent(QMouseEvent* event)
         if (state == 1) {
             changeRectMask(posPress);
             update();
+        }
+        if (pixInfo) {
+            pixInfo->hide();
         }
     }
 }
@@ -93,10 +123,12 @@ void ScreenCapture::mouseMoveEvent(QMouseEvent* event)
         }
     }
     else {
+        auto pos = event->pos();
         if (state == 0) {
+            pixInfo->mouseMove(pos);
             for (const auto& rect : rectWins)
             {
-                if (rect.contains(event->pos())) {
+                if (rect.contains(pos)) {
                     if (rectMask == rect) return;
                     rectMask = rect;
                     update();
@@ -105,7 +137,6 @@ void ScreenCapture::mouseMoveEvent(QMouseEvent* event)
             }
         }
         else if (state == 1) {
-            auto pos = event->pos();
             changeMouseState(pos.x(), pos.y());
         }
     }

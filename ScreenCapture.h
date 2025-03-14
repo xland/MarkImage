@@ -2,6 +2,7 @@
 #include <QPixmap>
 #include <QMainWindow>
 
+class PixInfo;
 class ScreenCapture : public QMainWindow
 {
 	Q_OBJECT
@@ -21,10 +22,11 @@ private:
 	void changeMouseState(const int& x, const int& y);
 	void changeRectMask(const QPoint& pos);
 	void moveMaskRect(const QPoint& pos);
+public:
+	QPixmap pixScreen;
 private:
 	QPoint posPress;
 	QList<QRect> rectWins;
-	QPixmap pixScreen;
 	int x, y, w, h;
 	QRect rectMask;
 	/// <summary>
@@ -34,4 +36,5 @@ private:
 	/// </summary>
 	uint state{ 0 };
 	uint mouseState{ 0 };
+	PixInfo* pixInfo;
 };

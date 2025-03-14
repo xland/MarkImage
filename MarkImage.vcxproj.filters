@@ -43,12 +43,18 @@
     <ClCompile Include="ScreenCapture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PixInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="App.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="ScreenCapture.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="PixInfo.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
