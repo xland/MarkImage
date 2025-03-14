@@ -37,74 +37,24 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="App\Cmd.cpp">
+    <ClCompile Include="App.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="App\App.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Window\WindowMain.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Window\MainTool.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Window\WindowScreen.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Window\MainLayer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Window\MainProperty.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Window\WindowPin.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Window\QtWidgetsClass.cpp">
+    <ClCompile Include="ScreenCapture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Lib\cxxopts\cxxopts.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="App\Cmd.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="App\App.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <QtMoc Include="Window\WindowMain.h">
+    <QtMoc Include="App.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Window\MainTool.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Window\WindowScreen.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Window\MainLayer.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Window\MainProperty.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Window\WindowPin.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="Window\QtWidgetsClass.h">
+    <QtMoc Include="ScreenCapture.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Doc\todo.md" />
-  </ItemGroup>
-  <ItemGroup>
-    <QtUic Include="Window\QtWidgetsClass.ui">
-      <Filter>Form Files</Filter>
-    </QtUic>
+    <None Include="Doc\Node从命令行启动.md" />
+    <None Include="Test\NodeStart\index.js" />
+    <None Include="Doc\job.md" />
   </ItemGroup>
 </Project>

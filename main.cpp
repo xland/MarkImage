@@ -1,13 +1,15 @@
 #include "MarkImage.h"
 #include <QtWidgets/QApplication>
-#include <QPainter>
+#include <QCoreApplication>
 
-#include "App/App.h"
+#include "App.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    App app;
-    app.init();
+    a.setQuitOnLastWindowClosed(false);
+
+    App app(qApp);
+    app.start();
     return a.exec();
 }
