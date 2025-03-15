@@ -3,6 +3,7 @@
 #include <QMainWindow>
 
 class PixInfo;
+class CutTool;
 class ScreenCapture : public QMainWindow
 {
 	Q_OBJECT
@@ -24,11 +25,11 @@ private:
 	void moveMaskRect(const QPoint& pos);
 public:
 	QPixmap pixScreen;
+	QRect rectMask;
 private:
 	QPoint posPress;
 	QList<QRect> rectWins;
 	int x, y, w, h;
-	QRect rectMask;
 	/// <summary>
 	/// 0 开始
 	/// 1 截图区域确认
@@ -37,4 +38,5 @@ private:
 	uint state{ 0 };
 	uint mouseState{ 0 };
 	PixInfo* pixInfo;
+	CutTool* cutTool;
 };

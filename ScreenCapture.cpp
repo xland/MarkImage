@@ -9,8 +9,10 @@
 #include <dwmapi.h>
 #include <ShellScalingApi.h>
 
+#include "Util.h"
 #include "PixInfo.h"
 #include "ScreenCapture.h"
+#include "CutTool.h"
 
 ScreenCapture::ScreenCapture(QWidget *parent) : QMainWindow(parent),
     x{ GetSystemMetrics(SM_XVIRTUALSCREEN) },
@@ -69,17 +71,12 @@ void ScreenCapture::paintEvent(QPaintEvent* event)
         .arg(rectMask.x()).arg(rectMask.y())
         .arg(rectMask.right()).arg(rectMask.bottom())
         .arg(rectMask.width()).arg(rectMask.height());
-    auto font = p.font();
-    font.setPointSizeF(8.f);
-    p.setFont(font);
-    QFontMetrics fm(font);
-    QRect textRect = fm.boundingRect(text);
-    int w = textRect.width();
-    int h = textRect.height();
-    auto y = rectMask.y() - h - 12;
-    auto x = rectMask.x() + 4;
+    auto font = Util::getTextFont(10);
+    p.setFont(*font);
+    QFontMetrics fm(*font);
+    int w = fm.horizontalAdvance(text);
     if (y < 0) y = rectMask.y() + 4;
-    QRect rect(x, y, w + 16, h + 8);
+    QRect rect(rectMask.x(), rectMask.y() - 25, w + 14, 22);
     p.setBrush(QColor(0, 0, 0, 120));
     p.setPen(Qt::NoPen);
     p.drawRoundedRect(rect,3,3);
@@ -106,6 +103,9 @@ void ScreenCapture::mouseMoveEvent(QMouseEvent* event)
 {
     if (event->buttons() & Qt::LeftButton) {
         auto pos = event->pos();
+        if (cutTool && cutTool->isVisible()) {
+            cutTool->hide();
+        }
         if (state == 0) {
             if (pos == posPress) return;
             rectMask.setCoords(posPress.x(), posPress.y(), pos.x(), pos.y());
@@ -147,6 +147,12 @@ void ScreenCapture::mouseReleaseEvent(QMouseEvent* event)
     state = 1;
     rectMask = rectMask.normalized();
     update();
+    if (!cutTool) {
+        cutTool = new CutTool(this);
+    }
+    auto br = rectMask.bottomRight();
+    cutTool->move(br.x() - cutTool->width(), br.y() + 4);
+    cutTool->show();
 }
 
 void ScreenCapture::moveMaskRect(const QPoint& pos)

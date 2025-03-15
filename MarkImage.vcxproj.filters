@@ -46,6 +46,12 @@
     <ClCompile Include="PixInfo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CutTool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Util.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="App.h">
@@ -57,10 +63,18 @@
     <QtMoc Include="PixInfo.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="CutTool.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <None Include="Doc\Node从命令行启动.md" />
     <None Include="Test\NodeStart\index.js" />
     <None Include="Doc\job.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Util.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
