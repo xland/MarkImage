@@ -23,6 +23,10 @@ private:
 	void changeMouseState(const int& x, const int& y);
 	void changeRectMask(const QPoint& pos);
 	void moveMaskRect(const QPoint& pos);
+	void saveFile();
+	void saveClipboard();
+	void closeBtnClick();
+	void pinImage();
 public:
 	QPixmap pixScreen;
 	QRect rectMask;

@@ -3,15 +3,12 @@
 #include <QPainterPath>
 #include <QGuiApplication>
 #include <QScreen>
-#include <QFileDialog>
-#include <QStandardPaths>
 #include <QMessageBox>
 #include <QToolTip>
 
 #include "ScreenCapture.h"
 #include "Util.h"
 #include "CutTool.h"
-#include "PinImage.h"
 
 CutTool::CutTool(bool disablePin, QWidget* parent) : QWidget(parent), disablePin{ disablePin }
 {
@@ -56,7 +53,7 @@ void CutTool::paintEvent(QPaintEvent* event)
 		}
 		p.setFont(*font);
 		p.setBrush(Qt::NoBrush);
-		p.setPen((i == 3 && disablePin) ? QColor(188, 188, 188) : textColor); // 
+		p.setPen((i == 3 && disablePin) ? QColor(188, 188, 188) : textColor);
 		p.drawText(r, Qt::AlignCenter, arr[i]);
 	}
 }
@@ -64,16 +61,17 @@ void CutTool::paintEvent(QPaintEvent* event)
 void CutTool::mousePressEvent(QMouseEvent* event)
 {
 	if (hoverIndex == 0) {
-		qApp->quit();
+		emit onClose();
 	}
 	else if (hoverIndex == 1) {
-		saveFile();
+		emit onSaveFile();
 	}
 	else if (hoverIndex == 2) {
-		saveClipboard();
+		emit onSaveClipboard();
 	}
 	else if (hoverIndex == 3) {
-		pinImage();
+		if (disablePin) return;
+		emit onPinImg();
 	}
 	else if (hoverIndex == 4) {
 
@@ -109,54 +107,6 @@ void CutTool::leaveEvent(QEvent* event)
 	
 }
 
-void CutTool::saveFile()
-{
-	QString desktopPath = QStandardPaths::writableLocation(QStandardPaths::DesktopLocation);
-	auto filePath = QDir::cleanPath(desktopPath + QDir::separator() + "Img" + QDateTime::currentDateTime().toString("yyyyMMddhhmmsszzz") + ".png");
-	filePath = QFileDialog::getSaveFileName(window(), tr("保存文件"), filePath, "MarkImage (*.png)");
-	if (filePath.isEmpty())
-	{
-		return;
-	}
-	auto win = (ScreenCapture*)window();
-	auto dpr = win->devicePixelRatio();
-	QRect rr(win->rectMask.topLeft() * dpr, win->rectMask.size() * dpr);
-	win->pixScreen.copy(rr).save(filePath);
-	qApp->quit();
-}
-
-void CutTool::saveClipboard()
-{
-	auto win = (ScreenCapture*)window();
-	auto dpr = win->devicePixelRatio();
-	QRect rr(win->rectMask.topLeft() * dpr, win->rectMask.size() * dpr);
-	auto tempImg = win->pixScreen.copy(rr).toImage();
-	auto width = tempImg.width();
-	auto height = tempImg.height();
-	HDC screenDC = GetDC(nullptr);
-	HDC memoryDC = CreateCompatibleDC(screenDC);
-	HBITMAP hBitmap = CreateCompatibleBitmap(screenDC, width, height);
-	DeleteObject(SelectObject(memoryDC, hBitmap));
-	BITMAPINFO bitmapInfo = { 0 };
-	bitmapInfo.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
-	bitmapInfo.bmiHeader.biWidth = width;
-	bitmapInfo.bmiHeader.biHeight = -height;
-	bitmapInfo.bmiHeader.biPlanes = 1;
-	bitmapInfo.bmiHeader.biBitCount = 32;
-	//pixmap.addr() 像素数据的地址
-	SetDIBitsToDevice(memoryDC, 0, 0, width, height, 0, 0, 0, height, tempImg.bits(), &bitmapInfo, DIB_RGB_COLORS);
-	if (!OpenClipboard(nullptr)) {
-		QMessageBox::warning(this, "Error", "Failed to open clipboard when save to clipboard.", QMessageBox::StandardButton::Ok);
-		return;
-	}
-	EmptyClipboard();
-	SetClipboardData(CF_BITMAP, hBitmap);
-	CloseClipboard();
-	ReleaseDC(nullptr, screenDC);
-	DeleteDC(memoryDC);
-	DeleteObject(hBitmap);
-	qApp->quit();
-}
 
 void CutTool::showToolTip()
 {
@@ -176,16 +126,4 @@ void CutTool::showToolTip()
 	else if (hoverIndex == 4) {
 		QToolTip::showText(QCursor::pos(), "编辑截图(Ctrl+E)", this);
 	}
-}
-
-void CutTool::pinImage()
-{
-	if (disablePin) return;
-	auto win = (ScreenCapture*)window();
-	auto dpr = win->devicePixelRatio();
-	auto pos = win->rectMask.topLeft();
-	QRect rr(win->rectMask.topLeft() * dpr, win->rectMask.size() * dpr);
-	auto pixmap = win->pixScreen.copy(rr);
-	new PinImage(pos,pixmap);
-	win->close();
 }

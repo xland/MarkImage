@@ -16,6 +16,10 @@ protected:
 	void mouseMoveEvent(QMouseEvent* event) override;
 	void mouseReleaseEvent(QMouseEvent* event) override;
 private:
+	void saveFile();
+	void saveClipboard();
+	void closeBtnClick();
+private:
 	QPoint posPress;
 	QPixmap pixmap;
 	QPoint pos;

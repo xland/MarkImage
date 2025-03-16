@@ -12,16 +12,18 @@ class CutTool : public QWidget
 public:
 	CutTool(bool disablePin, QWidget *parent = nullptr);
 	~CutTool();
+signals:
+	void onSaveFile();
+	void onSaveClipboard();
+	void onClose();
+	void onPinImg();
 protected:
 	void paintEvent(QPaintEvent* event) override;
 	void mousePressEvent(QMouseEvent* event) override;
 	void mouseMoveEvent(QMouseEvent* event) override;
 	void leaveEvent(QEvent* event) override;
 private:
-	void saveFile();
-	void saveClipboard();
 	void showToolTip();
-	void pinImage();
 private:
 	int hoverIndex{-1};
 	bool disablePin;

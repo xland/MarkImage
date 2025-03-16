@@ -2,11 +2,12 @@
 #include <QPainter>
 #include <QMouseEvent>
 
+#include "Util.h"
 #include "PinImage.h"
 
 PinImage::PinImage(const QPoint& pos,const QPixmap& pixmap, QWidget* parent) : QMainWindow(parent)
-,pixmap{pixmap}
-,pos{pos}
+    ,pixmap{pixmap}
+    ,pos{pos}
 {
 	setWindowFlags(windowFlags() | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
 	setAttribute(Qt::WA_TranslucentBackground);
@@ -26,6 +27,10 @@ PinImage::PinImage(const QPoint& pos,const QPixmap& pixmap, QWidget* parent) : Q
     auto y = pos.y() + size.height() + 6;
     cutTool->move(x, y);
     cutTool->show();
+
+    connect(cutTool, &CutTool::onSaveFile, this, &PinImage::saveFile);
+    connect(cutTool, &CutTool::onSaveClipboard, this, &PinImage::saveClipboard);
+    connect(cutTool, &CutTool::onClose, this, &PinImage::closeBtnClick);
 }
 
 PinImage::~PinImage()
@@ -61,4 +66,30 @@ void PinImage::mouseReleaseEvent(QMouseEvent* event)
     auto y = pos.y() + 6;
     cutTool->move(x, y);
     cutTool->show();
+}
+
+void PinImage::saveFile()
+{
+    auto filePath = Util::getSaveFilePath();
+    if (filePath.isEmpty())
+    {
+        return;
+    }
+    auto dpr = devicePixelRatio();
+    pixmap.save(filePath);
+    closeBtnClick();
+}
+
+void PinImage::saveClipboard()
+{
+    Util::saveImgToClipboard(pixmap.toImage());
+    closeBtnClick();
+}
+
+void PinImage::closeBtnClick()
+{
+    close();
+    deleteLater();
+    cutTool->close();
+    cutTool->deleteLater();
 }

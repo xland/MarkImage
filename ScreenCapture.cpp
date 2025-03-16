@@ -13,6 +13,7 @@
 #include "PixInfo.h"
 #include "ScreenCapture.h"
 #include "CutTool.h"
+#include "PinImage.h"
 
 ScreenCapture::ScreenCapture(QWidget *parent) : QMainWindow(parent),
     x{ GetSystemMetrics(SM_XVIRTUALSCREEN) },
@@ -149,6 +150,10 @@ void ScreenCapture::mouseReleaseEvent(QMouseEvent* event)
     update();
     if (!cutTool) {
         cutTool = new CutTool(false,this);
+        connect(cutTool, &CutTool::onSaveFile, this, &ScreenCapture::saveFile);
+        connect(cutTool, &CutTool::onSaveClipboard, this, &ScreenCapture::saveClipboard);
+        connect(cutTool, &CutTool::onClose, this, &ScreenCapture::closeBtnClick);
+        connect(cutTool, &CutTool::onPinImg, this, &ScreenCapture::pinImage);
     }
     auto br = rectMask.bottomRight();
     cutTool->move(br.x() - cutTool->width(), br.y() + 4);
@@ -340,4 +345,43 @@ void ScreenCapture::changeRectMask(const QPoint& pos)
     {
         rectMask.setLeft(pos.x());
     }
+}
+
+
+void ScreenCapture::saveFile()
+{
+    auto filePath = Util::getSaveFilePath();
+    if (filePath.isEmpty())
+    {
+        return;
+    }
+    auto dpr = devicePixelRatio();
+    QRect rr(rectMask.topLeft() * dpr, rectMask.size() * dpr);
+    pixScreen.copy(rr).save(filePath);
+    closeBtnClick();
+}
+
+void ScreenCapture::saveClipboard()
+{
+    auto dpr = devicePixelRatio();
+    QRect rr(rectMask.topLeft() * dpr, rectMask.size() * dpr);
+    auto tempImg = pixScreen.copy(rr).toImage();
+    Util::saveImgToClipboard(tempImg);
+    closeBtnClick();
+}
+
+void ScreenCapture::closeBtnClick()
+{
+    close();
+    deleteLater();
+}
+
+void ScreenCapture::pinImage()
+{
+    auto dpr = devicePixelRatio();
+    auto pos = rectMask.topLeft();
+    QRect rr(rectMask.topLeft() * dpr, rectMask.size() * dpr);
+    auto pixmap = pixScreen.copy(rr);
+    new PinImage(pos, pixmap);
+    closeBtnClick();
 }
