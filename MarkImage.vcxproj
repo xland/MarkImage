@@ -110,6 +110,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="PinImage.cpp" />
     <ClCompile Include="Util.cpp" />
     <QtRcc Include="MarkImage.qrc" />
     <QtMoc Include="MarkImage.h" />
@@ -138,6 +139,7 @@
     <QtMoc Include="CutTool.h" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="PinImage.h" />
     <ClInclude Include="Util.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

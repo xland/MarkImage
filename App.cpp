@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <QString>
+#include <QGuiApplication>
 
 #include <QCoreApplication>
 #include <QJsonDocument>
@@ -17,6 +18,8 @@
 
 App::App(QObject *parent) : QObject(parent)
 {
+    //QFont font("Microsoft YaHei Light", 10);
+    //qApp->setFont(font);
 }
 
 App::~App()

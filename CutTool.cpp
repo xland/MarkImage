@@ -6,13 +6,18 @@
 #include <QFileDialog>
 #include <QStandardPaths>
 #include <QMessageBox>
+#include <QToolTip>
 
 #include "ScreenCapture.h"
 #include "Util.h"
 #include "CutTool.h"
+#include "PinImage.h"
 
-CutTool::CutTool(QWidget* parent) : QWidget(parent)
+CutTool::CutTool(bool disablePin, QWidget* parent) : QWidget(parent), disablePin{ disablePin }
 {
+	if (disablePin) {
+		setWindowFlags(windowFlags() | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::Tool);
+	}
 	setMouseTracking(true);
 	setFixedSize(156, 32);
 	setAutoFillBackground(false);
@@ -41,15 +46,17 @@ void CutTool::paintEvent(QPaintEvent* event)
 	{
 		QRect r(3+30*i, 1, 30, 30);
 		QColor textColor(38, 56, 38);
-		if (i == hoverIndex) {
-			p.setBrush(QColor(228, 238, 255));
-			p.setPen(Qt::NoPen);
-			p.drawRoundedRect(r.adjusted(2,4,-2,-4), 4, 4);
-			textColor.setRgb(9, 88, 217);
+		if (i == hoverIndex ) {
+			if (!(i == 3 && disablePin)) {
+				p.setBrush(QColor(228, 238, 255));
+				p.setPen(Qt::NoPen);
+				p.drawRoundedRect(r.adjusted(2, 4, -2, -4), 4, 4);
+				textColor.setRgb(9, 88, 217);
+			}
 		}
 		p.setFont(*font);
 		p.setBrush(Qt::NoBrush);
-		p.setPen(textColor);
+		p.setPen((i == 3 && disablePin) ? QColor(188, 188, 188) : textColor); // 
 		p.drawText(r, Qt::AlignCenter, arr[i]);
 	}
 }
@@ -66,7 +73,7 @@ void CutTool::mousePressEvent(QMouseEvent* event)
 		saveClipboard();
 	}
 	else if (hoverIndex == 3) {
-
+		pinImage();
 	}
 	else if (hoverIndex == 4) {
 
@@ -83,6 +90,7 @@ void CutTool::mouseMoveEvent(QMouseEvent* event)
 			if (pos.x() > xPos && pos.x() < xPos + 30) {
 				if (i != hoverIndex) {
 					hoverIndex = i;
+					showToolTip();
 					update();
 					break;
 				}				
@@ -148,4 +156,36 @@ void CutTool::saveClipboard()
 	DeleteDC(memoryDC);
 	DeleteObject(hBitmap);
 	qApp->quit();
+}
+
+void CutTool::showToolTip()
+{
+	if (hoverIndex == 0) {
+		QToolTip::showText(QCursor::pos(), "退出截图(Esc)", this);
+	}
+	else if (hoverIndex == 1) {
+		QToolTip::showText(QCursor::pos(), "保存文件(Ctrl+S)", this);
+	}
+	else if (hoverIndex == 2) {
+		QToolTip::showText(QCursor::pos(), "存入剪切板(Ctrl+C)", this);
+	}
+	else if (hoverIndex == 3) {
+		if (disablePin) return;
+		QToolTip::showText(QCursor::pos(), "钉住截图(Ctrl+P)", this);
+	}
+	else if (hoverIndex == 4) {
+		QToolTip::showText(QCursor::pos(), "编辑截图(Ctrl+E)", this);
+	}
+}
+
+void CutTool::pinImage()
+{
+	if (disablePin) return;
+	auto win = (ScreenCapture*)window();
+	auto dpr = win->devicePixelRatio();
+	auto pos = win->rectMask.topLeft();
+	QRect rr(win->rectMask.topLeft() * dpr, win->rectMask.size() * dpr);
+	auto pixmap = win->pixScreen.copy(rr);
+	new PinImage(pos,pixmap);
+	win->close();
 }

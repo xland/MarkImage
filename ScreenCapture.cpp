@@ -148,7 +148,7 @@ void ScreenCapture::mouseReleaseEvent(QMouseEvent* event)
     rectMask = rectMask.normalized();
     update();
     if (!cutTool) {
-        cutTool = new CutTool(this);
+        cutTool = new CutTool(false,this);
     }
     auto br = rectMask.bottomRight();
     cutTool->move(br.x() - cutTool->width(), br.y() + 4);
