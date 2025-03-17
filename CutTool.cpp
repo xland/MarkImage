@@ -74,7 +74,7 @@ void CutTool::mousePressEvent(QMouseEvent* event)
 		emit onPinImg();
 	}
 	else if (hoverIndex == 4) {
-
+		emit onEditImg();
 	}
 }
 

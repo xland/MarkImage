@@ -19,6 +19,7 @@ private:
 	void saveFile();
 	void saveClipboard();
 	void closeBtnClick();
+	void editImage();
 private:
 	QPoint posPress;
 	QPixmap pixmap;

@@ -27,6 +27,7 @@ private:
 	void saveClipboard();
 	void closeBtnClick();
 	void pinImage();
+	void editImage();
 public:
 	QPixmap pixScreen;
 	QRect rectMask;

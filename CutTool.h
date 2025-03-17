@@ -17,6 +17,7 @@ signals:
 	void onSaveClipboard();
 	void onClose();
 	void onPinImg();
+	void onEditImg();
 protected:
 	void paintEvent(QPaintEvent* event) override;
 	void mousePressEvent(QMouseEvent* event) override;

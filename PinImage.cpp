@@ -4,6 +4,7 @@
 
 #include "Util.h"
 #include "PinImage.h"
+#include "MarkImage.h"
 
 PinImage::PinImage(const QPoint& pos,const QPixmap& pixmap, QWidget* parent) : QMainWindow(parent)
     ,pixmap{pixmap}
@@ -31,6 +32,7 @@ PinImage::PinImage(const QPoint& pos,const QPixmap& pixmap, QWidget* parent) : Q
     connect(cutTool, &CutTool::onSaveFile, this, &PinImage::saveFile);
     connect(cutTool, &CutTool::onSaveClipboard, this, &PinImage::saveClipboard);
     connect(cutTool, &CutTool::onClose, this, &PinImage::closeBtnClick);
+    connect(cutTool, &CutTool::onEditImg, this, &PinImage::editImage);
 }
 
 PinImage::~PinImage()
@@ -92,4 +94,11 @@ void PinImage::closeBtnClick()
     deleteLater();
     cutTool->close();
     cutTool->deleteLater();
+}
+
+void PinImage::editImage()
+{
+    auto pix = new QPixmap(pixmap);
+    new MarkImage(pix);
+    closeBtnClick();
 }

@@ -14,6 +14,7 @@
 #include "ScreenCapture.h"
 #include "CutTool.h"
 #include "PinImage.h"
+#include "MarkImage.h"
 
 ScreenCapture::ScreenCapture(QWidget *parent) : QMainWindow(parent),
     x{ GetSystemMetrics(SM_XVIRTUALSCREEN) },
@@ -154,6 +155,7 @@ void ScreenCapture::mouseReleaseEvent(QMouseEvent* event)
         connect(cutTool, &CutTool::onSaveClipboard, this, &ScreenCapture::saveClipboard);
         connect(cutTool, &CutTool::onClose, this, &ScreenCapture::closeBtnClick);
         connect(cutTool, &CutTool::onPinImg, this, &ScreenCapture::pinImage);
+        connect(cutTool, &CutTool::onEditImg, this, &ScreenCapture::editImage);
     }
     auto br = rectMask.bottomRight();
     cutTool->move(br.x() - cutTool->width(), br.y() + 4);
@@ -383,5 +385,15 @@ void ScreenCapture::pinImage()
     QRect rr(rectMask.topLeft() * dpr, rectMask.size() * dpr);
     auto pixmap = pixScreen.copy(rr);
     new PinImage(pos, pixmap);
+    closeBtnClick();
+}
+
+void ScreenCapture::editImage()
+{
+    auto dpr = devicePixelRatio();
+    QRect rr(rectMask.topLeft() * dpr, rectMask.size() * dpr);
+    //auto tempImg = pixScreen.copy(rr);
+    auto pix = new QPixmap(pixScreen.copy(rr));
+    new MarkImage(pix);
     closeBtnClick();
 }

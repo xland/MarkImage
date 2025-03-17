@@ -15,6 +15,7 @@
 
 #include "App.h"
 #include "ScreenCapture.h"
+#include "MarkImage.h"
 
 App::App(QObject *parent) : QObject(parent)
 {
@@ -40,6 +41,7 @@ void App::processCmd()
 {
 	auto arguments = QCoreApplication::arguments();
     if (arguments.length() < 2) {
+        new MarkImage(nullptr);
         return;
     }
     QJsonParseError err;
@@ -51,9 +53,10 @@ void App::processCmd()
     }
     auto param = jd.object();
     if (param["type"] == "editImage") {
-
+        new MarkImage(nullptr);
     }
     else if(param["type"] == "screenCapture"){
+        //{\"type\":\"screenCapture\"}
         new ScreenCapture();
     }
     else if (param["type"] == "pinImage") {

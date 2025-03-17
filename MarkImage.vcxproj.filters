@@ -55,6 +55,12 @@
     <ClCompile Include="PinImage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TitleBar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowFrame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="App.h">
@@ -70,6 +76,12 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="PinImage.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="TitleBar.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="WindowFrame.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
