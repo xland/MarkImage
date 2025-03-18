@@ -14,15 +14,17 @@ public:
     MarkImage(QPixmap* pixmap, QWidget *parent = nullptr);
     ~MarkImage();
 protected:
-    //void resizeEvent(QResizeEvent* event);
+    void resizeEvent(QResizeEvent* event);
     void paintEvent(QPaintEvent* event) override;
     void mousePressEvent(QMouseEvent* event) override;
     void mouseMoveEvent(QMouseEvent* event) override;
     void mouseReleaseEvent(QMouseEvent* event) override;
+    //bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result) override;
 private:
     void drawShadow(QPainter& p);
+public:
+    int padding{ 8 };
 private:
     QPixmap* pixmap;
     TitleBar* titleBar;
-    int padding{ 8 };
 };

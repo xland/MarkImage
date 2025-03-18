@@ -19,17 +19,19 @@ MarkImage::~MarkImage()
     delete pixmap;
 }
 
-//void MarkImage::resizeEvent(QResizeEvent* event)
-//{
-//    auto w = width();
-//    if (isMaximized()) {
-//        titleBar->setFixedSize(w, 38);
-//    }
-//    else {
-//        titleBar->setFixedSize(w - 16, 38);
-//    }
-//    QMainWindow::resizeEvent(event);
-//}
+void MarkImage::resizeEvent(QResizeEvent* event)
+{
+    auto w = width();
+    if (isMaximized()) {
+        titleBar->setFixedSize(w, 38);
+        titleBar->move(0, 0);
+    }
+    else {
+        titleBar->setFixedSize(w - 16, 38);
+        titleBar->move(padding, padding);
+    }
+    QMainWindow::resizeEvent(event);
+}
 
 void MarkImage::paintEvent(QPaintEvent* event)
 {
@@ -39,9 +41,11 @@ void MarkImage::paintEvent(QPaintEvent* event)
     if (!isMaximized()) {
         drawShadow(p);
     }
-    p.setBrush(QColor(255, 255, 255));
-    p.setPen(Qt::NoPen);
-    p.drawRect(rect());
+    else {
+        p.setBrush(QColor(255, 255, 255));
+        p.setPen(Qt::NoPen);
+        p.drawRect(rect());
+    }
 }
 
 void MarkImage::mousePressEvent(QMouseEvent* event)
@@ -58,6 +62,17 @@ void MarkImage::mouseReleaseEvent(QMouseEvent* event)
 {
 
 }
+
+//bool MarkImage::nativeEvent(const QByteArray& eventType, void* message, qintptr* result)
+//{
+//    MSG* msg = static_cast<MSG*>(message);
+//    if (msg->message == WM_LBUTTONDOWN) {
+//        qDebug() << "Left mouse button clicked in QWidget!";
+//        *result = 0;
+//        return true;
+//    }
+//    return QWidget::nativeEvent(eventType, message, result);
+//}
 
 void MarkImage::drawShadow(QPainter& p)
 {
