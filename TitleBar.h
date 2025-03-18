@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QWidget>
+#include "BtnSys.h"
 
 class TitleBar : public QWidget
 {
@@ -8,14 +9,12 @@ class TitleBar : public QWidget
 public:
 	TitleBar(QWidget *parent = nullptr);
 	~TitleBar();
+public:
+	BtnSys* btnMin;
+	BtnSys* btnMax;
+	BtnSys* btnClose;
+
 protected:
 	void paintEvent(QPaintEvent* event) override;
-	void mousePressEvent(QMouseEvent* event) override;
-	void mouseMoveEvent(QMouseEvent* event) override;
-	void mouseReleaseEvent(QMouseEvent* event) override;
-	void mouseDoubleClickEvent(QMouseEvent* event) override;
-	void leaveEvent(QEvent* event) override;
 private:
-	QPoint posPress;
-	int hoverIndex{ -1 };
 };

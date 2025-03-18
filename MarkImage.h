@@ -4,8 +4,13 @@
 #include <QWidget>
 #include <QPainter>
 
+namespace QWK {
+    class WidgetWindowAgent;
+    class StyleAgent;
+}
+
 class TitleBar;
-class MarkImage : public QMainWindow
+class MarkImage : public QWidget
 {
     Q_OBJECT
 
@@ -19,7 +24,6 @@ protected:
     void mouseMoveEvent(QMouseEvent* event) override;
     void mouseReleaseEvent(QMouseEvent* event) override;
     void changeEvent(QEvent* event) override;
-    //bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result) override;
 private:
     void drawShadow(QPainter& p);
 public:
@@ -28,5 +32,5 @@ public:
 private:
     QPixmap* pixmap;
     TitleBar* titleBar;
-
+    QWK::WidgetWindowAgent* windowAgent;
 };

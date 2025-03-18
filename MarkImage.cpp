@@ -3,15 +3,34 @@
 #include <QTimer>
 #include <QVBoxLayout>
 #include <QEvent>
+#include <QWKWidgets/widgetwindowagent.h>
 
 #include "MarkImage.h"
 #include "TitleBar.h"
 
-MarkImage::MarkImage(QPixmap* pixmap, QWidget* parent) : QMainWindow(parent), pixmap{pixmap}
+MarkImage::MarkImage(QPixmap* pixmap, QWidget* parent) : QWidget(parent), pixmap{pixmap}
 {
-	setWindowFlag(Qt::FramelessWindowHint);
-    setAttribute(Qt::WA_TranslucentBackground, true);     
-    titleBar = new TitleBar(this);
+	//setWindowFlag(Qt::FramelessWindowHint);
+    setAttribute(Qt::WA_DontCreateNativeAncestors);
+    auto agent = new QWK::WidgetWindowAgent(this);
+    agent->setup(this);
+    auto titleBar = new TitleBar(this);
+    auto layout = new QVBoxLayout(this);
+    layout->setSpacing(0);
+    layout->setContentsMargins(0, 0, 0, 0);
+    layout->addWidget(titleBar);
+    layout->addStretch();
+    setLayout(layout);
+    //agent->setHitTestVisible(myTitleBar->menuBar(), true);
+    agent->setTitleBar(titleBar);
+
+    agent->setSystemButton(QWK::WindowAgentBase::Minimize, titleBar->btnMin);
+    agent->setSystemButton(QWK::WindowAgentBase::Maximize, titleBar->btnMax);
+    agent->setSystemButton(QWK::WindowAgentBase::Close, titleBar->btnClose);
+
+
+    setGeometry(0,0,1200, 800);
+    //show();
     showMaximized();
 }
 
@@ -22,32 +41,32 @@ MarkImage::~MarkImage()
 
 void MarkImage::resizeEvent(QResizeEvent* event)
 {
-    auto w = width();
-    if (isMaximized()) {
-        titleBar->setFixedSize(w, 38);
-        titleBar->move(0, 0);
-    }
-    else {
-        titleBar->setFixedSize(w - 16, 38);
-        titleBar->move(padding, padding);
-    }
-    QMainWindow::resizeEvent(event);
+    //auto w = width();
+    //if (isMaximized()) {
+    //    titleBar->setFixedSize(w, 38);
+    //    titleBar->move(0, 0);
+    //}
+    //else {
+    //    titleBar->setFixedSize(w - 16, 38);
+    //    titleBar->move(padding, padding);
+    //}
+    QWidget::resizeEvent(event);
 }
 
 void MarkImage::paintEvent(QPaintEvent* event)
 {
-    QPainter p(this);
-    p.setRenderHint(QPainter::Antialiasing, true);
-    p.setRenderHint(QPainter::TextAntialiasing, true);
-    auto state = windowState();
-    if (isMaximized()) {
-        p.setBrush(QColor(255, 255, 255));
-        p.setPen(Qt::NoPen);
-        p.drawRect(rect());
-    }
-    else {
-        drawShadow(p);
-    }
+    //QPainter p(this);
+    //p.setRenderHint(QPainter::Antialiasing, true);
+    //p.setRenderHint(QPainter::TextAntialiasing, true);
+    //auto state = windowState();
+    ////if (isMaximized()) {
+    //    p.setBrush(QColor(255, 255, 255));
+    //    p.setPen(Qt::NoPen);
+    //    p.drawRect(rect());
+    ////}
+    ////else {
+    ////    drawShadow(p);
+    ////}
 }
 
 void MarkImage::mousePressEvent(QMouseEvent* event)
@@ -67,23 +86,13 @@ void MarkImage::mouseReleaseEvent(QMouseEvent* event)
 
 void MarkImage::changeEvent(QEvent* event)
 {
-    if (event->type() == QEvent::WindowStateChange) {
-        Qt::WindowStates state = this->windowState();
-        auto a = 1;
-    }
-    QWidget::changeEvent(event);
+    //update();
+    //if (event->type() == QEvent::WindowStateChange) {
+    //    Qt::WindowStates state = this->windowState();
+    //    auto a = 1;
+    //}
+    //QWidget::changeEvent(event);
 }
-
-//bool MarkImage::nativeEvent(const QByteArray& eventType, void* message, qintptr* result)
-//{
-//    MSG* msg = static_cast<MSG*>(message);
-//    if (msg->message == WM_LBUTTONDOWN) {
-//        qDebug() << "Left mouse button clicked in QWidget!";
-//        *result = 0;
-//        return true;
-//    }
-//    return QWidget::nativeEvent(eventType, message, result);
-//}
 
 void MarkImage::drawShadow(QPainter& p)
 {
