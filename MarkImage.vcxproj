@@ -113,7 +113,6 @@
     <ClCompile Include="PinImage.cpp" />
     <ClCompile Include="TitleBar.cpp" />
     <ClCompile Include="Util.cpp" />
-    <ClCompile Include="WindowFrame.cpp" />
     <QtRcc Include="MarkImage.qrc" />
     <QtMoc Include="MarkImage.h" />
     <ClCompile Include="App.cpp" />
@@ -141,7 +140,6 @@
     <QtMoc Include="CutTool.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="WindowFrame.h" />
     <QtMoc Include="TitleBar.h" />
     <QtMoc Include="PinImage.h" />
     <ClInclude Include="Util.h" />

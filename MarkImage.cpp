@@ -2,6 +2,7 @@
 #include <dwmapi.h>
 #include <QTimer>
 #include <QVBoxLayout>
+#include <QEvent>
 
 #include "MarkImage.h"
 #include "TitleBar.h"
@@ -38,13 +39,14 @@ void MarkImage::paintEvent(QPaintEvent* event)
     QPainter p(this);
     p.setRenderHint(QPainter::Antialiasing, true);
     p.setRenderHint(QPainter::TextAntialiasing, true);
-    if (!isMaximized()) {
-        drawShadow(p);
-    }
-    else {
+    auto state = windowState();
+    if (isMaximized()) {
         p.setBrush(QColor(255, 255, 255));
         p.setPen(Qt::NoPen);
         p.drawRect(rect());
+    }
+    else {
+        drawShadow(p);
     }
 }
 
@@ -61,6 +63,15 @@ void MarkImage::mouseMoveEvent(QMouseEvent* event)
 void MarkImage::mouseReleaseEvent(QMouseEvent* event)
 {
 
+}
+
+void MarkImage::changeEvent(QEvent* event)
+{
+    if (event->type() == QEvent::WindowStateChange) {
+        Qt::WindowStates state = this->windowState();
+        auto a = 1;
+    }
+    QWidget::changeEvent(event);
 }
 
 //bool MarkImage::nativeEvent(const QByteArray& eventType, void* message, qintptr* result)

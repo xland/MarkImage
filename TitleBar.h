@@ -14,6 +14,8 @@ protected:
 	void mouseMoveEvent(QMouseEvent* event) override;
 	void mouseReleaseEvent(QMouseEvent* event) override;
 	void mouseDoubleClickEvent(QMouseEvent* event) override;
+	void leaveEvent(QEvent* event) override;
 private:
 	QPoint posPress;
+	int hoverIndex{ -1 };
 };
