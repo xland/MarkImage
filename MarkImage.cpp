@@ -84,15 +84,16 @@ void MarkImage::mouseReleaseEvent(QMouseEvent* event)
 
 }
 
-void MarkImage::changeEvent(QEvent* event)
-{
-    //update();
-    //if (event->type() == QEvent::WindowStateChange) {
-    //    Qt::WindowStates state = this->windowState();
-    //    auto a = 1;
-    //}
-    //QWidget::changeEvent(event);
-}
+//void MarkImage::changeEvent(QEvent* event)
+//{
+//    if (event->type() == QEvent::WindowStateChange) {
+//        Qt::WindowStates state = this->windowState();
+//        if (state == Qt::WindowMaximized) {
+//            showMaximized();
+//        }        
+//    }
+//    QWidget::changeEvent(event);    
+//}
 
 void MarkImage::drawShadow(QPainter& p)
 {

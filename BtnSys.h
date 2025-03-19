@@ -8,17 +8,19 @@ class BtnSys : public QWidget
 	Q_OBJECT
 
 public:
-	BtnSys(const QChar& iconCode, bool isClose = false,QWidget *parent = nullptr);
+	BtnSys(const ushort& code, bool isClose = false,QWidget *parent = nullptr);
 	~BtnSys();
 protected:
 	void paintEvent(QPaintEvent* event) override;
-	virtual void enterEvent(QEnterEvent* event) override;
-	virtual void leaveEvent(QEvent* event) override;
-	virtual void mousePressEvent(QMouseEvent* event) override;
+	void enterEvent(QEnterEvent* event) override;
+	void leaveEvent(QEvent* event) override;
+	void mousePressEvent(QMouseEvent* event) override;
+	void moveEvent(QMoveEvent* event) override;
 signals:
 	void click();
+public:
+	ushort code;
 private:
-	QChar iconCode;
 	bool isHover{ false };
 	bool isClose;
 };

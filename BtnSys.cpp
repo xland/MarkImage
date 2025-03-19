@@ -2,8 +2,8 @@
 
 #include "BtnSys.h"
 
-BtnSys::BtnSys(const QChar& iconCode, bool isClose, QWidget* parent) : QWidget(parent), 
-iconCode{ iconCode }, 
+BtnSys::BtnSys(const ushort& code, bool isClose, QWidget* parent) : QWidget(parent), 
+code{ code }, 
 isClose{isClose}
 {
     setFixedSize(40, 34);
@@ -34,7 +34,7 @@ void BtnSys::paintEvent(QPaintEvent* event)
         painter.setPen(isHover ? QColor(0, 0, 0) : QColor(88, 88, 88));
     }
     
-    painter.drawText(rect(), Qt::AlignCenter, iconCode);
+    painter.drawText(rect(), Qt::AlignCenter, QChar(code));
 }
 
 void BtnSys::enterEvent(QEnterEvent* event)
@@ -56,4 +56,9 @@ void BtnSys::leaveEvent(QEvent* event)
 void BtnSys::mousePressEvent(QMouseEvent* event)
 {
     emit click();
+}
+
+void BtnSys::moveEvent(QMoveEvent* event)
+{
+    int a = 1;
 }
