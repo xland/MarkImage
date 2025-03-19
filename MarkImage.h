@@ -18,11 +18,11 @@ public:
     MarkImage(QPixmap* pixmap, QWidget *parent = nullptr);
     ~MarkImage();
 protected:
-    void resizeEvent(QResizeEvent* event);
     void paintEvent(QPaintEvent* event) override;
     void mousePressEvent(QMouseEvent* event) override;
     void mouseMoveEvent(QMouseEvent* event) override;
     void mouseReleaseEvent(QMouseEvent* event) override;
+    //bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result) override;
     //void changeEvent(QEvent* event) override;
 private:
     void drawShadow(QPainter& p);

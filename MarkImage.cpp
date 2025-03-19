@@ -8,30 +8,41 @@
 #include "MarkImage.h"
 #include "TitleBar.h"
 
-MarkImage::MarkImage(QPixmap* pixmap, QWidget* parent) : QWidget(parent), pixmap{pixmap}
+MarkImage::MarkImage(QPixmap* pixmap, QWidget* parent) : QWidget(parent), pixmap{ pixmap }
 {
-	//setWindowFlag(Qt::FramelessWindowHint);
+    //setWindowFlag(Qt::FramelessWindowHint);
+    //setWindowFlags(Qt::FramelessWindowHint | Qt::Window);
     setAttribute(Qt::WA_DontCreateNativeAncestors);
     auto agent = new QWK::WidgetWindowAgent(this);
     agent->setup(this);
-    auto titleBar = new TitleBar(this);
+
+    titleBar = new TitleBar(this);
     auto layout = new QVBoxLayout(this);
     layout->setSpacing(0);
     layout->setContentsMargins(0, 0, 0, 0);
     layout->addWidget(titleBar);
     layout->addStretch();
     setLayout(layout);
-    //agent->setHitTestVisible(myTitleBar->menuBar(), true);
     agent->setTitleBar(titleBar);
+    //agent->setSystemButton(QWK::WindowAgentBase::Minimize, titleBar->btnMin);
+    //agent->setSystemButton(QWK::WindowAgentBase::Maximize, titleBar->btnMax);
+    //agent->setSystemButton(QWK::WindowAgentBase::Close, titleBar->btnClose);
+    agent->setHitTestVisible(titleBar->btnMin,true);
+    agent->setHitTestVisible(titleBar->btnMax, true);
+    agent->setHitTestVisible(titleBar->btnClose, true);
 
-    agent->setSystemButton(QWK::WindowAgentBase::Minimize, titleBar->btnMin);
-    agent->setSystemButton(QWK::WindowAgentBase::Maximize, titleBar->btnMax);
-    agent->setSystemButton(QWK::WindowAgentBase::Close, titleBar->btnClose);
 
-
-    setGeometry(0,0,1200, 800);
+    setGeometry(0, 0, 1200, 800);
     //show();
     showMaximized();
+
+
+    HWND hwnd = reinterpret_cast<HWND>(winId());
+    MARGINS margins = { 1, 1, 1, 1 };
+    DwmExtendFrameIntoClientArea(hwnd, &margins);
+    int value = 2;
+    DwmSetWindowAttribute(hwnd, DWMWA_NCRENDERING_POLICY, &value, sizeof(value));
+    DwmSetWindowAttribute(hwnd, DWMWA_ALLOW_NCPAINT, &value, sizeof(value));
 }
 
 MarkImage::~MarkImage()
@@ -39,20 +50,72 @@ MarkImage::~MarkImage()
     delete pixmap;
 }
 
-void MarkImage::resizeEvent(QResizeEvent* event)
-{
-    //auto w = width();
-    //if (isMaximized()) {
-    //    titleBar->setFixedSize(w, 38);
-    //    titleBar->move(0, 0);
-    //}
-    //else {
-    //    titleBar->setFixedSize(w - 16, 38);
-    //    titleBar->move(padding, padding);
-    //}
-    QWidget::resizeEvent(event);
-}
-
+//bool MarkImage::nativeEvent(const QByteArray& eventType, void* message, qintptr* result) {
+//    MSG* msg = static_cast<MSG*>(message);
+//    switch (msg->message) {
+//    case WM_NCHITTEST: {
+//        const static int borderWidth = 8;
+//        QPoint pos = mapFromGlobal(QCursor::pos());
+//        bool left = pos.x() < borderWidth;
+//        bool right = pos.x() > width() - borderWidth;
+//        bool top = pos.y() < borderWidth;
+//        bool bottom = pos.y() > height() - borderWidth;
+//
+//        if (left && top) *result = HTTOPLEFT;
+//        else if (right && top) *result = HTTOPRIGHT;
+//        else if (left && bottom) *result = HTBOTTOMLEFT;
+//        else if (right && bottom) *result = HTBOTTOMRIGHT;
+//        else if (left) *result = HTLEFT;
+//        else if (right) *result = HTRIGHT;
+//        else if (top) *result = HTTOP;
+//        else if (bottom) *result = HTBOTTOM;
+//        else if (pos.x() < titleBar->btnMin->pos().x() && pos.y() < 34) {
+//            *result = HTCAPTION;
+//        }
+//        else {
+//            *result = HTCLIENT;
+//        }
+//        return true;
+//    }
+//    case WM_NCLBUTTONDBLCLK: {
+//        QPoint pos = mapFromGlobal(QCursor::pos());
+//        if (pos.x() < titleBar->btnMin->pos().x() && pos.y() < 34) {
+//            if (windowState() & Qt::WindowMaximized) {
+//                setWindowFlags(windowFlags() & ~Qt::FramelessWindowHint);
+//                setWindowState(Qt::WindowNoState);
+//                QTimer::singleShot(60, [this]() {
+//                    setFixedSize(1200, 800);
+//                    setWindowFlags(Qt::FramelessWindowHint);
+//                    auto screenRect = screen()->geometry();
+//                    int x = (screenRect.width() - width()) / 2 + screenRect.x();
+//                    int y = (screenRect.height() - height()) / 2 + screenRect.y();
+//                    move(x, y);
+//                    show();
+//                    });
+//            }
+//            else {
+//                showMaximized();
+//            }
+//            return true;
+//        }
+//        break;
+//    }
+//    }
+//    return QWidget::nativeEvent(eventType, message, result);
+//}
+//void MarkImage::changeEvent(QEvent* event)
+//{
+//    if (event->type() == QEvent::WindowStateChange) {
+//        if (windowState() & Qt::WindowMaximized) {
+//            titleBar->btnMax->code = 0xe6ea;
+//        }
+//        else {
+//            titleBar->btnMax->code = 0xe6e5;
+//        }
+//        titleBar->update();
+//    }
+//    QWidget::changeEvent(event);
+//}
 void MarkImage::paintEvent(QPaintEvent* event)
 {
     //QPainter p(this);
@@ -83,17 +146,6 @@ void MarkImage::mouseReleaseEvent(QMouseEvent* event)
 {
 
 }
-
-//void MarkImage::changeEvent(QEvent* event)
-//{
-//    if (event->type() == QEvent::WindowStateChange) {
-//        Qt::WindowStates state = this->windowState();
-//        if (state == Qt::WindowMaximized) {
-//            showMaximized();
-//        }        
-//    }
-//    QWidget::changeEvent(event);    
-//}
 
 void MarkImage::drawShadow(QPainter& p)
 {
