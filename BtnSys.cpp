@@ -1,4 +1,5 @@
 #include <QPainter>
+#include <QMouseEvent>
 
 #include "BtnSys.h"
 
@@ -8,6 +9,7 @@ isClose{isClose}
 {
     setFixedSize(40, 34);
     setMouseTracking(true);
+    setAttribute(Qt::WA_Hover, true);
 }
 
 BtnSys::~BtnSys()
@@ -61,4 +63,9 @@ void BtnSys::mousePressEvent(QMouseEvent* event)
 void BtnSys::moveEvent(QMoveEvent* event)
 {
     int a = 1;
+}
+
+void BtnSys::mouseReleaseEvent(QMouseEvent* event)
+{
+    QWidget::mouseReleaseEvent(event);
 }

@@ -16,6 +16,7 @@ protected:
 	void leaveEvent(QEvent* event) override;
 	void mousePressEvent(QMouseEvent* event) override;
 	void moveEvent(QMoveEvent* event) override;
+	void mouseReleaseEvent(QMouseEvent* event) override;
 signals:
 	void click();
 public:

@@ -16,8 +16,8 @@ public:
 	BtnSys* btnMin;
 	BtnSys* btnMax;
 	BtnSys* btnClose;
+	QHBoxLayout* layout;
 protected:
 	void paintEvent(QPaintEvent* event) override;
 private:
-	QHBoxLayout* layout;
 };
