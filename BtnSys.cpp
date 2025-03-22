@@ -23,7 +23,7 @@ void BtnSys::paintEvent(QPaintEvent* event)
     painter.setRenderHint(QPainter::Antialiasing, true);
     painter.setRenderHint(QPainter::TextAntialiasing, true);
     if (isHover) {
-        painter.setBrush(isClose? QColor(230, 18, 36) :QColor(248, 248, 255));
+        painter.setBrush(isClose? QColor(230, 18, 36) :QColor(255, 255, 255));
         painter.setPen(Qt::NoPen);
         painter.drawRect(rect());
     }
@@ -58,14 +58,4 @@ void BtnSys::leaveEvent(QEvent* event)
 void BtnSys::mousePressEvent(QMouseEvent* event)
 {
     emit click();
-}
-
-void BtnSys::moveEvent(QMoveEvent* event)
-{
-    int a = 1;
-}
-
-void BtnSys::mouseReleaseEvent(QMouseEvent* event)
-{
-    QWidget::mouseReleaseEvent(event);
 }

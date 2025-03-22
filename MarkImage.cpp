@@ -5,6 +5,8 @@
 #include <QEvent>
 #include <QApplication>
 
+#include "ContentBox.h"
+#include "StatusBar.h"
 #include "MarkImage.h"
 #include "TitleBar.h"
 
@@ -15,8 +17,10 @@ MarkImage::MarkImage(QPixmap* pixmap, QWidget* parent) : QWidget(parent), pixmap
     layout->setSpacing(0);
     layout->setContentsMargins(0, 0, 0, 0);
     layout->addWidget(titleBar);
-    layout->addStretch();
+	layout->addWidget(new ContentBox(this));
+    layout->addWidget(new StatusBar(this));
     setLayout(layout);
+
     setAttribute(Qt::WA_DontCreateNativeAncestors);
     HWND hwnd = reinterpret_cast<HWND>(winId());
     MARGINS margins = { 1, 1, 1, 1 };
@@ -116,21 +120,6 @@ void MarkImage::showEvent(QShowEvent* event)
     PostMessage(hwnd, WM_LBUTTONDOWN, MK_LBUTTON, pos);
     PostMessage(hwnd, WM_LBUTTONUP, 0, pos);
 }
-void MarkImage::paintEvent(QPaintEvent* event)
-{
-    //QPainter p(this);
-    //p.setRenderHint(QPainter::Antialiasing, true);
-    //p.setRenderHint(QPainter::TextAntialiasing, true);
-    //auto state = windowState();
-    ////if (isMaximized()) {
-    //    p.setBrush(QColor(255, 255, 255));
-    //    p.setPen(Qt::NoPen);
-    //    p.drawRect(rect());
-    ////}
-    ////else {
-    ////    drawShadow(p);
-    ////}
-}
 
 void MarkImage::mousePressEvent(QMouseEvent* event)
 {
@@ -147,67 +136,3 @@ void MarkImage::mouseReleaseEvent(QMouseEvent* event)
 
 }
 
-void MarkImage::drawShadow(QPainter& p)
-{
-    p.setPen(Qt::NoPen);
-    QColor c(88, 88, 88, 88);
-    {
-        QRadialGradient gradient(QPointF(padding, padding), padding);
-        gradient.setColorAt(0.0, c);
-        gradient.setColorAt(1.0, Qt::transparent);
-        p.setBrush(gradient);
-        p.drawRect(0, 0, padding, padding);
-    }
-    {
-        QLinearGradient gradient(0, 0, 0, padding);
-        gradient.setColorAt(0.0, Qt::transparent);
-        gradient.setColorAt(1.0, c);
-        p.setBrush(gradient);
-        p.drawRect(padding, 0, width() - padding * 2, padding);
-    }
-    {
-        QRadialGradient gradient(QPointF(width() - padding, padding), padding);
-        gradient.setColorAt(0.0, c);
-        gradient.setColorAt(1.0, Qt::transparent);
-        p.setBrush(gradient);
-        p.drawRect(width() - padding, 0, padding, padding);
-    }
-    {
-        QLinearGradient gradient(width() - padding, 0, width(), 0);
-        gradient.setColorAt(0.0, c);
-        gradient.setColorAt(1.0, Qt::transparent);
-        p.setBrush(gradient);
-        p.drawRect(width() - padding, padding, padding, height() - 2 * padding);
-    }
-    {
-        QRadialGradient gradient(QPointF(width() - padding, height() - padding), padding);
-        gradient.setColorAt(0.0, c);
-        gradient.setColorAt(1.0, Qt::transparent);
-        p.setBrush(gradient);
-        p.drawRect(width() - padding, height() - padding, padding, padding);
-    }
-    {
-        QLinearGradient gradient(padding, height() - padding, padding, height());
-        gradient.setColorAt(0.0, c);
-        gradient.setColorAt(1.0, Qt::transparent);
-        p.setBrush(gradient);
-        p.drawRect(padding, height() - padding, width() - 2 * padding, padding);
-    }
-    {
-        QRadialGradient gradient(QPointF(padding, height() - padding), padding);
-        gradient.setColorAt(0.0, c);
-        gradient.setColorAt(1.0, Qt::transparent);
-        p.setBrush(gradient);
-        p.drawRect(0, height() - padding, padding, padding);
-    }
-    {
-        QLinearGradient gradient(0, 0, padding, 0);
-        gradient.setColorAt(0.0, Qt::transparent);
-        gradient.setColorAt(1.0, c);
-        p.setBrush(gradient);
-        p.drawRect(0, padding, padding, height() - 2 * padding);
-    }
-    p.setBrush(QColor(255, 255, 255));
-    p.setPen(Qt::NoPen);
-    p.drawRect(rect().adjusted(padding, padding, -padding, -padding));
-}

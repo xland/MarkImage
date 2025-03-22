@@ -61,6 +61,42 @@
     <ClCompile Include="BtnSys.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ToolBar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ContentBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolSetting.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ShapeLayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Canvas.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StatusBar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BtnTool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BtnCheck.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SettingFill.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SettingBorder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SettingPosSize.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BtnNumInput.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="App.h">
@@ -82,6 +118,42 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="BtnSys.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="ToolBar.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="ContentBox.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="ToolSetting.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="ShapeLayer.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Canvas.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="StatusBar.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="BtnTool.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="BtnCheck.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="SettingFill.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="SettingBorder.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="SettingPosSize.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="BtnNumInput.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

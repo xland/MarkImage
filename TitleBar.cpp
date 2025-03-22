@@ -55,9 +55,10 @@ void TitleBar::paintEvent(QPaintEvent* event)
     QPainter p(this);
     p.setRenderHint(QPainter::Antialiasing, true);
     p.setRenderHint(QPainter::TextAntialiasing, true);
-    p.setBrush(QColor(200, 220, 240));
+    p.setBrush(QColor(238, 238, 238));
     p.setPen(Qt::NoPen);
     p.drawRect(rect());
+
     QPixmap logo(":/Res/logo.png");
     logo = logo.scaled(30 * window()->devicePixelRatio(), 30 * window()->devicePixelRatio(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
     logo.setDevicePixelRatio(window()->devicePixelRatio());

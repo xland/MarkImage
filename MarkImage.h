@@ -12,7 +12,6 @@ public:
     MarkImage(QPixmap* pixmap, QWidget *parent = nullptr);
     ~MarkImage();
 protected:
-    void paintEvent(QPaintEvent* event) override;
     void mousePressEvent(QMouseEvent* event) override;
     void mouseMoveEvent(QMouseEvent* event) override;
     void mouseReleaseEvent(QMouseEvent* event) override;
@@ -20,7 +19,6 @@ protected:
     void changeEvent(QEvent* event) override;
     void showEvent(QShowEvent* event) override;
 private:
-    void drawShadow(QPainter& p);
 public:
     int padding{ 8 };
     int normalW{ 1000 }, normalH{ 800 };

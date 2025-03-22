@@ -1,25 +1,19 @@
 #pragma once
+#include <QMainWindow>
 
-#include <QWidget>
-#include "Util.h"
-
-class BtnSys : public QWidget
+class BtnCheck : public QWidget
 {
 	Q_OBJECT
-
 public:
-	BtnSys(const ushort& code, bool isClose = false,QWidget *parent = nullptr);
-	~BtnSys();
+	BtnCheck(const QString& text,bool isChecked = false, QWidget *parent = nullptr);
+	~BtnCheck();
 protected:
 	void paintEvent(QPaintEvent* event) override;
 	void enterEvent(QEnterEvent* event) override;
 	void leaveEvent(QEvent* event) override;
 	void mousePressEvent(QMouseEvent* event) override;
-signals:
-	void click();
 public:
-	ushort code;
+	bool isChecked{ false };
+	QString text;
 private:
-	bool isHover{ false };
-	bool isClose;
 };

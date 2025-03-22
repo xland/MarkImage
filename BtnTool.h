@@ -1,25 +1,24 @@
 #pragma once
-
 #include <QWidget>
-#include "Util.h"
 
-class BtnSys : public QWidget
+class BtnTool : public QWidget
 {
 	Q_OBJECT
 
 public:
-	BtnSys(const ushort& code, bool isClose = false,QWidget *parent = nullptr);
-	~BtnSys();
+	BtnTool(const QString& text,const uint& code, QWidget *parent = nullptr,bool isSelected=false);
+	~BtnTool();
+signals:
+	void click();
 protected:
 	void paintEvent(QPaintEvent* event) override;
 	void enterEvent(QEnterEvent* event) override;
 	void leaveEvent(QEvent* event) override;
 	void mousePressEvent(QMouseEvent* event) override;
-signals:
-	void click();
 public:
-	ushort code;
+	bool isSelected{ false };
 private:
 	bool isHover{ false };
-	bool isClose;
+	QString text;
+	uint code;
 };

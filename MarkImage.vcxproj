@@ -116,9 +116,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BtnCheck.cpp" />
+    <ClCompile Include="BtnNumInput.cpp" />
     <ClCompile Include="BtnSys.cpp" />
+    <ClCompile Include="Canvas.cpp" />
+    <ClCompile Include="ContentBox.cpp" />
     <ClCompile Include="PinImage.cpp" />
+    <ClCompile Include="SettingBorder.cpp" />
+    <ClCompile Include="SettingFill.cpp" />
+    <ClCompile Include="SettingPosSize.cpp" />
+    <ClCompile Include="ShapeLayer.cpp" />
+    <ClCompile Include="StatusBar.cpp" />
     <ClCompile Include="TitleBar.cpp" />
+    <ClCompile Include="ToolBar.cpp" />
+    <ClCompile Include="BtnTool.cpp" />
+    <ClCompile Include="ToolSetting.cpp" />
     <ClCompile Include="Util.cpp" />
     <QtRcc Include="MarkImage.qrc" />
     <QtMoc Include="MarkImage.h" />
@@ -150,6 +162,18 @@
     <QtMoc Include="TitleBar.h" />
     <QtMoc Include="PinImage.h" />
     <QtMoc Include="BtnSys.h" />
+    <QtMoc Include="ToolBar.h" />
+    <QtMoc Include="ContentBox.h" />
+    <QtMoc Include="ToolSetting.h" />
+    <QtMoc Include="ShapeLayer.h" />
+    <QtMoc Include="Canvas.h" />
+    <QtMoc Include="StatusBar.h" />
+    <QtMoc Include="BtnTool.h" />
+    <QtMoc Include="BtnCheck.h" />
+    <QtMoc Include="SettingFill.h" />
+    <QtMoc Include="SettingBorder.h" />
+    <QtMoc Include="SettingPosSize.h" />
+    <QtMoc Include="BtnNumInput.h" />
     <ClInclude Include="Util.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
