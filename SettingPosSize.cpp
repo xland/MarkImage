@@ -10,13 +10,12 @@
 SettingPosSize::SettingPosSize(QWidget *parent) : QWidget(parent)
 {
 	auto layout = new QVBoxLayout(this);
-	layout->setSpacing(4);
-	layout->setContentsMargins(8, 36, 8, 8);
+	layout->setSpacing(8);
+	layout->setContentsMargins(8, 38, 8, 8);
 	layout->addWidget(new BtnNumInput("水平位置", 30, this));
-	layout->addWidget(new BtnCheck("垂直位置", false, this));
-	layout->addWidget(new BtnCheck("高度", false, this));
-	layout->addWidget(new BtnCheck("宽度", false, this));
-	layout->addWidget(new BtnCheck("旋转角度", false, this));
+	layout->addWidget(new BtnNumInput("垂直位置", 30, this));
+	layout->addWidget(new BtnNumInput("高度", 30, this));
+	layout->addWidget(new BtnNumInput("宽度", 30, this));
 	setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
 }
 

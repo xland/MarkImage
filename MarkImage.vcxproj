@@ -118,6 +118,7 @@
   <ItemGroup>
     <ClCompile Include="BtnCheck.cpp" />
     <ClCompile Include="BtnNumInput.cpp" />
+    <ClCompile Include="BtnNumInputBtn.cpp" />
     <ClCompile Include="BtnSys.cpp" />
     <ClCompile Include="Canvas.cpp" />
     <ClCompile Include="ContentBox.cpp" />
@@ -174,6 +175,7 @@
     <QtMoc Include="SettingBorder.h" />
     <QtMoc Include="SettingPosSize.h" />
     <QtMoc Include="BtnNumInput.h" />
+    <QtMoc Include="BtnNumInputBtn.h" />
     <ClInclude Include="Util.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

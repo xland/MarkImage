@@ -6,7 +6,7 @@
 BtnCheck::BtnCheck(const QString& text, bool isChecked, QWidget *parent) : QWidget(parent)
 , text{ text }, isChecked{ isChecked }
 {
-	setFixedHeight(26);
+	setFixedHeight(22);
 }
 
 BtnCheck::~BtnCheck()
