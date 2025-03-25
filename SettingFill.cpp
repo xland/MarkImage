@@ -12,6 +12,7 @@ SettingFill::SettingFill(QWidget *parent) : QWidget(parent)
 	checkNoFill = new BtnCheck("无填充", true, this);
 	checkPureColor = new BtnCheck("纯色填充", false, this);
 	checkGradientColor = new BtnCheck("渐变填充", false, this);
+	colorSelector = new BtnColorSelector(this);
 
 	connect(checkNoFill, &BtnCheck::onClick, this, &SettingFill::onCheckChange);
 	connect(checkPureColor, &BtnCheck::onClick, this, &SettingFill::onCheckChange);
@@ -20,6 +21,7 @@ SettingFill::SettingFill(QWidget *parent) : QWidget(parent)
 	layout->addWidget(checkNoFill);
 	layout->addWidget(checkPureColor);
 	layout->addWidget(checkGradientColor);
+	layout->addWidget(colorSelector);
 	setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
 }
 
@@ -56,15 +58,18 @@ void SettingFill::onCheckChange()
 	if (btn == checkNoFill) {
 		checkPureColor->isChecked = false;
 		checkGradientColor->isChecked = false;
+		colorSelector->hide();
 	}
 	else if (btn == checkPureColor) {
 		checkNoFill->isChecked = false;
 		checkGradientColor->isChecked = false;
+		colorSelector->show();
 	}
 	else if (btn == checkGradientColor)
 	{
 		checkPureColor->isChecked = false;
 		checkNoFill->isChecked = false;
+		colorSelector->hide();
 	}
 	update();
 }

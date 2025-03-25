@@ -117,6 +117,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BtnCheck.cpp" />
+    <ClCompile Include="BtnColorSelector.cpp" />
+    <ClCompile Include="BtnColorSelectorList.cpp" />
     <ClCompile Include="BtnNumInput.cpp" />
     <ClCompile Include="BtnNumInputBtn.cpp" />
     <ClCompile Include="BtnSys.cpp" />
@@ -176,6 +178,8 @@
     <QtMoc Include="SettingPosSize.h" />
     <QtMoc Include="BtnNumInput.h" />
     <QtMoc Include="BtnNumInputBtn.h" />
+    <QtMoc Include="BtnColorSelector.h" />
+    <QtMoc Include="BtnColorSelectorList.h" />
     <ClInclude Include="Util.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

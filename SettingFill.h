@@ -2,6 +2,7 @@
 
 #include <QWidget>
 #include "BtnCheck.h"
+#include "BtnColorSelector.h"
 
 class SettingFill : public QWidget
 {
@@ -18,5 +19,5 @@ private:
 	BtnCheck* checkNoFill;
 	BtnCheck* checkPureColor;
 	BtnCheck* checkGradientColor;
-
+	BtnColorSelector* colorSelector;
 };

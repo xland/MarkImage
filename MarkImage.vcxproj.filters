@@ -100,6 +100,12 @@
     <ClCompile Include="BtnNumInputBtn.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BtnColorSelector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BtnColorSelectorList.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="App.h">
@@ -160,6 +166,12 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="BtnNumInputBtn.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="BtnColorSelector.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="BtnColorSelectorList.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
