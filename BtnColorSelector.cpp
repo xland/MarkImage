@@ -2,6 +2,7 @@
 #include <QLabel>
 #include <QPainter>
 #include <QColorDialog>
+#include <QMouseEvent>
 #include "BtnColorSelector.h"
 #include "Util.h"
 
@@ -33,20 +34,24 @@ void BtnColorSelector::paintEvent(QPaintEvent* event)
 	p.drawRoundedRect(rr,3,3);
 
 	p.setBrush(color);
-	rr.adjust(3, 3, -22, -3);
+	rr.adjust(3, 3, -3, -3);
 	p.drawRect(rr);
 
-	auto font = Util::getIconFont(12);
-	p.setFont(*font);
-	p.setBrush(Qt::NoBrush);
-	p.setPen(QColor(130, 130, 130));
-	QRect rr2(rect().right() - 22, 0, 22, height());
-	p.drawText(rr2, Qt::AlignCenter, QChar(0xe70f));  //QChar(0xe708)
+	//auto font = Util::getIconFont(12);
+	//p.setFont(*font);
+	//p.setBrush(Qt::NoBrush);
+	//p.setPen(QColor(130, 130, 130));
+	//QRect rr2(rect().right() - 22, 0, 22, height());
+	//p.drawText(rr2, Qt::AlignCenter, QChar(0xe70f));  //QChar(0xe708)
 
 }
 
 void BtnColorSelector::mousePressEvent(QMouseEvent* event)
 {
+	auto p = event->pos();
+	if (p.x() < rect().right() - 124) {
+		return;
+	}
 	color = QColorDialog::getColor(Qt::white, window(), "选择颜色",QColorDialog::ColorDialogOption::ShowAlphaChannel);
 	update();
 }
