@@ -2,7 +2,6 @@
 #include <QPainter>
 #include <QVBoxLayout>
 #include "SettingFill.h"
-#include "BtnCheck.h"
 #include "Util.h"
 
 SettingFill::SettingFill(QWidget *parent) : QWidget(parent)
@@ -10,9 +9,17 @@ SettingFill::SettingFill(QWidget *parent) : QWidget(parent)
 	auto layout = new QVBoxLayout(this);
 	layout->setSpacing(4);
 	layout->setContentsMargins(8, 36, 8, 8);
-	layout->addWidget(new BtnCheck("无填充", true, this));
-	layout->addWidget(new BtnCheck("纯色填充", false, this));
-	layout->addWidget(new BtnCheck("渐变填充", false, this));
+	checkNoFill = new BtnCheck("无填充", true, this);
+	checkPureColor = new BtnCheck("纯色填充", false, this);
+	checkGradientColor = new BtnCheck("渐变填充", false, this);
+
+	connect(checkNoFill, &BtnCheck::onClick, this, &SettingFill::onCheckChange);
+	connect(checkPureColor, &BtnCheck::onClick, this, &SettingFill::onCheckChange);
+	connect(checkGradientColor, &BtnCheck::onClick, this, &SettingFill::onCheckChange);
+
+	layout->addWidget(checkNoFill);
+	layout->addWidget(checkPureColor);
+	layout->addWidget(checkGradientColor);
 	setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
 }
 
@@ -37,4 +44,27 @@ void SettingFill::paintEvent(QPaintEvent* event)
 	font = Util::getTextFont(13);
 	p.setFont(*font);
 	p.drawText(r, Qt::AlignLeft | Qt::AlignTop, "填充属性");
+}
+
+void SettingFill::onCheckChange()
+{
+	auto btn = (BtnCheck*)sender();
+	if (btn->isChecked) {
+		return;
+	}
+	btn->isChecked = true;
+	if (btn == checkNoFill) {
+		checkPureColor->isChecked = false;
+		checkGradientColor->isChecked = false;
+	}
+	else if (btn == checkPureColor) {
+		checkNoFill->isChecked = false;
+		checkGradientColor->isChecked = false;
+	}
+	else if (btn == checkGradientColor)
+	{
+		checkPureColor->isChecked = false;
+		checkNoFill->isChecked = false;
+	}
+	update();
 }

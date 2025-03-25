@@ -46,4 +46,5 @@ void BtnCheck::leaveEvent(QEvent* event)
 
 void BtnCheck::mousePressEvent(QMouseEvent* event)
 {
+	emit onClick();
 }

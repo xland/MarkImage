@@ -7,6 +7,8 @@ class BtnCheck : public QWidget
 public:
 	BtnCheck(const QString& text,bool isChecked = false, QWidget *parent = nullptr);
 	~BtnCheck();
+signals:
+	void onClick();
 protected:
 	void paintEvent(QPaintEvent* event) override;
 	void enterEvent(QEnterEvent* event) override;

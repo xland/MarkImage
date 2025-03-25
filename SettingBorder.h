@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QWidget>
+#include "BtnCheck.h"
 
 class SettingBorder : public QWidget
 {
@@ -13,4 +14,10 @@ protected:
 	void paintEvent(QPaintEvent* event) override;
 private:
 	void adjustHeight();
+private:
+	void onCheckChange();
+private:
+	BtnCheck* checkNoBorder;
+	BtnCheck* checkSolidBorder;
+	BtnCheck* checkdotBorder;
 };

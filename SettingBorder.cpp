@@ -2,7 +2,6 @@
 #include <QLabel>
 #include <QVBoxLayout>
 #include "SettingBorder.h"
-#include "BtnCheck.h"
 #include "Util.h"
 
 SettingBorder::SettingBorder(QWidget *parent) : QWidget(parent)
@@ -10,9 +9,18 @@ SettingBorder::SettingBorder(QWidget *parent) : QWidget(parent)
 	auto layout = new QVBoxLayout(this);
 	layout->setSpacing(4);
 	layout->setContentsMargins(8, 36, 8, 8);
-	layout->addWidget(new BtnCheck("无边框",true,this));
-	layout->addWidget(new BtnCheck("实线边框", false, this));
-	layout->addWidget(new BtnCheck("虚线边框", false, this));
+	checkNoBorder = new BtnCheck("无边框", true, this);
+	checkSolidBorder = new BtnCheck("实线边框", false, this);
+	checkdotBorder = new BtnCheck("虚线边框", false, this);
+
+	connect(checkNoBorder, &BtnCheck::onClick, this, &SettingBorder::onCheckChange);
+	connect(checkSolidBorder, &BtnCheck::onClick, this, &SettingBorder::onCheckChange);
+	connect(checkdotBorder, &BtnCheck::onClick, this, &SettingBorder::onCheckChange);
+
+	layout->addWidget(checkNoBorder);
+	layout->addWidget(checkSolidBorder);
+	layout->addWidget(checkdotBorder);
+
 	setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
 }
 
@@ -48,4 +56,27 @@ void SettingBorder::adjustHeight()
 		}
 	}
 	setFixedHeight(totalHeight);
+}
+
+void SettingBorder::onCheckChange()
+{
+	auto btn = (BtnCheck*)sender();
+	if (btn->isChecked) {
+		return;
+	}
+	btn->isChecked = true;
+	if (btn == checkNoBorder) {
+		checkSolidBorder->isChecked = false;
+		checkdotBorder->isChecked = false;
+	}
+	else if (btn == checkSolidBorder) {
+		checkNoBorder->isChecked = false;
+		checkdotBorder->isChecked = false;
+	}
+	else if (btn == checkdotBorder)
+	{
+		checkNoBorder->isChecked = false;
+		checkSolidBorder->isChecked = false;
+	}
+	update();
 }

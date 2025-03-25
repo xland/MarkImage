@@ -1,6 +1,8 @@
 #pragma once
 
 #include <QWidget>
+#include <QLineEdit>
+#include "BtnNumInputBtn.h"
 
 class BtnNumInput : public QWidget
 {
@@ -12,5 +14,10 @@ public:
 protected:
 	void paintEvent(QPaintEvent* event) override;
 private:
+	void onBtnClick();
+private:
 	int val;
+	BtnNumInputBtn* btnLeft;
+	BtnNumInputBtn* btnRight;
+	QLineEdit* input;
 };
