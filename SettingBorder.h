@@ -2,6 +2,8 @@
 
 #include <QWidget>
 #include "BtnCheck.h"
+#include "BtnNumInput.h"
+#include "BtnColorSelector.h"
 
 class SettingBorder : public QWidget
 {
@@ -20,4 +22,6 @@ private:
 	BtnCheck* checkNoBorder;
 	BtnCheck* checkSolidBorder;
 	BtnCheck* checkdotBorder;
+	BtnNumInput* borderWidth;
+	BtnColorSelector* colorSelector;
 };

@@ -8,7 +8,7 @@
 BtnTool::BtnTool(const QString& text, const uint& code, QWidget* parent, bool isSelected) : QWidget(parent),
 text{ text }, code{ code }, isSelected{ isSelected }
 {
-	setFixedSize(60, 50);
+	setFixedSize(80, 60);
 	connect(this, &BtnTool::click, (ToolBar*)parent, &ToolBar::btnClick);
 }
 
@@ -34,9 +34,9 @@ void BtnTool::paintEvent(QPaintEvent* event)
 	else {
 		painter.setPen(QColor(88, 88, 88));
 	}
-	auto font = Util::getIconFont(20);
+	auto font = Util::getIconFont(16);
 	painter.setFont(*font);
-	painter.drawText(rect().adjusted(0,0,0,-15), Qt::AlignCenter, QChar(code));
+	painter.drawText(rect().adjusted(0,0,0,-18), Qt::AlignCenter, QChar(code));
 
 	font = Util::getTextFont(12);
 	painter.setFont(*font);

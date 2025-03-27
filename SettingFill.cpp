@@ -1,18 +1,19 @@
 #include <QLabel>
 #include <QPainter>
 #include <QVBoxLayout>
+#include <QMessageBox>
 #include "SettingFill.h"
 #include "Util.h"
 
 SettingFill::SettingFill(QWidget *parent) : QWidget(parent)
 {
 	auto layout = new QVBoxLayout(this);
-	layout->setSpacing(4);
+	layout->setSpacing(8);
 	layout->setContentsMargins(8, 36, 8, 8);
 	checkNoFill = new BtnCheck("无填充", true, this);
 	checkPureColor = new BtnCheck("纯色填充", false, this);
 	checkGradientColor = new BtnCheck("渐变填充", false, this);
-	colorSelector = new BtnColorSelector(this);
+	colorSelector = new BtnColorSelector("填充颜色", this);
 
 	connect(checkNoFill, &BtnCheck::onClick, this, &SettingFill::onCheckChange);
 	connect(checkPureColor, &BtnCheck::onClick, this, &SettingFill::onCheckChange);
@@ -54,7 +55,6 @@ void SettingFill::onCheckChange()
 	if (btn->isChecked) {
 		return;
 	}
-	btn->isChecked = true;
 	if (btn == checkNoFill) {
 		checkPureColor->isChecked = false;
 		checkGradientColor->isChecked = false;
@@ -67,9 +67,12 @@ void SettingFill::onCheckChange()
 	}
 	else if (btn == checkGradientColor)
 	{
-		checkPureColor->isChecked = false;
-		checkNoFill->isChecked = false;
-		colorSelector->hide();
+		//checkPureColor->isChecked = false;
+		//checkNoFill->isChecked = false;
+		//colorSelector->hide();
+		QMessageBox::information(this, "提示", "暂不支持渐变填充");
+		return;
 	}
+	btn->isChecked = true;
 	update();
 }

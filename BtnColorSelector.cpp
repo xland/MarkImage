@@ -6,13 +6,14 @@
 #include "BtnColorSelector.h"
 #include "Util.h"
 
-BtnColorSelector::BtnColorSelector(QWidget* parent) : QWidget(parent),color(Qt::red)
+BtnColorSelector::BtnColorSelector(const QString& text, QWidget* parent) : QWidget(parent),
+color(Qt::red),text{text}
 {
 	setFixedHeight(22);
 	auto layout = new QHBoxLayout(this);
 	layout->setSpacing(0);
 	layout->setContentsMargins(0, 0, 0, 0);
-	auto label = new QLabel("颜色", this);
+	auto label = new QLabel(text, this);
 	label->setStyleSheet(R"(QLabel{color:#888888;font-size:13px})");
 	layout->addWidget(label);
 	setVisible(false);
@@ -31,11 +32,11 @@ void BtnColorSelector::paintEvent(QPaintEvent* event)
 	p.setBrush(QColor(255, 255, 255));
 	p.setPen(Qt::NoPen);
 	QRect rr(rect().right() - 124, 0, 124, height());
-	p.drawRoundedRect(rr,3,3);
+	p.drawRect(rr);
 
 	p.setBrush(color);
 	rr.adjust(3, 3, -3, -3);
-	p.drawRect(rr);
+	p.drawRoundedRect(rr,3,3);
 
 	//auto font = Util::getIconFont(12);
 	//p.setFont(*font);

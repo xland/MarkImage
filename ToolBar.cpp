@@ -6,7 +6,7 @@
 
 ToolBar::ToolBar(QWidget *parent) : QWidget(parent)
 {
-	setFixedWidth(60);
+	setFixedWidth(80);
 
     auto layout = new QVBoxLayout(this);
     layout->setSpacing(0);

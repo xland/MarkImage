@@ -10,7 +10,7 @@
 SettingPosSize::SettingPosSize(QWidget *parent) : QWidget(parent)
 {
 	auto layout = new QVBoxLayout(this);
-	layout->setSpacing(8);
+	layout->setSpacing(10);
 	layout->setContentsMargins(8, 38, 8, 8);
 	layout->addWidget(new BtnNumInput("水平位置", 30, this));
 	layout->addWidget(new BtnNumInput("垂直位置", 30, this));

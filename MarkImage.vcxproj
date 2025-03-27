@@ -117,17 +117,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BtnCheck.cpp" />
+    <ClCompile Include="BtnCheckHalf.cpp" />
     <ClCompile Include="BtnColorSelector.cpp" />
     <ClCompile Include="BtnColorSelectorList.cpp" />
     <ClCompile Include="BtnNumInput.cpp" />
     <ClCompile Include="BtnNumInputBtn.cpp" />
     <ClCompile Include="BtnSys.cpp" />
     <ClCompile Include="Canvas.cpp" />
+    <ClCompile Include="ColorGradientBar.cpp" />
     <ClCompile Include="ContentBox.cpp" />
     <ClCompile Include="PinImage.cpp" />
     <ClCompile Include="SettingBorder.cpp" />
     <ClCompile Include="SettingFill.cpp" />
     <ClCompile Include="SettingPosSize.cpp" />
+    <ClCompile Include="ShapeItem.cpp" />
     <ClCompile Include="ShapeLayer.cpp" />
     <ClCompile Include="StatusBar.cpp" />
     <ClCompile Include="TitleBar.cpp" />
@@ -180,6 +183,9 @@
     <QtMoc Include="BtnNumInputBtn.h" />
     <QtMoc Include="BtnColorSelector.h" />
     <QtMoc Include="BtnColorSelectorList.h" />
+    <QtMoc Include="ColorGradientBar.h" />
+    <QtMoc Include="BtnCheckHalf.h" />
+    <QtMoc Include="ShapeItem.h" />
     <ClInclude Include="Util.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

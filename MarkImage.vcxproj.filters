@@ -106,6 +106,15 @@
     <ClCompile Include="BtnColorSelectorList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ColorGradientBar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BtnCheckHalf.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ShapeItem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="App.h">
@@ -172,6 +181,15 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="BtnColorSelectorList.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="ColorGradientBar.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="BtnCheckHalf.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="ShapeItem.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

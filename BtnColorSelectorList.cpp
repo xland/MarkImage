@@ -3,6 +3,7 @@
 
 BtnColorSelectorList::BtnColorSelectorList(QWidget *parent) : QWidget(parent)
 {
+	//todo
 }
 
 BtnColorSelectorList::~BtnColorSelectorList()

@@ -7,11 +7,15 @@
 SettingBorder::SettingBorder(QWidget *parent) : QWidget(parent)
 {
 	auto layout = new QVBoxLayout(this);
-	layout->setSpacing(4);
+	layout->setSpacing(8);
 	layout->setContentsMargins(8, 36, 8, 8);
 	checkNoBorder = new BtnCheck("无边框", true, this);
 	checkSolidBorder = new BtnCheck("实线边框", false, this);
 	checkdotBorder = new BtnCheck("虚线边框", false, this);
+	borderWidth = new BtnNumInput("边框粗细", 2, this);
+	borderWidth->setVisible(false);
+	colorSelector = new BtnColorSelector("边框颜色", this);
+	colorSelector->setVisible(false);
 
 	connect(checkNoBorder, &BtnCheck::onClick, this, &SettingBorder::onCheckChange);
 	connect(checkSolidBorder, &BtnCheck::onClick, this, &SettingBorder::onCheckChange);
@@ -20,6 +24,8 @@ SettingBorder::SettingBorder(QWidget *parent) : QWidget(parent)
 	layout->addWidget(checkNoBorder);
 	layout->addWidget(checkSolidBorder);
 	layout->addWidget(checkdotBorder);
+	layout->addWidget(borderWidth);
+	layout->addWidget(colorSelector);
 
 	setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
 }
@@ -68,15 +74,20 @@ void SettingBorder::onCheckChange()
 	if (btn == checkNoBorder) {
 		checkSolidBorder->isChecked = false;
 		checkdotBorder->isChecked = false;
+		borderWidth->hide();
 	}
 	else if (btn == checkSolidBorder) {
 		checkNoBorder->isChecked = false;
 		checkdotBorder->isChecked = false;
+		borderWidth->show();
+		colorSelector->show();
 	}
 	else if (btn == checkdotBorder)
 	{
 		checkNoBorder->isChecked = false;
 		checkSolidBorder->isChecked = false;
+		borderWidth->show();
+		colorSelector->show();
 	}
 	update();
 }
