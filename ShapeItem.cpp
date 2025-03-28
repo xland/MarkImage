@@ -12,6 +12,7 @@ ShapeItem::ShapeItem(QWidget *parent) : QWidget(parent)
 	setFixedHeight(38);
     setMouseTracking(true);
     setCursor(Qt::CursorShape::PointingHandCursor);
+    setAcceptDrops(true);
 }
 
 ShapeItem::~ShapeItem()
@@ -91,12 +92,8 @@ void ShapeItem::mouseMoveEvent(QMouseEvent* event)
     QMimeData* mimeData = new QMimeData();
     mimeData->setData("application/x-draggablewidget", QByteArray());
     drag->setMimeData(mimeData);
-
-    // 设置拖拽时的预览图像
-    QPixmap pixmap(size());
-    render(&pixmap);
-    drag->setPixmap(pixmap);
-    drag->setHotSpot(QPoint(pixmap.width() / 2, pixmap.height() / 2));
+    drag->setPixmap(grab());
+    drag->setHotSpot(QPoint(width() / 2, height() / 2));
     drag->exec(Qt::MoveAction);
 }
 
@@ -109,6 +106,7 @@ void ShapeItem::dragEnterEvent(QDragEnterEvent* event)
 
 void ShapeItem::dropEvent(QDropEvent* event)
 {
+    //todo 这个方法应该放到ShapeLayer中
     if (event->mimeData()->hasFormat("application/x-draggablewidget")) {
         ShapeItem* source = qobject_cast<ShapeItem*>(event->source());
         if (source && source != this) {
