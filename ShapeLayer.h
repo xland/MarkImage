@@ -12,4 +12,7 @@ public:
 protected:
 	void paintEvent(QPaintEvent* event);
 private:
+	void itemClick();
+private:
+	bool isChecked{false};
 };

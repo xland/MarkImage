@@ -1,5 +1,9 @@
 #include <QPainter>
-
+#include <QMouseEvent>
+#include <QDrag>
+#include <QMimeData>
+#include <QApplication>
+#include <QVBoxLayout>
 #include "Util.h"
 #include "ShapeItem.h"
 
@@ -20,8 +24,6 @@ void ShapeItem::paintEvent(QPaintEvent * event)
     p.setRenderHint(QPainter::Antialiasing, true);
     p.setRenderHint(QPainter::TextAntialiasing, true);
 
-
-
     if (isCheck || isHover) 
     {
         p.setPen(QColor(50, 130, 240));
@@ -31,7 +33,7 @@ void ShapeItem::paintEvent(QPaintEvent * event)
         p.setPen(Qt::NoPen);
     }
     p.setBrush(QColor(255, 255, 255));
-    p.drawRoundedRect(rect(), 3, 3);
+    p.drawRect(rect());
     p.setBrush(Qt::NoBrush);
     p.setPen(isCheck? QColor(50, 130, 240):QColor(88, 88, 88));
 
@@ -69,6 +71,58 @@ void ShapeItem::leaveEvent(QEvent* event)
 
 void ShapeItem::mousePressEvent(QMouseEvent* event)
 {
-    isCheck = !isCheck;
-    update();
+    if (event->button() == Qt::LeftButton) {      
+        dragStartPosition = event->pos();
+        isCheck = !isCheck;
+        update();
+        emit onClick();
+    }
+}
+
+void ShapeItem::mouseMoveEvent(QMouseEvent* event)
+{
+    if (!(event->buttons() & Qt::LeftButton))
+        return;
+    if ((event->pos() - dragStartPosition).manhattanLength() < QApplication::startDragDistance()) {
+        return;
+    }
+
+    QDrag* drag = new QDrag(this);
+    QMimeData* mimeData = new QMimeData();
+    mimeData->setData("application/x-draggablewidget", QByteArray());
+    drag->setMimeData(mimeData);
+
+    // 设置拖拽时的预览图像
+    QPixmap pixmap(size());
+    render(&pixmap);
+    drag->setPixmap(pixmap);
+    drag->setHotSpot(QPoint(pixmap.width() / 2, pixmap.height() / 2));
+    drag->exec(Qt::MoveAction);
+}
+
+void ShapeItem::dragEnterEvent(QDragEnterEvent* event)
+{
+    if (event->mimeData()->hasFormat("application/x-draggablewidget")) {
+        event->acceptProposedAction();
+    }
+}
+
+void ShapeItem::dropEvent(QDropEvent* event)
+{
+    if (event->mimeData()->hasFormat("application/x-draggablewidget")) {
+        ShapeItem* source = qobject_cast<ShapeItem*>(event->source());
+        if (source && source != this) {
+            QVBoxLayout* layout = qobject_cast<QVBoxLayout*>(parentWidget()->layout());
+            if (layout) {
+                int sourceIndex = layout->indexOf(source);
+                int targetIndex = layout->indexOf(this);
+
+                // 交换位置
+                layout->removeWidget(source);
+                layout->insertWidget(targetIndex, source);
+
+                event->acceptProposedAction();
+            }
+        }
+    }
 }
