@@ -16,6 +16,7 @@ ShapeLayer::ShapeLayer(QWidget *parent) : QWidget(parent)
     layout->setSpacing(8);
     layout->setContentsMargins(0, 0, 0, 10);
 	shapeLayerBar = new ShapeLayerBar(this);
+    connect(shapeLayerBar, &ShapeLayerBar::onClick, this, &ShapeLayer::barClick);
 	layout->addWidget(shapeLayerBar);
     for (size_t i = 0; i < 10; i++)
     {
@@ -58,6 +59,18 @@ void ShapeLayer::itemClick()
         shapeLayerBar->update();
     }
 }
+void ShapeLayer::barClick()
+{
+    auto items = findChildren<ShapeItem*>();
+    for (size_t i = 0; i < items.length(); i++)
+    {
+        if (items[i]->isCheck == shapeLayerBar->isChecked) {
+            continue;
+        }
+		items[i]->isCheck = shapeLayerBar->isChecked;
+		items[i]->update();
+    }
+}
 void ShapeLayer::dragEnterEvent(QDragEnterEvent* event)
 {
     if (event->mimeData()->hasFormat("application/x-draggablewidget")) {
@@ -72,6 +85,7 @@ void ShapeLayer::dropEvent(QDropEvent* event)
             auto l = (QVBoxLayout*)this->layout();   
             auto pos = event->position();
             int index = -1;
+            bool flag = false;
             for (int i = 0; i < l->count(); ++i) {
                 auto obj = l->itemAt(i);
                 if (!obj || !obj->widget()) continue;
@@ -80,9 +94,13 @@ void ShapeLayer::dropEvent(QDropEvent* event)
                 if (item) {
                     index += 1;
                     if (pos.y() < item->y() + item->height() / 2) {
+                        flag = true;
                         break;
                     }
                 }
+            }
+            if (!flag) {
+                index += 1;
             }
             l->removeWidget(source);
             l->insertWidget(index+1, source);

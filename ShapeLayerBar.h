@@ -8,8 +8,11 @@ class ShapeLayerBar : public QWidget
 public:
 	ShapeLayerBar(QWidget *parent = nullptr);
 	~ShapeLayerBar();
+signals:
+	void onClick();
 protected:
 	void paintEvent(QPaintEvent* event);
+	void mousePressEvent(QMouseEvent* event) override;
 public:
 	bool isChecked{ false };
 private:

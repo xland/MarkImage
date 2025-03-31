@@ -1,4 +1,5 @@
 #include <QPainter>
+#include <QMouseEvent>
 #include "Util.h"
 #include "ShapeLayerBar.h"
 
@@ -35,4 +36,13 @@ void ShapeLayerBar::paintEvent(QPaintEvent* event)
     p.setFont(*font);
     header.setLeft(28);
     p.drawText(header, "已绘元素：0", Qt::AlignLeft | Qt::AlignVCenter);
+}
+
+void ShapeLayerBar::mousePressEvent(QMouseEvent* event)
+{
+    if (event->button() == Qt::LeftButton) {
+        isChecked = !isChecked;
+        update();
+        emit onClick();
+    }
 }

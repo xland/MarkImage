@@ -16,6 +16,7 @@ protected:
 	void dropEvent(QDropEvent* event) override;
 private:
 	void itemClick();
+	void barClick();
 private:
 	ShapeLayerBar* shapeLayerBar;
 };
