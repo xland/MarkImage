@@ -71,17 +71,18 @@ void ShapeLayer::dropEvent(QDropEvent* event)
         if (source) {
             auto l = (QVBoxLayout*)this->layout();   
             auto pos = event->position();
-            auto items = findChildren<ShapeItem*>();
             int index = -1;
-            for (size_t i = 0; i < items.length(); i++)
-            {
-                if (pos.y() < items[i]->y() + items[i]->height() / 2) {
-                    index = i;
-                    break;
+            for (int i = 0; i < l->count(); ++i) {
+                auto obj = l->itemAt(i);
+                if (!obj || !obj->widget()) continue;
+                auto item = qobject_cast<ShapeItem*>(obj->widget());
+				if (item == source) continue;
+                if (item) {
+                    index += 1;
+                    if (pos.y() < item->y() + item->height() / 2) {
+                        break;
+                    }
                 }
-            }
-            if (index == -1) {
-                index = items.size()-1;
             }
             l->removeWidget(source);
             l->insertWidget(index+1, source);
