@@ -1,7 +1,8 @@
 #include <QPainter>
 #include <QVBoxLayout>
 #include <QMouseEvent>
-
+#include <QDragEnterEvent>
+#include <QMimeData>
 
 #include "Util.h"
 #include "ShapeLayer.h"
@@ -9,11 +10,13 @@
 
 ShapeLayer::ShapeLayer(QWidget *parent) : QWidget(parent)
 {
+    setAcceptDrops(true);
     setFixedWidth(260);
-
 	auto layout = new QVBoxLayout(this);
     layout->setSpacing(8);
-    layout->setContentsMargins(10, 46, 10, 10);
+    layout->setContentsMargins(0, 0, 0, 10);
+	shapeLayerBar = new ShapeLayerBar(this);
+	layout->addWidget(shapeLayerBar);
     for (size_t i = 0; i < 10; i++)
     {
         auto item = new ShapeItem(this);
@@ -37,27 +40,7 @@ void ShapeLayer::paintEvent(QPaintEvent* event)
     p.setBrush(QColor(238, 242, 255));
     p.setPen(Qt::NoPen);
     p.drawRect(rect());
-
-    p.setBrush(QColor(210, 220, 240));
-    QRect header(0, 0, width(), 36);
-    p.drawRect(header);
-    p.setPen(QPen(QColor(50, 130, 240),0.5));
-	p.drawLine(0, 36, width(), 36);
-    
-
-    p.setBrush(Qt::NoBrush);
-    p.setPen(QColor(50, 130, 240));
-    auto font = Util::getIconFont(12);
-    p.setFont(*font);
-    header.setLeft(10);
-    p.drawText(header, QChar(isChecked ? 0xe896: 0xe894), Qt::AlignLeft | Qt::AlignVCenter);
-
-    font = Util::getTextFont(12);
-    p.setFont(*font);
-    header.setLeft(28);
-    p.drawText(header, "已绘元素：0", Qt::AlignLeft | Qt::AlignVCenter);
 }
-
 
 void ShapeLayer::itemClick()
 {
@@ -70,8 +53,39 @@ void ShapeLayer::itemClick()
             break;
         }
     }
-    if (isChecked != needCheck) {
-        isChecked = needCheck;
-        update();
+    if (shapeLayerBar->isChecked != needCheck) {
+        shapeLayerBar->isChecked = needCheck;
+        shapeLayerBar->update();
+    }
+}
+void ShapeLayer::dragEnterEvent(QDragEnterEvent* event)
+{
+    if (event->mimeData()->hasFormat("application/x-draggablewidget")) {
+        event->acceptProposedAction();
+    }
+}
+void ShapeLayer::dropEvent(QDropEvent* event)
+{
+    if (event->mimeData()->hasFormat("application/x-draggablewidget")) {
+        ShapeItem* source = qobject_cast<ShapeItem*>(event->source());
+        if (source) {
+            auto l = (QVBoxLayout*)this->layout();   
+            auto pos = event->position();
+            auto items = findChildren<ShapeItem*>();
+            int index = -1;
+            for (size_t i = 0; i < items.length(); i++)
+            {
+                if (pos.y() < items[i]->y() + items[i]->height() / 2) {
+                    index = i;
+                    break;
+                }
+            }
+            if (index == -1) {
+                index = items.size()-1;
+            }
+            l->removeWidget(source);
+            l->insertWidget(index+1, source);
+            event->acceptProposedAction();
+        }
     }
 }

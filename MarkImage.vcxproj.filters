@@ -115,6 +115,9 @@
     <ClCompile Include="ShapeItem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ShapeLayerBar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="App.h">
@@ -190,6 +193,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="ShapeItem.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="ShapeLayerBar.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

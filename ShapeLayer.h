@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QWidget>
+#include "ShapeLayerBar.h"
 
 class ShapeLayer : public QWidget
 {
@@ -10,9 +11,11 @@ public:
 	ShapeLayer(QWidget *parent = nullptr);
 	~ShapeLayer();
 protected:
-	void paintEvent(QPaintEvent* event);
+	void paintEvent(QPaintEvent* event) override;
+	void dragEnterEvent(QDragEnterEvent* event) override;
+	void dropEvent(QDropEvent* event) override;
 private:
 	void itemClick();
 private:
-	bool isChecked{false};
+	ShapeLayerBar* shapeLayerBar;
 };
