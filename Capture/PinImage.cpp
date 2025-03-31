@@ -4,7 +4,7 @@
 
 #include "Util.h"
 #include "PinImage.h"
-#include "MarkImage.h"
+#include "./Mark/MarkImage.h"
 
 PinImage::PinImage(const QPoint& pos,const QPixmap& pixmap, QWidget* parent) : QMainWindow(parent)
     ,pixmap{pixmap}

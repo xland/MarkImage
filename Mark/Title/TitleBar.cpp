@@ -5,9 +5,9 @@
 #include <Windows.h>
 #include <QApplication>
 
-#include "Util.h"
+#include "../../Util.h"
 #include "TitleBar.h"
-#include "MarkImage.h"
+#include "../MarkImage.h"
 
 TitleBar::TitleBar(QWidget *parent) : QWidget(parent)
 {

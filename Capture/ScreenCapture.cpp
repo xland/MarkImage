@@ -14,7 +14,7 @@
 #include "ScreenCapture.h"
 #include "CutTool.h"
 #include "PinImage.h"
-#include "MarkImage.h"
+#include "./Mark/MarkImage.h"
 
 ScreenCapture::ScreenCapture(QWidget *parent) : QMainWindow(parent),
     x{ GetSystemMetrics(SM_XVIRTUALSCREEN) },

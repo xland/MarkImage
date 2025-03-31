@@ -26,10 +26,10 @@
     <QtRcc Include="MarkImage.qrc">
       <Filter>Resource Files</Filter>
     </QtRcc>
-    <QtMoc Include="MarkImage.h">
+    <QtMoc Include="Mark\MarkImage.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <ClCompile Include="MarkImage.cpp">
+    <ClCompile Include="Mark\MarkImage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -40,82 +40,82 @@
     <ClCompile Include="App.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ScreenCapture.cpp">
+    <ClCompile Include="Capture\ScreenCapture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PixInfo.cpp">
+    <ClCompile Include="Capture\PixInfo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CutTool.cpp">
+    <ClCompile Include="Capture\CutTool.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Util.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PinImage.cpp">
+    <ClCompile Include="Capture\PinImage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TitleBar.cpp">
+    <ClCompile Include="Mark\Title\TitleBar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BtnSys.cpp">
+    <ClCompile Include="Mark\Title\BtnSys.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ToolBar.cpp">
+    <ClCompile Include="Mark\Tool\ToolBar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ContentBox.cpp">
+    <ClCompile Include="Mark\ContentBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ToolSetting.cpp">
+    <ClCompile Include="Mark\Setting\ToolSetting.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ShapeLayer.cpp">
+    <ClCompile Include="Mark\Shape\ShapeLayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Canvas.cpp">
+    <ClCompile Include="Mark\Canvas.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="StatusBar.cpp">
+    <ClCompile Include="Mark\StatusBar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BtnTool.cpp">
+    <ClCompile Include="Mark\Tool\BtnTool.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BtnCheck.cpp">
+    <ClCompile Include="Mark\Setting\BtnCheck.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SettingFill.cpp">
+    <ClCompile Include="Mark\Setting\SettingFill.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SettingBorder.cpp">
+    <ClCompile Include="Mark\Setting\SettingBorder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SettingPosSize.cpp">
+    <ClCompile Include="Mark\Setting\SettingPosSize.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BtnNumInput.cpp">
+    <ClCompile Include="Mark\Setting\BtnNumInput.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BtnNumInputBtn.cpp">
+    <ClCompile Include="Mark\Setting\BtnNumInputBtn.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BtnColorSelector.cpp">
+    <ClCompile Include="Mark\Setting\BtnColorSelector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BtnColorSelectorList.cpp">
+    <ClCompile Include="Mark\Setting\BtnColorSelectorList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ColorGradientBar.cpp">
+    <ClCompile Include="Mark\ColorGradientBar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BtnCheckHalf.cpp">
+    <ClCompile Include="Mark\Setting\BtnCheckHalf.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ShapeItem.cpp">
+    <ClCompile Include="Mark\Shape\ShapeItem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ShapeLayerBar.cpp">
+    <ClCompile Include="Mark\Shape\ShapeLayerBar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -123,79 +123,79 @@
     <QtMoc Include="App.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="ScreenCapture.h">
+    <QtMoc Include="Capture\ScreenCapture.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="PixInfo.h">
+    <QtMoc Include="Capture\PixInfo.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="CutTool.h">
+    <QtMoc Include="Capture\CutTool.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="PinImage.h">
+    <QtMoc Include="Capture\PinImage.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="TitleBar.h">
+    <QtMoc Include="Mark\Title\TitleBar.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="BtnSys.h">
+    <QtMoc Include="Mark\Title\BtnSys.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="ToolBar.h">
+    <QtMoc Include="Mark\Tool\ToolBar.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="ContentBox.h">
+    <QtMoc Include="Mark\ContentBox.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="ToolSetting.h">
+    <QtMoc Include="Mark\Setting\ToolSetting.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="ShapeLayer.h">
+    <QtMoc Include="Mark\Shape\ShapeLayer.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Canvas.h">
+    <QtMoc Include="Mark\Canvas.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="StatusBar.h">
+    <QtMoc Include="Mark\StatusBar.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="BtnTool.h">
+    <QtMoc Include="Mark\Tool\BtnTool.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="BtnCheck.h">
+    <QtMoc Include="Mark\Setting\BtnCheck.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="SettingFill.h">
+    <QtMoc Include="Mark\Setting\SettingFill.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="SettingBorder.h">
+    <QtMoc Include="Mark\Setting\SettingBorder.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="SettingPosSize.h">
+    <QtMoc Include="Mark\Setting\SettingPosSize.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="BtnNumInput.h">
+    <QtMoc Include="Mark\Setting\BtnNumInput.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="BtnNumInputBtn.h">
+    <QtMoc Include="Mark\Setting\BtnNumInputBtn.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="BtnColorSelector.h">
+    <QtMoc Include="Mark\Setting\BtnColorSelector.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="BtnColorSelectorList.h">
+    <QtMoc Include="Mark\Setting\BtnColorSelectorList.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="ColorGradientBar.h">
+    <QtMoc Include="Mark\ColorGradientBar.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="BtnCheckHalf.h">
+    <QtMoc Include="Mark\Setting\BtnCheckHalf.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="ShapeItem.h">
+    <QtMoc Include="Mark\Shape\ShapeItem.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="ShapeLayerBar.h">
+    <QtMoc Include="Mark\Shape\ShapeLayerBar.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

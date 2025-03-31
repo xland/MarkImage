@@ -1,9 +1,9 @@
 #include "ContentBox.h"
 
 #include "Canvas.h"
-#include "ToolBar.h"
-#include "ToolSetting.h"
-#include "ShapeLayer.h"
+#include "./Tool/ToolBar.h"
+#include "./Setting/ToolSetting.h"
+#include "./Shape/ShapeLayer.h"
 
 ContentBox::ContentBox(QWidget *parent) : QWidget(parent)
 {

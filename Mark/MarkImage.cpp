@@ -8,7 +8,7 @@
 #include "ContentBox.h"
 #include "StatusBar.h"
 #include "MarkImage.h"
-#include "TitleBar.h"
+#include "./Title/TitleBar.h"
 
 MarkImage::MarkImage(QPixmap* pixmap, QWidget* parent) : QWidget(parent), pixmap{ pixmap }
 {

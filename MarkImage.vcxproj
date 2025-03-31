@@ -116,36 +116,36 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BtnCheck.cpp" />
-    <ClCompile Include="BtnCheckHalf.cpp" />
-    <ClCompile Include="BtnColorSelector.cpp" />
-    <ClCompile Include="BtnColorSelectorList.cpp" />
-    <ClCompile Include="BtnNumInput.cpp" />
-    <ClCompile Include="BtnNumInputBtn.cpp" />
-    <ClCompile Include="BtnSys.cpp" />
-    <ClCompile Include="Canvas.cpp" />
-    <ClCompile Include="ColorGradientBar.cpp" />
-    <ClCompile Include="ContentBox.cpp" />
-    <ClCompile Include="PinImage.cpp" />
-    <ClCompile Include="SettingBorder.cpp" />
-    <ClCompile Include="SettingFill.cpp" />
-    <ClCompile Include="SettingPosSize.cpp" />
-    <ClCompile Include="ShapeItem.cpp" />
-    <ClCompile Include="ShapeLayer.cpp" />
-    <ClCompile Include="ShapeLayerBar.cpp" />
-    <ClCompile Include="StatusBar.cpp" />
-    <ClCompile Include="TitleBar.cpp" />
-    <ClCompile Include="ToolBar.cpp" />
-    <ClCompile Include="BtnTool.cpp" />
-    <ClCompile Include="ToolSetting.cpp" />
+    <ClCompile Include="Mark\Setting\BtnCheck.cpp" />
+    <ClCompile Include="Mark\Setting\BtnCheckHalf.cpp" />
+    <ClCompile Include="Mark\Setting\BtnColorSelector.cpp" />
+    <ClCompile Include="Mark\Setting\BtnColorSelectorList.cpp" />
+    <ClCompile Include="Mark\Setting\BtnNumInput.cpp" />
+    <ClCompile Include="Mark\Setting\BtnNumInputBtn.cpp" />
+    <ClCompile Include="Mark\Title\BtnSys.cpp" />
+    <ClCompile Include="Mark\Canvas.cpp" />
+    <ClCompile Include="Mark\ColorGradientBar.cpp" />
+    <ClCompile Include="Mark\ContentBox.cpp" />
+    <ClCompile Include="Capture\PinImage.cpp" />
+    <ClCompile Include="Mark\Setting\SettingBorder.cpp" />
+    <ClCompile Include="Mark\Setting\SettingFill.cpp" />
+    <ClCompile Include="Mark\Setting\SettingPosSize.cpp" />
+    <ClCompile Include="Mark\Shape\ShapeItem.cpp" />
+    <ClCompile Include="Mark\Shape\ShapeLayer.cpp" />
+    <ClCompile Include="Mark\Shape\ShapeLayerBar.cpp" />
+    <ClCompile Include="Mark\StatusBar.cpp" />
+    <ClCompile Include="Mark\Title\TitleBar.cpp" />
+    <ClCompile Include="Mark\Tool\ToolBar.cpp" />
+    <ClCompile Include="Mark\Tool\BtnTool.cpp" />
+    <ClCompile Include="Mark\Setting\ToolSetting.cpp" />
     <ClCompile Include="Util.cpp" />
     <QtRcc Include="MarkImage.qrc" />
-    <QtMoc Include="MarkImage.h" />
+    <QtMoc Include="Mark\MarkImage.h" />
     <ClCompile Include="App.cpp" />
-    <ClCompile Include="CutTool.cpp" />
-    <ClCompile Include="PixInfo.cpp" />
-    <ClCompile Include="ScreenCapture.cpp" />
-    <ClCompile Include="MarkImage.cpp" />
+    <ClCompile Include="Capture\CutTool.cpp" />
+    <ClCompile Include="Capture\PixInfo.cpp" />
+    <ClCompile Include="Capture\ScreenCapture.cpp" />
+    <ClCompile Include="Mark\MarkImage.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -157,37 +157,37 @@
     <None Include="Test\NodeStart\index.js" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="ScreenCapture.h" />
+    <QtMoc Include="Capture\ScreenCapture.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="PixInfo.h" />
+    <QtMoc Include="Capture\PixInfo.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="CutTool.h" />
+    <QtMoc Include="Capture\CutTool.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="TitleBar.h" />
-    <QtMoc Include="PinImage.h" />
-    <QtMoc Include="BtnSys.h" />
-    <QtMoc Include="ToolBar.h" />
-    <QtMoc Include="ContentBox.h" />
-    <QtMoc Include="ToolSetting.h" />
-    <QtMoc Include="ShapeLayer.h" />
-    <QtMoc Include="Canvas.h" />
-    <QtMoc Include="StatusBar.h" />
-    <QtMoc Include="BtnTool.h" />
-    <QtMoc Include="BtnCheck.h" />
-    <QtMoc Include="SettingFill.h" />
-    <QtMoc Include="SettingBorder.h" />
-    <QtMoc Include="SettingPosSize.h" />
-    <QtMoc Include="BtnNumInput.h" />
-    <QtMoc Include="BtnNumInputBtn.h" />
-    <QtMoc Include="BtnColorSelector.h" />
-    <QtMoc Include="BtnColorSelectorList.h" />
-    <QtMoc Include="ColorGradientBar.h" />
-    <QtMoc Include="BtnCheckHalf.h" />
-    <QtMoc Include="ShapeItem.h" />
-    <QtMoc Include="ShapeLayerBar.h" />
+    <QtMoc Include="Mark\Title\TitleBar.h" />
+    <QtMoc Include="Capture\PinImage.h" />
+    <QtMoc Include="Mark\Title\BtnSys.h" />
+    <QtMoc Include="Mark\Tool\ToolBar.h" />
+    <QtMoc Include="Mark\ContentBox.h" />
+    <QtMoc Include="Mark\Setting\ToolSetting.h" />
+    <QtMoc Include="Mark\Shape\ShapeLayer.h" />
+    <QtMoc Include="Mark\Canvas.h" />
+    <QtMoc Include="Mark\StatusBar.h" />
+    <QtMoc Include="Mark\Tool\BtnTool.h" />
+    <QtMoc Include="Mark\Setting\BtnCheck.h" />
+    <QtMoc Include="Mark\Setting\SettingFill.h" />
+    <QtMoc Include="Mark\Setting\SettingBorder.h" />
+    <QtMoc Include="Mark\Setting\SettingPosSize.h" />
+    <QtMoc Include="Mark\Setting\BtnNumInput.h" />
+    <QtMoc Include="Mark\Setting\BtnNumInputBtn.h" />
+    <QtMoc Include="Mark\Setting\BtnColorSelector.h" />
+    <QtMoc Include="Mark\Setting\BtnColorSelectorList.h" />
+    <QtMoc Include="Mark\ColorGradientBar.h" />
+    <QtMoc Include="Mark\Setting\BtnCheckHalf.h" />
+    <QtMoc Include="Mark\Shape\ShapeItem.h" />
+    <QtMoc Include="Mark\Shape\ShapeLayerBar.h" />
     <ClInclude Include="Util.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

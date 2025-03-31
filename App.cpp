@@ -14,8 +14,8 @@
 #include <QTimer>
 
 #include "App.h"
-#include "ScreenCapture.h"
-#include "MarkImage.h"
+#include "./Capture/ScreenCapture.h"
+#include "./Mark/MarkImage.h"
 
 App::App(QObject *parent) : QObject(parent)
 {

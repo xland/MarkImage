@@ -1,4 +1,3 @@
-#include "MarkImage.h"
 #include <QtWidgets/QApplication>
 #include <QCoreApplication>
 

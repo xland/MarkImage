@@ -7,7 +7,7 @@
 #include <QToolTip>
 
 #include "ScreenCapture.h"
-#include "Util.h"
+#include "../Util.h"
 #include "CutTool.h"
 
 CutTool::CutTool(bool disablePin, QWidget* parent) : QWidget(parent), disablePin{ disablePin }
