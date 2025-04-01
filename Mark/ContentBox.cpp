@@ -1,6 +1,6 @@
 #include "ContentBox.h"
 
-#include "Canvas.h"
+#include "./Canvas/CanvasBox.h"
 #include "./Tool/ToolBar.h"
 #include "./Setting/ToolSetting.h"
 #include "./Shape/ShapeLayer.h"
@@ -11,13 +11,13 @@ ContentBox::ContentBox(QWidget *parent) : QWidget(parent)
     toolBar = new ToolBar(this);
 	toolSetting = new ToolSetting(this);
     shapeLayer = new ShapeLayer(this);
-    canvas = new Canvas(this);
+    canvasBox = new CanvasBox(this);
     layout = new QHBoxLayout(this);
     layout->setSpacing(0);
     layout->setContentsMargins(0, 0, 0, 0);
     layout->addWidget(toolBar);
     layout->addWidget(toolSetting);
-    layout->addWidget(canvas);
+    layout->addWidget(canvasBox);
     layout->addWidget(shapeLayer);
     setLayout(layout);
 }

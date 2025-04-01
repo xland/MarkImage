@@ -23,6 +23,7 @@ ToolBar::ToolBar(QWidget *parent) : QWidget(parent)
     layout->addWidget(new BtnTool("文字", 0xe6ec, this));
     layout->addWidget(new BtnTool("橡皮擦", 0xe6be, this));
     layout->addWidget(new BtnTool("马赛克", 0xe82e, this));
+    layout->addWidget(new BtnTool("图像", 0xe87d, this));
     layout->addStretch();
     setLayout(layout);
 

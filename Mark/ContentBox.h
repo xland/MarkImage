@@ -6,7 +6,7 @@
 class ToolBar;
 class ToolSetting;
 class ShapeLayer;
-class Canvas;
+class CanvasBox;
 
 class ContentBox : public QWidget
 {
@@ -20,6 +20,6 @@ private:
 	ToolBar* toolBar;
 	ToolSetting* toolSetting;
 	ShapeLayer* shapeLayer;
-	Canvas* canvas;
+	CanvasBox* canvasBox;
 	QHBoxLayout* layout;
 };

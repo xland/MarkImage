@@ -73,7 +73,7 @@
     <ClCompile Include="Mark\Shape\ShapeLayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Mark\Canvas.cpp">
+    <ClCompile Include="Mark\Canvas\Canvas.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Mark\StatusBar.cpp">
@@ -118,6 +118,9 @@
     <ClCompile Include="Mark\Shape\ShapeLayerBar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Mark\Canvas\CanvasBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="App.h">
@@ -153,7 +156,7 @@
     <QtMoc Include="Mark\Shape\ShapeLayer.h">
       <Filter>Header Files</Filter>
     </QtMoc>
-    <QtMoc Include="Mark\Canvas.h">
+    <QtMoc Include="Mark\Canvas\Canvas.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="Mark\StatusBar.h">
@@ -196,6 +199,9 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="Mark\Shape\ShapeLayerBar.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Mark\Canvas\CanvasBox.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
