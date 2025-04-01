@@ -28,3 +28,7 @@ Shape设置工具栏
 Shape工具栏添加图像工具，允许用户在绘图区域添加图像
 ShapeLayer应该支持滚动
 
+
+
+imgWidth / x = widgetWidth;
+imgHeight / y = widgetHeight;

@@ -4,6 +4,7 @@
 #include <QMimeData>
 #include <QApplication>
 #include <QVBoxLayout>
+#include <QDateTime>
 #include "Util.h"
 #include "ShapeItem.h"
 
@@ -73,16 +74,12 @@ void ShapeItem::mousePressEvent(QMouseEvent* event)
 {
     if (event->button() == Qt::LeftButton) {      
         dragStartPosition = event->pos();
-        isCheck = !isCheck;
-        update();
-        emit onClick();
     }
 }
 
 void ShapeItem::mouseMoveEvent(QMouseEvent* event)
 {
-    if (!(event->buttons() & Qt::LeftButton))
-        return;
+    if (!(event->buttons() & Qt::LeftButton)) return;
     if ((event->pos() - dragStartPosition).manhattanLength() < QApplication::startDragDistance()) {
         return;
     }
@@ -94,4 +91,12 @@ void ShapeItem::mouseMoveEvent(QMouseEvent* event)
     drag->setPixmap(grab(rect().adjusted(10,0,-10,0)));
     drag->setHotSpot(QPoint(width() / 2, height() / 2));
     drag->exec(Qt::MoveAction);
+}
+
+void ShapeItem::mouseReleaseEvent(QMouseEvent* event)
+{
+    if (dragStartPosition != event->pos()) return;
+    isCheck = !isCheck;
+    update();
+    emit onClick();
 }

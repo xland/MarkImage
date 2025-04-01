@@ -12,4 +12,5 @@ public:
 protected:
 	void paintEvent(QPaintEvent* event) override;
 private:
+	QImage img;
 };
