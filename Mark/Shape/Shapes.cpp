@@ -27,11 +27,12 @@ void Shapes::add(ShapeBase* shape)
     shapes.append(shape);
 }
 
-void Shapes::removeNotReady()
+void Shapes::move(QPoint& posPress, QPoint& posMove)
 {
-    for (int i = shapes.size() - 1; i >= 0; --i) {
-        if (!shapes[i]->isReady) {
-            delete shapes.takeAt(i);
+    for (size_t i = 0; i < shapes.size(); i++)
+    {
+        if (shapes[i]->isChecked) {
+            shapes[i]->move(posPress, posMove);
         }
     }
 }

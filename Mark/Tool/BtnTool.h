@@ -6,8 +6,9 @@ class BtnTool : public QWidget
 	Q_OBJECT
 
 public:
-	BtnTool(const QString& text,const uint& code, QWidget *parent = nullptr,bool isSelected=false);
+	BtnTool(const QString& text,const uint& code, int type, QWidget *parent = nullptr,bool isSelected=false);
 	~BtnTool();
+	int type;
 signals:
 	void click();
 protected:

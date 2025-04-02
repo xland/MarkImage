@@ -5,8 +5,8 @@
 #include "ToolBar.h"
 
 
-BtnTool::BtnTool(const QString& text, const uint& code, QWidget* parent, bool isSelected) : QWidget(parent),
-text{ text }, code{ code }, isSelected{ isSelected }
+BtnTool::BtnTool(const QString& text, const uint& code, int type, QWidget* parent, bool isSelected) : QWidget(parent),
+	text{ text }, code{ code }, type{type}, isSelected{ isSelected }
 {
 	setFixedSize(80, 60);
 	connect(this, &BtnTool::click, (ToolBar*)parent, &ToolBar::btnClick);

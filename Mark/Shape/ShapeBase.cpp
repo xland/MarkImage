@@ -14,6 +14,10 @@ void ShapeBase::paint(QPainter* p)
 {
 }
 
-void ShapeBase::draw(const QPoint& posPress, const QPoint& posMove)
+void ShapeBase::draw(QPoint& posPress,QPoint& posMove)
+{
+}
+
+void ShapeBase::move(QPoint& posPress,QPoint& posMove)
 {
 }

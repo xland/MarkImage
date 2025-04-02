@@ -10,7 +10,8 @@ class ShapeBase  : public QObject
 public:
 	ShapeBase(QObject *parent);
 	~ShapeBase();
-	bool isReady{ false };
 	virtual void paint(QPainter* p);
-	virtual void draw(const QPoint& posPress,const QPoint& posMove);
+	virtual void draw(QPoint& posPress,QPoint& posMove);
+	virtual void move(QPoint& posPress,QPoint& posMove);
+	bool isChecked{ false };
 };

@@ -13,6 +13,16 @@ class Canvas : public QWidget
 public:
 	Canvas(QWidget *parent = nullptr);
 	~Canvas();
+	void changeState(const int& state);
+	/// <summary>
+	/// 0 初始状态
+	/// 1 准备绘图
+	/// 2 绘图中
+	/// 3 准备改变位置
+	/// 4 位置改变中
+	/// </summary>
+	int state{ 1 };
+	int type{ 0 };
 protected:
 	void paintEvent(QPaintEvent* event) override;
 	void mousePressEvent(QMouseEvent* event) override;

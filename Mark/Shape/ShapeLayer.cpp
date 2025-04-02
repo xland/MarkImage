@@ -11,6 +11,7 @@
 
 ShapeLayer::ShapeLayer(QWidget *parent) : QWidget(parent)
 {
+    setVisible(false);
     setAcceptDrops(true);
     setFixedWidth(260);
 	auto layout = new QVBoxLayout(this);
@@ -67,10 +68,10 @@ void ShapeLayer::itemClick()
         shapeLayerBar->update();
         auto canvas = parentWidget()->findChild<Canvas*>();
         if (needCheck) {
-            canvas->setCursor(Qt::SizeAllCursor);
+            canvas->changeState(3);
         }
         else {
-            canvas->setCursor(Qt::CrossCursor);
+            canvas->changeState(1);
         }
     }
 }

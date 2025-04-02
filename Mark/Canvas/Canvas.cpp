@@ -1,4 +1,5 @@
 #include <QPainter>
+#include "../Shape/ShapeLayer.h"
 #include "Canvas.h"
 #include "CanvasBox.h"
 
@@ -18,6 +19,17 @@ Canvas::~Canvas()
 
 }
 
+void Canvas::changeState(const int& state)
+{
+    this->state = state;
+    if (state == 1 || state == 2) {
+        setCursor(Qt::CrossCursor);
+    }
+    else if (state == 3 || state == 4) {
+        setCursor(Qt::SizeAllCursor);
+    }
+}
+
 void Canvas::paintEvent(QPaintEvent* event)
 {
     QPainter p(this);
@@ -32,24 +44,45 @@ void Canvas::paintEvent(QPaintEvent* event)
 
 void Canvas::mousePressEvent(QMouseEvent* event)
 {
-	if (event->button() == Qt::LeftButton) {
-		posPress = event->pos();
-        auto shapes = Shapes::get();
-        //todo 验证创建什么类型的Shape
-        shape = new ShapeRect(this);
-        //shapes->add(new ShapeRect(shapes));
+	if (event->button() != Qt::LeftButton) {
+        return;
 	}
+    posPress = event->pos();
+    auto shapes = Shapes::get();
+    //todo 验证创建什么类型的Shape
+    if (state == 1) {
+        if (type == 0) {
+            shape = new ShapeRect(this);
+        }        
+    }
+    else if (state == 3) {
+        
+    }
+    
 }
 
 void Canvas::mouseMoveEvent(QMouseEvent* event)
 {
 	if (event->buttons() & Qt::LeftButton) {
-        shape->draw(posPress, event->pos());
-		auto box = (CanvasBox*)parent();
-        imgCanvas->fill(Qt::transparent);
-        QPainter p(imgCanvas);
-        p.setRenderHint(QPainter::Antialiasing, true);
-        shape->paint(&p);
+        auto pos = event->pos();
+        if (state == 1) {
+            state = 2;
+        }
+        else if (state == 3) {
+            state = 4;
+        }
+        if (state == 2) {
+            shape->draw(posPress, pos);
+            auto box = (CanvasBox*)parent();
+            imgCanvas->fill(Qt::transparent);
+            QPainter p(imgCanvas);
+            p.setRenderHint(QPainter::Antialiasing, true);
+            shape->paint(&p);
+        }
+        else if (state == 4) {
+            auto shapes = Shapes::get();
+            shapes->move(posPress,pos);
+        }
 		update();
 	}
 }
@@ -62,13 +95,15 @@ void Canvas::mouseReleaseEvent(QMouseEvent* event)
         return;
     }
     auto shapes = Shapes::get();
-    shapes->add(shape);
     imgCanvas->fill(Qt::transparent);
     auto box = (CanvasBox*)parent();
     QPainter p(imgBoard);
     p.setRenderHint(QPainter::Antialiasing, true);
     shape->paint(&p);
     update();
+    shapes->add(shape);
+    auto layer = window()->findChild<ShapeLayer*>();
+    layer->show();
 }
 
 void Canvas::onParentResize(const int widgetWidth, const int widgetHeight)

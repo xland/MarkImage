@@ -10,7 +10,8 @@ public:
 	ShapeRect(QObject *parent);
 	~ShapeRect();
 	void paint(QPainter* p) override;
-	void draw(const QPoint& posPress, const QPoint& posMove) override;
+	void draw(QPoint& posPress,QPoint& posMove) override;
+	void move(QPoint& posPress,QPoint& posMove) override;
 private:
 	QRect rect;
 };
