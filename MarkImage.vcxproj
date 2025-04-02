@@ -125,6 +125,9 @@
     <ClCompile Include="Mark\Setting\BtnColorSelectorList.cpp" />
     <ClCompile Include="Mark\Setting\BtnNumInput.cpp" />
     <ClCompile Include="Mark\Setting\BtnNumInputBtn.cpp" />
+    <ClCompile Include="Mark\Shape\ShapeBase.cpp" />
+    <ClCompile Include="Mark\Shape\ShapeRect.cpp" />
+    <ClCompile Include="Mark\Shape\Shapes.cpp" />
     <ClCompile Include="Mark\Title\BtnSys.cpp" />
     <ClCompile Include="Mark\Canvas\Canvas.cpp" />
     <ClCompile Include="Mark\ColorGradientBar.cpp" />
@@ -192,6 +195,9 @@
     <QtMoc Include="Mark\Shape\ShapeItem.h" />
     <QtMoc Include="Mark\Shape\ShapeLayerBar.h" />
     <QtMoc Include="Mark\Canvas\CanvasBox.h" />
+    <QtMoc Include="Mark\Shape\ShapeBase.h" />
+    <QtMoc Include="Mark\Shape\ShapeRect.h" />
+    <QtMoc Include="Mark\Shape\Shapes.h" />
     <ClInclude Include="Util.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

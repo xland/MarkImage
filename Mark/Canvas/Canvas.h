@@ -2,6 +2,9 @@
 
 #include <QWidget>
 #include <QMouseEvent>
+#include "../Shape/Shapes.h"
+#include "../Shape/ShapeRect.h"
+#include "../Shape/ShapeBase.h"
 
 class Canvas : public QWidget
 {
@@ -23,5 +26,5 @@ private:
 	QPixmap* imgCanvas;
 	QPixmap* imgBoard;
 	QPoint posPress;
-	QRect rect1;
+	ShapeBase* shape;
 };

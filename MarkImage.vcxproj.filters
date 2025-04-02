@@ -121,6 +121,15 @@
     <ClCompile Include="Mark\Canvas\CanvasBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Mark\Shape\ShapeBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Mark\Shape\ShapeRect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Mark\Shape\Shapes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="App.h">
@@ -202,6 +211,15 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="Mark\Canvas\CanvasBox.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Mark\Shape\ShapeBase.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Mark\Shape\ShapeRect.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Mark\Shape\Shapes.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

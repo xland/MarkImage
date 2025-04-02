@@ -10,6 +10,7 @@ class ShapeLayer : public QWidget
 public:
 	ShapeLayer(QWidget *parent = nullptr);
 	~ShapeLayer();
+	void addShape();
 protected:
 	void paintEvent(QPaintEvent* event) override;
 	void dragEnterEvent(QDragEnterEvent* event) override;

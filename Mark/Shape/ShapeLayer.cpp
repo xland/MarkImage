@@ -5,6 +5,7 @@
 #include <QMimeData>
 
 #include "Util.h"
+#include "../Canvas/Canvas.h"
 #include "ShapeLayer.h"
 #include "ShapeItem.h"
 
@@ -18,12 +19,14 @@ ShapeLayer::ShapeLayer(QWidget *parent) : QWidget(parent)
 	shapeLayerBar = new ShapeLayerBar(this);
     connect(shapeLayerBar, &ShapeLayerBar::onClick, this, &ShapeLayer::barClick);
 	layout->addWidget(shapeLayerBar);
+
     for (size_t i = 0; i < 10; i++)
     {
         auto item = new ShapeItem(this);
         connect(item, &ShapeItem::onClick, this,&ShapeLayer::itemClick);
         layout->addWidget(item);
     }
+
     layout->addStretch();
     setLayout(layout);
 }
@@ -31,6 +34,11 @@ ShapeLayer::ShapeLayer(QWidget *parent) : QWidget(parent)
 ShapeLayer::~ShapeLayer()
 {
 	
+}
+
+void ShapeLayer::addShape()
+{
+
 }
 
 void ShapeLayer::paintEvent(QPaintEvent* event)
@@ -57,6 +65,13 @@ void ShapeLayer::itemClick()
     if (shapeLayerBar->isChecked != needCheck) {
         shapeLayerBar->isChecked = needCheck;
         shapeLayerBar->update();
+        auto canvas = parentWidget()->findChild<Canvas*>();
+        if (needCheck) {
+            canvas->setCursor(Qt::SizeAllCursor);
+        }
+        else {
+            canvas->setCursor(Qt::CrossCursor);
+        }
     }
 }
 void ShapeLayer::barClick()
