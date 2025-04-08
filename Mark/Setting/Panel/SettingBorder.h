@@ -1,9 +1,9 @@
 #pragma once
 
 #include <QWidget>
-#include "BtnCheck.h"
-#include "BtnNumInput.h"
-#include "BtnColorSelector.h"
+#include "../Ctrl/BtnCheck.h"
+#include "../Ctrl/BtnNumInput.h"
+#include "../Ctrl/BtnColorSelector.h"
 
 class SettingBorder : public QWidget
 {

@@ -30,6 +30,7 @@ protected:
 	void mouseReleaseEvent(QMouseEvent* event) override;
 private:
 	void onParentResize(const int w, const int h);
+	void toolChange(int toolType);
 private:
 	int x, y, w, h;
 	QImage img;

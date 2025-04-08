@@ -1,4 +1,6 @@
 #include <QPainter>
+
+#include "../Tool/ToolBar.h"
 #include "../Shape/ShapeLayer.h"
 #include "Canvas.h"
 #include "CanvasBox.h"
@@ -7,6 +9,11 @@ Canvas::Canvas(QWidget *parent) : QWidget(parent)
 {  
 	setMouseTracking(true);
     setAttribute(Qt::WA_Hover, true);
+
+    auto toolBar = window()->findChild<ToolBar*>();
+    connect(toolBar, &ToolBar::toolChange, this, &Canvas::toolChange);
+
+
 	auto cb = (CanvasBox*)parent;
 	connect(cb, &CanvasBox::onResize, this, &Canvas::onParentResize);
     img.load("D:\\project\\MarkImage\\Doc\\allen.png");
@@ -139,4 +146,9 @@ void Canvas::onParentResize(const int widgetWidth, const int widgetHeight)
     //    imgBoard->setDevicePixelRatio(dpr);
     //}
     setGeometry(x, y, w, h);
+}
+
+void Canvas::toolChange(int toolType)
+{
+    type = toolType;
 }

@@ -1,8 +1,8 @@
 #pragma once
 
 #include <QWidget>
-#include "BtnCheck.h"
-#include "BtnColorSelector.h"
+#include "../Ctrl/BtnCheck.h"
+#include "../Ctrl/BtnColorSelector.h"
 
 class SettingFill : public QWidget
 {

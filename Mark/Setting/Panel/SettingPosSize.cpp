@@ -2,8 +2,8 @@
 #include <QLabel>
 #include <QVBoxLayout>
 
-#include "BtnCheck.h"
-#include "BtnNumInput.h"
+#include "../Ctrl/BtnCheck.h"
+#include "../Ctrl/BtnNumInput.h"
 #include "Util.h"
 #include "SettingPosSize.h"
 

@@ -1,14 +1,15 @@
 #pragma once
 
 #include <QWidget>
+#include "SettingBase.h"
 
-class ToolSetting : public QWidget
+class SettingRect : public SettingBase
 {
 	Q_OBJECT
 
 public:
-	ToolSetting(QWidget *parent = nullptr);
-	~ToolSetting();
+	SettingRect(QWidget* parent = nullptr);
+	~SettingRect();
 protected:
 	void paintEvent(QPaintEvent* event) override;
 private:

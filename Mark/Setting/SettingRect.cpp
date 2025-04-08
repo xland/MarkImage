@@ -2,31 +2,35 @@
 #include <QVBoxLayout>
 #include <QLabel>
 
+#include "../Tool/ToolBar.h"
 #include "Util.h"
-#include "ToolSetting.h"
-#include "SettingBorder.h"
-#include "SettingFill.h"
-#include "SettingPosSize.h"
+#include "SettingRect.h"
+#include "./Ctrl/SettingBorder.h"
+#include "./Ctrl/SettingFill.h"
+#include "./Ctrl/SettingPosSize.h"
 
-ToolSetting::ToolSetting(QWidget *parent) : QWidget(parent)
+SettingRect::SettingRect(QWidget* parent) : SettingBase(parent)
 {
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-	setFixedWidth(220);
+    setFixedWidth(220);
+
     auto layout = new QVBoxLayout(this);
     layout->setSpacing(6);
     layout->setContentsMargins(6, 6, 6, 6);
+
     layout->addWidget(new SettingFill(this));
     layout->addWidget(new SettingBorder(this));
     layout->addWidget(new SettingPosSize(this));
+
     layout->addStretch();
     setLayout(layout);
 }
 
-ToolSetting::~ToolSetting()
+SettingRect::~SettingRect()
 {
 }
 
-void ToolSetting::paintEvent(QPaintEvent* event)
+void SettingRect::paintEvent(QPaintEvent* event)
 {
     QPainter p(this);
     p.setRenderHint(QPainter::Antialiasing, true);

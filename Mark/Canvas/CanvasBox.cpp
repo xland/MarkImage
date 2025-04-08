@@ -9,11 +9,11 @@ CanvasBox::CanvasBox(QWidget *parent) : QWidget(parent)
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);    
 	canvas = new Canvas(this);
 
-    QGraphicsDropShadowEffect* shadowFrameLogin = new QGraphicsDropShadowEffect(this);
-    shadowFrameLogin->setOffset(0, 0);
-    shadowFrameLogin->setColor(QColor(0,0,0,80));
-    shadowFrameLogin->setBlurRadius(26);
-    canvas->setGraphicsEffect(shadowFrameLogin);
+    QGraphicsDropShadowEffect* shadow = new QGraphicsDropShadowEffect(this);
+    shadow->setOffset(0, 0);
+    shadow->setColor(QColor(0,0,0,80));
+    shadow->setBlurRadius(26);
+    canvas->setGraphicsEffect(shadow);
 }
 
 CanvasBox::~CanvasBox()

@@ -4,7 +4,7 @@
 #include <QHBoxLayout>
 
 class ToolBar;
-class ToolSetting;
+class SettingBase;
 class ShapeLayer;
 class CanvasBox;
 
@@ -17,9 +17,9 @@ public:
 	~ContentBox();
 
 private:
+	void toolChange(int toolType);
 	ToolBar* toolBar;
-	ToolSetting* toolSetting;
+	SettingBase* setting;
 	ShapeLayer* shapeLayer;
 	CanvasBox* canvasBox;
-	QHBoxLayout* layout;
 };
