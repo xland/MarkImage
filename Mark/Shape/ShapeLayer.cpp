@@ -83,7 +83,7 @@ void ShapeLayer::refreshShapes()
         auto item = new ShapeItem(this);
         item->index = i;
         connect(item, &ShapeItem::onClick, this, &ShapeLayer::itemClick);
-        layout->insertWidget(i+1, item);
+        layout->insertWidget(0, item);
     }
     layout->addStretch();
     listCtrl->setWidget(itemBox);
@@ -135,6 +135,14 @@ void ShapeLayer::barClick()
         }
 		items[i]->isCheck = shapeLayerBar->isChecked;
 		items[i]->update();
+    }
+    auto canvas = parentWidget()->findChild<Canvas*>();
+    if (shapeLayerBar->isChecked)
+    {
+        canvas->changeState(3);
+    }
+    else {
+        canvas->changeState(1);
     }
 }
 void ShapeLayer::dragEnterEvent(QDragEnterEvent* event)
