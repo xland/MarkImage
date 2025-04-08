@@ -1,8 +1,8 @@
 #include <QPainter>
-#include <QVBoxLayout>
 #include <QMouseEvent>
 #include <QDragEnterEvent>
 #include <QMimeData>
+
 
 #include "Util.h"
 #include "../Canvas/Canvas.h"
@@ -14,32 +14,82 @@ ShapeLayer::ShapeLayer(QWidget *parent) : QWidget(parent)
     setVisible(false);
     setAcceptDrops(true);
     setFixedWidth(260);
-	auto layout = new QVBoxLayout(this);
-    layout->setSpacing(8);
-    layout->setContentsMargins(0, 0, 0, 10);
-	shapeLayerBar = new ShapeLayerBar(this);
+    QVBoxLayout* layout = new QVBoxLayout(this);
+    layout->setSpacing(0);
+    layout->setContentsMargins(0, 0, 0, 0);
+    shapeLayerBar = new ShapeLayerBar(this);
     connect(shapeLayerBar, &ShapeLayerBar::onClick, this, &ShapeLayer::barClick);
-	layout->addWidget(shapeLayerBar);
-
-    for (size_t i = 0; i < 10; i++)
-    {
-        auto item = new ShapeItem(this);
-        connect(item, &ShapeItem::onClick, this,&ShapeLayer::itemClick);
-        layout->addWidget(item);
-    }
-
-    layout->addStretch();
+    layout->addWidget(shapeLayerBar);
+    listCtrl = new QScrollArea(this);
+    listCtrl->setStyleSheet(R"(QScrollArea{border: none; background: transparent;}
+QScrollBar:vertical {
+    border: none;
+    background: transparent; /* 滚动条背景颜色 */
+    width: 6px;         /* 滚动条宽度 */
+    margin: 0px 0px 0px 0px;
+}
+QScrollBar::handle:vertical {
+    background: #dddddd; /* 滑块颜色 */
+    min-height: 20px;    /* 滑块最小高度 */
+    border-radius: 2px;  /* 圆角 */
+}
+QScrollBar::handle:vertical:hover {
+    background: #cccccc; /* 鼠标悬停时的滑块颜色 */
+}
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+    height: 0px;         /* 移除上下箭头 */
+    background: none;
+}
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+    background: none;     /* 滑块上下区域的背景 */
+})");
+    layout->addWidget(listCtrl);
     setLayout(layout);
+
+ //   QWidget* contentWidget = widget();
+ //   if (contentWidget) {
+ //       delete contentWidget;
+ //   }
+ //   contentWidget = new QWidget(this);
+ //   contentWidget->setFixedWidth(this->width());
+ //   QVBoxLayout* layout = new QVBoxLayout(this);
+ //   layout->setSpacing(8);
+ //   layout->setContentsMargins(0, 0, 0, 10);
+	//shapeLayerBar = new ShapeLayerBar(this);
+ //   connect(shapeLayerBar, &ShapeLayerBar::onClick, this, &ShapeLayer::barClick);
+	//layout->addWidget(shapeLayerBar);
+ //   setLayout(layout);
 }
 
 ShapeLayer::~ShapeLayer()
 {
-	
+
 }
 
-void ShapeLayer::addShape()
+void ShapeLayer::refreshShapes()
 {
-
+    if (itemBox) {
+        delete itemBox;
+    }
+    itemBox = new QWidget(listCtrl);
+    itemBox->setFixedWidth(this->width());
+    itemBox->setStyleSheet(R"(background:transparent;margin:0px;padding:0px;)");
+    auto layout = new QVBoxLayout(itemBox);
+    layout->setSpacing(8);
+    layout->setContentsMargins(0, 8, 0, 8);
+    auto shapes = Shapes::get();
+    for (size_t i = 0; i < shapes->shapes.size(); i++)
+    {
+        auto item = new ShapeItem(this);
+        item->index = i;
+        connect(item, &ShapeItem::onClick, this, &ShapeLayer::itemClick);
+        layout->insertWidget(i+1, item);
+    }
+    layout->addStretch();
+    listCtrl->setWidget(itemBox);
+    if (!isVisible()) {
+        show();
+    }
 }
 
 void ShapeLayer::paintEvent(QPaintEvent* event)

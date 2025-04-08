@@ -51,7 +51,9 @@ void ShapeItem::paintEvent(QPaintEvent * event)
     font = Util::getTextFont(13);
     p.setFont(*font);
     r.setLeft(62);
-    p.drawText(r, "多边形：边框：3,填充：无", Qt::AlignLeft | Qt::AlignVCenter);
+    QString str = "多边形：边框：%1,填充：无";
+    str = str.arg(index);
+    p.drawText(r, str, Qt::AlignLeft | Qt::AlignVCenter);
 }
 
 void ShapeItem::enterEvent(QEnterEvent* event)

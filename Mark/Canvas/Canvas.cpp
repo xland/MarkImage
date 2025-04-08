@@ -103,7 +103,7 @@ void Canvas::mouseReleaseEvent(QMouseEvent* event)
     update();
     shapes->add(shape);
     auto layer = window()->findChild<ShapeLayer*>();
-    layer->show();
+    layer->refreshShapes();
 }
 
 void Canvas::onParentResize(const int widgetWidth, const int widgetHeight)

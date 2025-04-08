@@ -20,6 +20,7 @@ protected:
 	void mouseReleaseEvent(QMouseEvent* event) override;
 public:
 	bool isCheck{ false };
+	int index;
 private:
 	bool isHover{ false };
 	QPoint dragStartPosition;

@@ -13,6 +13,7 @@ public:
 	static Shapes* get();
 	void add(ShapeBase* shape);
 	void move(QPoint& posPress, QPoint& posMove);
-private:
 	QList<ShapeBase*> shapes;
+private:
+	
 };

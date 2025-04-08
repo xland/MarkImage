@@ -1,6 +1,8 @@
 #pragma once
 
 #include <QWidget>
+#include <QVBoxLayout>
+#include <QScrollArea>
 #include "ShapeLayerBar.h"
 
 class ShapeLayer : public QWidget
@@ -10,7 +12,7 @@ class ShapeLayer : public QWidget
 public:
 	ShapeLayer(QWidget *parent = nullptr);
 	~ShapeLayer();
-	void addShape();
+	void refreshShapes();
 protected:
 	void paintEvent(QPaintEvent* event) override;
 	void dragEnterEvent(QDragEnterEvent* event) override;
@@ -20,4 +22,6 @@ private:
 	void barClick();
 private:
 	ShapeLayerBar* shapeLayerBar;
+	QScrollArea* listCtrl;
+	QWidget* itemBox;
 };
