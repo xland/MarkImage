@@ -5,6 +5,8 @@
 
 Canvas::Canvas(QWidget *parent) : QWidget(parent)
 {  
+	setMouseTracking(true);
+    setAttribute(Qt::WA_Hover, true);
 	auto cb = (CanvasBox*)parent;
 	connect(cb, &CanvasBox::onResize, this, &Canvas::onParentResize);
     img.load("D:\\project\\MarkImage\\Doc\\allen.png");
