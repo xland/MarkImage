@@ -21,44 +21,20 @@ Layers::Layers(QWidget *parent) : QWidget(parent)
     connect(layerBar, &LayerBar::onClick, this, &Layers::barClick);
     layout->addWidget(layerBar);
     listCtrl = new QScrollArea(this);
+    listCtrl->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    listCtrl->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     listCtrl->setStyleSheet(R"(QScrollArea{border: none; background: transparent;}
-QScrollBar:vertical {
-    border: none;
-    background: transparent; /* 滚动条背景颜色 */
-    width: 6px;         /* 滚动条宽度 */
-    margin: 0px 0px 0px 0px;
-}
-QScrollBar::handle:vertical {
-    background: #dddddd; /* 滑块颜色 */
-    min-height: 20px;    /* 滑块最小高度 */
-    border-radius: 2px;  /* 圆角 */
-}
-QScrollBar::handle:vertical:hover {
-    background: #cccccc; /* 鼠标悬停时的滑块颜色 */
-}
+QScrollBar:vertical { border: none; background: transparent; /* 滚动条背景颜色 */
+    width: 6px; /* 滚动条宽度 */ margin: 0px 0px 0px 0px; }
+QScrollBar::handle:vertical { background: #dddddd; /* 滑块颜色 */
+    min-height: 20px;/* 滑块最小高度 */ border-radius: 2px;  /* 圆角 */ }
+QScrollBar::handle:vertical:hover { background: #cccccc; /* 鼠标悬停时的滑块颜色 */ }
 QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
-    height: 0px;         /* 移除上下箭头 */
-    background: none;
-}
+    height: 0px; /* 移除上下箭头 */ background: none; }
 QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
-    background: none;     /* 滑块上下区域的背景 */
-})");
+    background: none;/* 滑块上下区域的背景 */ })");
     layout->addWidget(listCtrl);
     setLayout(layout);
-
- //   QWidget* contentWidget = widget();
- //   if (contentWidget) {
- //       delete contentWidget;
- //   }
- //   contentWidget = new QWidget(this);
- //   contentWidget->setFixedWidth(this->width());
- //   QVBoxLayout* layout = new QVBoxLayout(this);
- //   layout->setSpacing(8);
- //   layout->setContentsMargins(0, 0, 0, 10);
-	//shapeLayerBar = new ShapeLayerBar(this);
- //   connect(shapeLayerBar, &ShapeLayerBar::onClick, this, &ShapeLayer::barClick);
-	//layout->addWidget(shapeLayerBar);
- //   setLayout(layout);
 }
 
 Layers::~Layers()
@@ -75,7 +51,7 @@ void Layers::refreshShapes()
     itemBox->setFixedWidth(this->width());
     itemBox->setStyleSheet(R"(background:transparent;margin:0px;padding:0px;)");
     auto layout = new QVBoxLayout(itemBox);
-    layout->setSpacing(8);
+    layout->setSpacing(6);
     layout->setContentsMargins(8, 8, 8, 8);
     auto shapes = Shapes::get();
     for (size_t i = 0; i < shapes->shapes.size(); i++)

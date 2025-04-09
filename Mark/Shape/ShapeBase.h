@@ -2,6 +2,7 @@
 
 #include <QPainter>
 #include <QObject>
+#include "Util.h"
 
 class ShapeBase  : public QObject
 {

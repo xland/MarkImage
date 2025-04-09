@@ -119,6 +119,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Mark\Canvas\CanvasBox.cpp" />
+    <ClCompile Include="Mark\Setting\Comp\SettingSize.cpp" />
     <ClCompile Include="Mark\Setting\Ctrl\BtnCheck.cpp" />
     <ClCompile Include="Mark\Setting\Ctrl\BtnCheckHalf.cpp" />
     <ClCompile Include="Mark\Setting\Ctrl\BtnColorSelector.cpp" />
@@ -126,6 +127,7 @@
     <ClCompile Include="Mark\Setting\Ctrl\BtnNumInput.cpp" />
     <ClCompile Include="Mark\Setting\Ctrl\BtnNumInputBtn.cpp" />
     <ClCompile Include="Mark\Setting\SettingBase.cpp" />
+    <ClCompile Include="Mark\Setting\SettingBoard.cpp" />
     <ClCompile Include="Mark\Setting\SettingNormal.cpp" />
     <ClCompile Include="Mark\Shape\ShapeBase.cpp" />
     <ClCompile Include="Mark\Shape\ShapeImg.cpp" />
@@ -204,6 +206,8 @@
     <QtMoc Include="Mark\Setting\SettingBase.h" />
     <QtMoc Include="Mark\Setting\SettingNormal.h" />
     <QtMoc Include="Mark\Shape\ShapeImg.h" />
+    <QtMoc Include="Mark\Setting\SettingBoard.h" />
+    <QtMoc Include="Mark\Setting\Comp\SettingSize.h" />
     <ClInclude Include="Util.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

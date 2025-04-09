@@ -1,29 +1,27 @@
 #include "ContentBox.h"
 
-#include "./Canvas/CanvasBox.h"
-#include "./Tool/ToolBar.h"
-#include "./Setting/SettingImg.h"
-#include "./Setting/SettingNormal.h"
+#include "Canvas/CanvasBox.h"
+#include "Tool/ToolBar.h"
+#include "Setting/SettingImg.h"
+#include "Setting/SettingNormal.h"
+#include "Setting/SettingBoard.h"
 #include "./Layer/Layers.h"
 
 ContentBox::ContentBox(QWidget *parent) : QWidget(parent)
 {
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     toolBar = new ToolBar(this);
-	setting = new SettingImg(this);
+	setting = new SettingBoard(this);
     layers = new Layers(this);
     canvasBox = new CanvasBox(this);
     auto layout = new QHBoxLayout(this);
     layout->setSpacing(0);
     layout->setContentsMargins(0, 0, 0, 0);
     layout->addWidget(toolBar);
-
     layout->addWidget(setting);
-
     layout->addWidget(canvasBox);
     layout->addWidget(layers);
     setLayout(layout);
-
 	connect(toolBar, &ToolBar::toolChange, this, &ContentBox::toolChange);
 }
 
@@ -41,9 +39,12 @@ void ContentBox::toolChange(int toolType)
 		setting = nullptr;
 	}
 	if (toolType == 0) {
+		setting = new SettingBoard(this);
+	}
+	else if (toolType == 1) {
 		setting = new SettingImg(this);
 	}
-	else if (toolType >= 1 && toolType <= 5) {
+	else if (toolType >= 2 && toolType <= 5) {
 		setting = new SettingNormal(this);
 	}
 	/*

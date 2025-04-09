@@ -13,7 +13,7 @@
 
 LayerItem::LayerItem(ShapeBase* shape, QWidget *parent) : QWidget(parent),shape{shape}
 {
-	setFixedHeight(38);
+	setFixedHeight(32);
     setMouseTracking(true);
     setCursor(Qt::CursorShape::PointingHandCursor);
 }
@@ -27,7 +27,7 @@ void LayerItem::paintEvent(QPaintEvent * event)
     QPainter p(this);
     p.setRenderHint(QPainter::Antialiasing, true);
     p.setRenderHint(QPainter::TextAntialiasing, true);
-    QPen pen(isCheck?QColor(50, 130, 240): QColor(180, 180, 180), 1);
+    QPen pen(isCheck?QColor(50, 130, 240): QColor(180, 180, 180), 0.5);
     p.setPen(pen);
     if (isCheck || isHover){
         p.setBrush(QColor(220, 250, 255));
@@ -36,15 +36,13 @@ void LayerItem::paintEvent(QPaintEvent * event)
 	{
         p.setBrush(QColor(255, 255, 255));
 	}
-    p.drawRect(rect());
-    
+    auto r = rect().adjusted(1,1,-1,-1);
+    p.drawRect(r);
     p.setBrush(Qt::NoBrush);
-    p.setPen(isCheck? QColor(13, 13, 13):QColor(88, 88, 88));
+    p.setPen(isCheck ? QColor(13, 13, 13) : QColor(88, 88, 88));
+
     auto font = Util::getIconFont(13);
     p.setFont(*font);
-    auto r = rect();
-    //r.setLeft(20);
-    //p.drawText(r, QChar(isCheck?0xe896:0xe894), Qt::AlignLeft | Qt::AlignVCenter);
     r.setLeft(10);
     p.drawText(r, QChar(0xe6af), Qt::AlignLeft | Qt::AlignVCenter);
     font = Util::getTextFont(13);

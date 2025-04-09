@@ -139,6 +139,12 @@
     <ClCompile Include="Mark\Shape\ShapeImg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Mark\Setting\SettingBoard.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Mark\Setting\Comp\SettingSize.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="App.h">
@@ -238,6 +244,12 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="Mark\Shape\ShapeImg.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Mark\Setting\SettingBoard.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="Mark\Setting\Comp\SettingSize.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
