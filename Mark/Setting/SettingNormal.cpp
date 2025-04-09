@@ -4,12 +4,12 @@
 
 #include "../Tool/ToolBar.h"
 #include "Util.h"
-#include "SettingRect.h"
-#include "./Ctrl/SettingBorder.h"
-#include "./Ctrl/SettingFill.h"
-#include "./Ctrl/SettingPosSize.h"
+#include "SettingNormal.h"
+#include "./Comp/SettingBorder.h"
+#include "./Comp/SettingFill.h"
+#include "./Comp/SettingPosSize.h"
 
-SettingRect::SettingRect(QWidget* parent) : SettingBase(parent)
+SettingNormal::SettingNormal(QWidget* parent) : SettingBase(parent)
 {
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     setFixedWidth(220);
@@ -26,11 +26,11 @@ SettingRect::SettingRect(QWidget* parent) : SettingBase(parent)
     setLayout(layout);
 }
 
-SettingRect::~SettingRect()
+SettingNormal::~SettingNormal()
 {
 }
 
-void SettingRect::paintEvent(QPaintEvent* event)
+void SettingNormal::paintEvent(QPaintEvent* event)
 {
     QPainter p(this);
     p.setRenderHint(QPainter::Antialiasing, true);

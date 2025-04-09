@@ -5,26 +5,30 @@
 #include <QApplication>
 #include <QVBoxLayout>
 #include <QDateTime>
-#include "Util.h"
-#include "ShapeItem.h"
+#include <QPainterPath>
 
-ShapeItem::ShapeItem(QWidget *parent) : QWidget(parent)
+#include "Util.h"
+#include "LayerItem.h"
+#include "../Shape/ShapeBase.h"
+
+LayerItem::LayerItem(ShapeBase* shape, QWidget *parent) : QWidget(parent),shape{shape}
 {
 	setFixedHeight(38);
     setMouseTracking(true);
     setCursor(Qt::CursorShape::PointingHandCursor);
 }
 
-ShapeItem::~ShapeItem()
+LayerItem::~LayerItem()
 {
 }
 
-void ShapeItem::paintEvent(QPaintEvent * event)
+void LayerItem::paintEvent(QPaintEvent * event)
 {
     QPainter p(this);
     p.setRenderHint(QPainter::Antialiasing, true);
     p.setRenderHint(QPainter::TextAntialiasing, true);
-    p.setPen(Qt::NoPen);
+    QPen pen(isCheck?QColor(50, 130, 240): QColor(180, 180, 180), 1);
+    p.setPen(pen);
     if (isCheck || isHover){
         p.setBrush(QColor(220, 250, 255));
 	}
@@ -32,31 +36,24 @@ void ShapeItem::paintEvent(QPaintEvent * event)
 	{
         p.setBrush(QColor(255, 255, 255));
 	}
-
-    auto r = rect().adjusted(10,0,-10,0);
-
-    p.drawRoundedRect(r,4,4);
+    p.drawRect(rect());
+    
     p.setBrush(Qt::NoBrush);
-    p.setPen(isCheck? QColor(33, 33, 33):QColor(88, 88, 88));
-
+    p.setPen(isCheck? QColor(13, 13, 13):QColor(88, 88, 88));
     auto font = Util::getIconFont(13);
     p.setFont(*font);
-
-    r.setLeft(20);
-    p.drawText(r, QChar(isCheck?0xe896:0xe894), Qt::AlignLeft | Qt::AlignVCenter);
-
-    r.setLeft(46);
+    auto r = rect();
+    //r.setLeft(20);
+    //p.drawText(r, QChar(isCheck?0xe896:0xe894), Qt::AlignLeft | Qt::AlignVCenter);
+    r.setLeft(10);
     p.drawText(r, QChar(0xe6af), Qt::AlignLeft | Qt::AlignVCenter);
-
     font = Util::getTextFont(13);
     p.setFont(*font);
-    r.setLeft(62);
-    QString str = "多边形：边框：%1,填充：无";
-    str = str.arg(index);
-    p.drawText(r, str, Qt::AlignLeft | Qt::AlignVCenter);
+    r.setLeft(30);
+	shape->drawTitle(r, &p);
 }
 
-void ShapeItem::enterEvent(QEnterEvent* event)
+void LayerItem::enterEvent(QEnterEvent* event)
 {
     if (!isHover) {
         isHover = true;
@@ -64,7 +61,7 @@ void ShapeItem::enterEvent(QEnterEvent* event)
     }
 }
 
-void ShapeItem::leaveEvent(QEvent* event)
+void LayerItem::leaveEvent(QEvent* event)
 {
     if (isHover) {
         isHover = false;
@@ -72,14 +69,14 @@ void ShapeItem::leaveEvent(QEvent* event)
     }
 }
 
-void ShapeItem::mousePressEvent(QMouseEvent* event)
+void LayerItem::mousePressEvent(QMouseEvent* event)
 {
     if (event->button() == Qt::LeftButton) {      
         dragStartPosition = event->pos();
     }
 }
 
-void ShapeItem::mouseMoveEvent(QMouseEvent* event)
+void LayerItem::mouseMoveEvent(QMouseEvent* event)
 {
     if (!(event->buttons() & Qt::LeftButton)) return;
     if ((event->pos() - dragStartPosition).manhattanLength() < QApplication::startDragDistance()) {
@@ -90,12 +87,12 @@ void ShapeItem::mouseMoveEvent(QMouseEvent* event)
     QMimeData* mimeData = new QMimeData();
     mimeData->setData("application/x-draggablewidget", QByteArray());
     drag->setMimeData(mimeData);
-    drag->setPixmap(grab(rect().adjusted(10,0,-10,0)));
+    drag->setPixmap(grab(rect()));
     drag->setHotSpot(QPoint(width() / 2, height() / 2));
     drag->exec(Qt::MoveAction);
 }
 
-void ShapeItem::mouseReleaseEvent(QMouseEvent* event)
+void LayerItem::mouseReleaseEvent(QMouseEvent* event)
 {
     if (dragStartPosition != event->pos()) return;
     isCheck = !isCheck;

@@ -5,7 +5,7 @@
 
 class ToolBar;
 class SettingBase;
-class ShapeLayer;
+class Layers;
 class CanvasBox;
 
 class ContentBox : public QWidget
@@ -20,6 +20,6 @@ private:
 	void toolChange(int toolType);
 	ToolBar* toolBar;
 	SettingBase* setting;
-	ShapeLayer* shapeLayer;
+	Layers* layers;
 	CanvasBox* canvasBox;
 };

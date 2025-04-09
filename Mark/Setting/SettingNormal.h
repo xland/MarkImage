@@ -3,13 +3,13 @@
 #include <QWidget>
 #include "SettingBase.h"
 
-class SettingRect : public SettingBase
+class SettingNormal : public SettingBase
 {
 	Q_OBJECT
 
 public:
-	SettingRect(QWidget* parent = nullptr);
-	~SettingRect();
+	SettingNormal(QWidget* parent = nullptr);
+	~SettingNormal();
 protected:
 	void paintEvent(QPaintEvent* event) override;
 private:

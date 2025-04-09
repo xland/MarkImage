@@ -3,9 +3,9 @@
 #include <QWidget>
 #include <QMouseEvent>
 #include "../Shape/Shapes.h"
-#include "../Shape/ShapeRect.h"
 #include "../Shape/ShapeBase.h"
 
+class ShapeImg;
 class Canvas : public QWidget
 {
 	Q_OBJECT
@@ -14,6 +14,7 @@ public:
 	Canvas(QWidget *parent = nullptr);
 	~Canvas();
 	void changeState(const int& state);
+	void addShapeImg(ShapeImg* shapeImg);
 	/// <summary>
 	/// 0 初始状态
 	/// 1 准备绘图
@@ -33,7 +34,6 @@ private:
 	void toolChange(int toolType);
 private:
 	int x, y, w, h;
-	QImage img;
 	QPixmap* imgCanvas;
 	QPixmap* imgBoard;
 	QPoint posPress;

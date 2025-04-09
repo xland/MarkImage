@@ -2,12 +2,12 @@
 
 #include <QWidget>
 
-class ShapeLayerBar : public QWidget
+class LayerBar : public QWidget
 {
 	Q_OBJECT
 public:
-	ShapeLayerBar(QWidget *parent = nullptr);
-	~ShapeLayerBar();
+	LayerBar(QWidget *parent = nullptr);
+	~LayerBar();
 signals:
 	void onClick();
 protected:

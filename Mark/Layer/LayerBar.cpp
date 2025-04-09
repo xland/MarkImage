@@ -1,19 +1,19 @@
 #include <QPainter>
 #include <QMouseEvent>
 #include "Util.h"
-#include "ShapeLayerBar.h"
+#include "LayerBar.h"
 
-ShapeLayerBar::ShapeLayerBar(QWidget *parent) : QWidget(parent)
+LayerBar::LayerBar(QWidget *parent) : QWidget(parent)
 {
 	setFixedHeight(36);
 	setCursor(Qt::CursorShape::PointingHandCursor);
 }
 
-ShapeLayerBar::~ShapeLayerBar()
+LayerBar::~LayerBar()
 {
 
 }
-void ShapeLayerBar::paintEvent(QPaintEvent* event)
+void LayerBar::paintEvent(QPaintEvent* event)
 {
     QPainter p(this);
 	p.setPen(Qt::NoPen);
@@ -26,7 +26,6 @@ void ShapeLayerBar::paintEvent(QPaintEvent* event)
 
 
     p.setBrush(Qt::NoBrush);
-    p.setPen(QColor(50, 130, 240));
     auto font = Util::getIconFont(12);
     p.setFont(*font);
     header.setLeft(10);
@@ -38,7 +37,7 @@ void ShapeLayerBar::paintEvent(QPaintEvent* event)
     p.drawText(header, "已绘元素：0", Qt::AlignLeft | Qt::AlignVCenter);
 }
 
-void ShapeLayerBar::mousePressEvent(QMouseEvent* event)
+void LayerBar::mousePressEvent(QMouseEvent* event)
 {
     if (event->button() == Qt::LeftButton) {
         isChecked = !isChecked;

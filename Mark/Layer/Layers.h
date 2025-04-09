@@ -3,15 +3,15 @@
 #include <QWidget>
 #include <QVBoxLayout>
 #include <QScrollArea>
-#include "ShapeLayerBar.h"
+#include "LayerBar.h"
 
-class ShapeLayer : public QWidget
+class Layers : public QWidget
 {
 	Q_OBJECT
 
 public:
-	ShapeLayer(QWidget *parent = nullptr);
-	~ShapeLayer();
+	Layers(QWidget *parent = nullptr);
+	~Layers();
 	void refreshShapes();
 protected:
 	void paintEvent(QPaintEvent* event) override;
@@ -21,7 +21,7 @@ private:
 	void itemClick();
 	void barClick();
 private:
-	ShapeLayerBar* shapeLayerBar;
+	LayerBar* layerBar;
 	QScrollArea* listCtrl;
 	QWidget* itemBox;
 };

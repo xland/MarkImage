@@ -6,10 +6,10 @@
 
 #include "Util.h"
 #include "../Canvas/Canvas.h"
-#include "ShapeLayer.h"
-#include "ShapeItem.h"
+#include "Layers.h"
+#include "LayerItem.h"
 
-ShapeLayer::ShapeLayer(QWidget *parent) : QWidget(parent)
+Layers::Layers(QWidget *parent) : QWidget(parent)
 {
     setVisible(false);
     setAcceptDrops(true);
@@ -17,9 +17,9 @@ ShapeLayer::ShapeLayer(QWidget *parent) : QWidget(parent)
     QVBoxLayout* layout = new QVBoxLayout(this);
     layout->setSpacing(0);
     layout->setContentsMargins(0, 0, 0, 0);
-    shapeLayerBar = new ShapeLayerBar(this);
-    connect(shapeLayerBar, &ShapeLayerBar::onClick, this, &ShapeLayer::barClick);
-    layout->addWidget(shapeLayerBar);
+    layerBar = new LayerBar(this);
+    connect(layerBar, &LayerBar::onClick, this, &Layers::barClick);
+    layout->addWidget(layerBar);
     listCtrl = new QScrollArea(this);
     listCtrl->setStyleSheet(R"(QScrollArea{border: none; background: transparent;}
 QScrollBar:vertical {
@@ -61,12 +61,12 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
  //   setLayout(layout);
 }
 
-ShapeLayer::~ShapeLayer()
+Layers::~Layers()
 {
 
 }
 
-void ShapeLayer::refreshShapes()
+void Layers::refreshShapes()
 {
     if (itemBox) {
         delete itemBox;
@@ -76,13 +76,13 @@ void ShapeLayer::refreshShapes()
     itemBox->setStyleSheet(R"(background:transparent;margin:0px;padding:0px;)");
     auto layout = new QVBoxLayout(itemBox);
     layout->setSpacing(8);
-    layout->setContentsMargins(0, 8, 0, 8);
+    layout->setContentsMargins(8, 8, 8, 8);
     auto shapes = Shapes::get();
     for (size_t i = 0; i < shapes->shapes.size(); i++)
     {
-        auto item = new ShapeItem(this);
+        auto item = new LayerItem(shapes->shapes[i], this);
         item->index = i;
-        connect(item, &ShapeItem::onClick, this, &ShapeLayer::itemClick);
+        connect(item, &LayerItem::onClick, this, &Layers::itemClick);
         layout->insertWidget(0, item);
     }
     layout->addStretch();
@@ -92,7 +92,7 @@ void ShapeLayer::refreshShapes()
     }
 }
 
-void ShapeLayer::paintEvent(QPaintEvent* event)
+void Layers::paintEvent(QPaintEvent* event)
 {
     QPainter p(this);
     p.setRenderHint(QPainter::Antialiasing, true);
@@ -102,9 +102,9 @@ void ShapeLayer::paintEvent(QPaintEvent* event)
     p.drawRect(rect());
 }
 
-void ShapeLayer::itemClick()
+void Layers::itemClick()
 {
-    auto items = findChildren<ShapeItem*>();
+    auto items = findChildren<LayerItem*>();
     bool needCheck = false;
     for (size_t i = 0; i < items.length(); i++)
     {
@@ -113,9 +113,9 @@ void ShapeLayer::itemClick()
             break;
         }
     }
-    if (shapeLayerBar->isChecked != needCheck) {
-        shapeLayerBar->isChecked = needCheck;
-        shapeLayerBar->update();
+    if (layerBar->isChecked != needCheck) {
+        layerBar->isChecked = needCheck;
+        layerBar->update();
         auto canvas = parentWidget()->findChild<Canvas*>();
         if (needCheck) {
             canvas->changeState(3);
@@ -125,19 +125,19 @@ void ShapeLayer::itemClick()
         }
     }
 }
-void ShapeLayer::barClick()
+void Layers::barClick()
 {
-    auto items = findChildren<ShapeItem*>();
+    auto items = findChildren<LayerItem*>();
     for (size_t i = 0; i < items.length(); i++)
     {
-        if (items[i]->isCheck == shapeLayerBar->isChecked) {
+        if (items[i]->isCheck == layerBar->isChecked) {
             continue;
         }
-		items[i]->isCheck = shapeLayerBar->isChecked;
+		items[i]->isCheck = layerBar->isChecked;
 		items[i]->update();
     }
     auto canvas = parentWidget()->findChild<Canvas*>();
-    if (shapeLayerBar->isChecked)
+    if (layerBar->isChecked)
     {
         canvas->changeState(3);
     }
@@ -145,39 +145,35 @@ void ShapeLayer::barClick()
         canvas->changeState(1);
     }
 }
-void ShapeLayer::dragEnterEvent(QDragEnterEvent* event)
+void Layers::dragEnterEvent(QDragEnterEvent* event)
 {
     if (event->mimeData()->hasFormat("application/x-draggablewidget")) {
         event->acceptProposedAction();
     }
 }
-void ShapeLayer::dropEvent(QDropEvent* event)
+void Layers::dropEvent(QDropEvent* event)
 {
     if (event->mimeData()->hasFormat("application/x-draggablewidget")) {
-        ShapeItem* source = qobject_cast<ShapeItem*>(event->source());
+        LayerItem* source = qobject_cast<LayerItem*>(event->source());
         if (source) {
-            auto l = (QVBoxLayout*)this->layout();   
+            auto l = (QVBoxLayout*)itemBox->layout();
             auto pos = event->position();
-            int index = -1;
-            bool flag = false;
+            pos.setY(pos.y() - 40);
+            int index = 0;
             for (int i = 0; i < l->count(); ++i) {
                 auto obj = l->itemAt(i);
                 if (!obj || !obj->widget()) continue;
-                auto item = qobject_cast<ShapeItem*>(obj->widget());
+                auto item = qobject_cast<LayerItem*>(obj->widget());
 				if (item == source) continue;
+                index = i;
                 if (item) {
-                    index += 1;
                     if (pos.y() < item->y() + item->height() / 2) {
-                        flag = true;
                         break;
                     }
                 }
             }
-            if (!flag) {
-                index += 1;
-            }
             l->removeWidget(source);
-            l->insertWidget(index+1, source);
+            l->insertWidget(index, source);
             event->acceptProposedAction();
         }
     }

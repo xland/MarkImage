@@ -29,3 +29,9 @@ void ShapeRect::move(QPoint& posPress, QPoint& posMove)
 	rect.translate(delta);
 	posPress = posMove;
 }
+
+void ShapeRect::drawTitle(const QRect& rect, QPainter* p)
+{
+	QString str = "矩形";
+	p->drawText(rect, str, Qt::AlignLeft | Qt::AlignVCenter);
+}

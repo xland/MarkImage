@@ -2,17 +2,18 @@
 
 #include <QWidget>
 
-class ShapeItem : public QWidget
+class ShapeBase;
+class LayerItem : public QWidget
 {
 	Q_OBJECT
 
 public:
-	ShapeItem(QWidget *parent = nullptr);
-	~ShapeItem();
+	LayerItem(ShapeBase* shape,QWidget *parent = nullptr);
+	~LayerItem();
 signals:
 	void onClick();
 protected:
-	void paintEvent(QPaintEvent* event);
+	void paintEvent(QPaintEvent* event) override;
 	void enterEvent(QEnterEvent* event) override;
 	void leaveEvent(QEvent* event) override;
 	void mousePressEvent(QMouseEvent* event) override;
@@ -21,6 +22,7 @@ protected:
 public:
 	bool isCheck{ false };
 	int index;
+	ShapeBase* shape{ nullptr };
 private:
 	bool isHover{ false };
 	QPoint dragStartPosition;

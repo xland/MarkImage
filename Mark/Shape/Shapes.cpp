@@ -24,6 +24,7 @@ Shapes* Shapes::get()
 
 void Shapes::add(ShapeBase* shape)
 {
+
     shapes.append(shape);
 }
 

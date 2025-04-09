@@ -1,7 +1,10 @@
 #include <QPainter>
 
 #include "../Tool/ToolBar.h"
-#include "../Shape/ShapeLayer.h"
+#include "../Layer/Layers.h"
+
+#include "../Shape/ShapeImg.h"
+#include "../Shape/ShapeRect.h"
 #include "Canvas.h"
 #include "CanvasBox.h"
 
@@ -13,13 +16,13 @@ Canvas::Canvas(QWidget *parent) : QWidget(parent)
     auto toolBar = window()->findChild<ToolBar*>();
     connect(toolBar, &ToolBar::toolChange, this, &Canvas::toolChange);
 
-
 	auto cb = (CanvasBox*)parent;
 	connect(cb, &CanvasBox::onResize, this, &Canvas::onParentResize);
-    img.load("D:\\project\\MarkImage\\Doc\\allen.png");
-    imgCanvas = new QPixmap(img.width(), img.height());
+    QSize s(800, 600);
+    setFixedSize(s);
+    imgCanvas = new QPixmap(s);
     imgCanvas->fill(Qt::transparent);
-    imgBoard = new QPixmap(img.width(), img.height());
+    imgBoard = new QPixmap(s);
     imgBoard->fill(Qt::transparent);
 }
 
@@ -39,6 +42,13 @@ void Canvas::changeState(const int& state)
     }
 }
 
+void Canvas::addShapeImg(ShapeImg* shapeImg)
+{
+    QPainter p(imgBoard);
+	p.drawImage(0, 0, shapeImg->img);
+    update();
+}
+
 void Canvas::paintEvent(QPaintEvent* event)
 {
     QPainter p(this);
@@ -46,7 +56,9 @@ void Canvas::paintEvent(QPaintEvent* event)
     p.setRenderHint(QPainter::VerticalSubpixelPositioning, true);
     p.setRenderHint(QPainter::LosslessImageRendering, true);
     p.setRenderHint(QPainter::NonCosmeticBrushPatterns, true);
-    p.drawImage(0,0, img);
+	p.setPen(Qt::NoPen);
+	p.setBrush(QColor(255, 255, 255));
+	p.drawRect(rect());
     p.drawPixmap(0, 0, *imgBoard);
     p.drawPixmap(0, 0, *imgCanvas);
 }
@@ -57,11 +69,10 @@ void Canvas::mousePressEvent(QMouseEvent* event)
         return;
 	}
     posPress = event->pos();
-    auto shapes = Shapes::get();
     //todo 验证创建什么类型的Shape
     if (state == 1) {
         if (type == 0) {
-            shape = new ShapeRect(this);
+            shape = new ShapeRect(Shapes::get());
         }        
     }
     else if (state == 3) {
@@ -111,14 +122,14 @@ void Canvas::mouseReleaseEvent(QMouseEvent* event)
     shape->paint(&p);
     update();
     shapes->add(shape);
-    auto layer = window()->findChild<ShapeLayer*>();
+    auto layer = window()->findChild<Layers*>();
     layer->refreshShapes();
 }
 
 void Canvas::onParentResize(const int widgetWidth, const int widgetHeight)
 {
-    int imgWidth = img.width();
-    int imgHeight = img.height();
+    int imgWidth = width();
+    int imgHeight = height();
 
     //if (imgWidth < widgetWidth && imgHeight < widgetHeight) {
         //todo 100%
@@ -126,7 +137,6 @@ void Canvas::onParentResize(const int widgetWidth, const int widgetHeight)
         y = (widgetHeight - imgHeight) / 2;
         w = imgWidth;
         h = imgHeight;
-        img.setDevicePixelRatio(1.f);
         imgCanvas->setDevicePixelRatio(1.f);
         imgBoard->setDevicePixelRatio(1.f);
     //}
