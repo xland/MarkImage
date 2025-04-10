@@ -34,7 +34,7 @@ MarkImage::MarkImage(QPixmap* pixmap, QWidget* parent) : QWidget(parent), pixmap
     SetWindowLongPtr(hwnd, GWL_STYLE, style);
     SetWindowPos(hwnd, nullptr, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_FRAMECHANGED);
 
-    setGeometry(0, 0, 1200, 800);
+    //setGeometry(0, 0, 1200, 800);
     //show();
     showMaximized();
 }

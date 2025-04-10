@@ -8,8 +8,7 @@
 #include "Util.h"
 #include "BtnNumInput.h"
 
-BtnNumInput::BtnNumInput(const QString& text, int val, QWidget* parent) : QWidget(parent), 
-val{val}
+BtnNumInput::BtnNumInput(const QString& text, int val, QWidget* parent) : QWidget(parent)
 {
 	setFixedHeight(22);
 	auto layout = new QHBoxLayout(this);
@@ -24,8 +23,8 @@ val{val}
 	input->setFixedHeight(22);
 	input->setFixedWidth(80);
 	input->setAlignment(Qt::AlignCenter);
-	input->setStyleSheet(R"(QLineEdit{border:none;padding:0px;margin:0px;}
-QLineEdit:focus{border:none;outline:none;})");
+	input->setStyleSheet(R"(QLineEdit{border:none;padding:0px;margin:0px;} QLineEdit:focus{border:none;outline:none;})");
+	connect(input, &QLineEdit::textChanged, this, [this]() { emit valueChanged(input->text().toInt()); });
 	QRegularExpression regExp("^[0-9]*$");
 	QRegularExpressionValidator* validator = new QRegularExpressionValidator(regExp, input);
 	input->setValidator(validator);
@@ -44,6 +43,11 @@ BtnNumInput::~BtnNumInput()
 
 }
 
+int BtnNumInput::getVal()
+{
+	return input->text().toInt();
+}
+
 void BtnNumInput::paintEvent(QPaintEvent* event)
 {
 	//QPainter p(this);
@@ -57,6 +61,7 @@ void BtnNumInput::paintEvent(QPaintEvent* event)
 void BtnNumInput::onBtnClick()
 {
 	auto btn = (BtnNumInputBtn*)sender();
+	auto val = input->text().toInt();
 	if (btn == btnLeft) {
 		val--;
 	}

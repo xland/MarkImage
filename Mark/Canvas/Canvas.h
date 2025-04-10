@@ -29,13 +29,13 @@ protected:
 	void mousePressEvent(QMouseEvent* event) override;
 	void mouseMoveEvent(QMouseEvent* event) override;
 	void mouseReleaseEvent(QMouseEvent* event) override;
+	void resizeEvent(QResizeEvent* event) override;
 private:
 	void onParentResize(const int w, const int h);
 	void toolChange(int toolType);
 private:
-	int x, y, w, h;
-	QPixmap* imgCanvas;
-	QPixmap* imgBoard;
+	QPixmap imgCanvas;
+	QPixmap imgBoard;
 	QPoint posPress;
 	ShapeBase* shape;
 };

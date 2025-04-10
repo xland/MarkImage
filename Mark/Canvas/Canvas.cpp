@@ -5,6 +5,7 @@
 
 #include "../Shape/ShapeImg.h"
 #include "../Shape/ShapeRect.h"
+#include "../Setting/SettingBoard.h"
 #include "Canvas.h"
 #include "CanvasBox.h"
 
@@ -16,14 +17,21 @@ Canvas::Canvas(QWidget *parent) : QWidget(parent)
     auto toolBar = window()->findChild<ToolBar*>();
     connect(toolBar, &ToolBar::toolChange, this, &Canvas::toolChange);
 
-	auto cb = (CanvasBox*)parent;
-	connect(cb, &CanvasBox::onResize, this, &Canvas::onParentResize);
+	//auto cb = (CanvasBox*)parent;
+	//connect(cb, &CanvasBox::onResize, this, &Canvas::onParentResize);
+
+
     QSize s(800, 600);
     setFixedSize(s);
-    imgCanvas = new QPixmap(s);
-    imgCanvas->fill(Qt::transparent);
-    imgBoard = new QPixmap(s);
-    imgBoard->fill(Qt::transparent);
+    imgCanvas = QPixmap(s);
+    imgCanvas.fill(Qt::transparent);
+    imgBoard = QPixmap(s);
+    imgBoard.fill(Qt::transparent);
+
+    auto sb = window()->findChild<SettingBoard*>();
+    if (sb) {
+        sb->setVal(800, 600);
+    }
 }
 
 Canvas::~Canvas()
@@ -44,7 +52,7 @@ void Canvas::changeState(const int& state)
 
 void Canvas::addShapeImg(ShapeImg* shapeImg)
 {
-    QPainter p(imgBoard);
+    QPainter p(&imgBoard);
 	p.drawImage(0, 0, shapeImg->img);
     update();
 }
@@ -59,8 +67,8 @@ void Canvas::paintEvent(QPaintEvent* event)
 	p.setPen(Qt::NoPen);
 	p.setBrush(QColor(255, 255, 255));
 	p.drawRect(rect());
-    p.drawPixmap(0, 0, *imgBoard);
-    p.drawPixmap(0, 0, *imgCanvas);
+    p.drawPixmap(0, 0, imgBoard);
+    p.drawPixmap(0, 0, imgCanvas);
 }
 
 void Canvas::mousePressEvent(QMouseEvent* event)
@@ -94,8 +102,8 @@ void Canvas::mouseMoveEvent(QMouseEvent* event)
         if (state == 2) {
             shape->draw(posPress, pos);
             auto box = (CanvasBox*)parent();
-            imgCanvas->fill(Qt::transparent);
-            QPainter p(imgCanvas);
+            imgCanvas.fill(Qt::transparent);
+            QPainter p(&imgCanvas);
             p.setRenderHint(QPainter::Antialiasing, true);
             shape->paint(&p);
         }
@@ -115,15 +123,37 @@ void Canvas::mouseReleaseEvent(QMouseEvent* event)
         return;
     }
     auto shapes = Shapes::get();
-    imgCanvas->fill(Qt::transparent);
+    imgCanvas.fill(Qt::transparent);
     auto box = (CanvasBox*)parent();
-    QPainter p(imgBoard);
+    QPainter p(&imgBoard);
     p.setRenderHint(QPainter::Antialiasing, true);
     shape->paint(&p);
     update();
     shapes->add(shape);
     auto layer = window()->findChild<Layers*>();
     layer->refreshShapes();
+}
+
+void Canvas::resizeEvent(QResizeEvent* event)
+{
+    if (!event->oldSize().isValid()) {
+        return;
+    }
+    auto w = width();
+	auto h = height();
+	if (w == imgCanvas.width() && h == imgCanvas.height()) {
+		return;
+	}
+    QPixmap imgCanvasTemp(w, h);
+	QPixmap imgBoardTemp(w, h);
+	imgCanvasTemp.fill(Qt::transparent);
+	imgBoardTemp.fill(Qt::transparent);
+	QPainter p1(&imgCanvasTemp);
+	QPainter p2(&imgBoardTemp);
+	p1.drawPixmap(0, 0, imgCanvas);
+	p2.drawPixmap(0, 0, imgBoard);
+	imgCanvas = imgCanvasTemp;
+	imgBoard = imgBoardTemp;
 }
 
 void Canvas::onParentResize(const int widgetWidth, const int widgetHeight)
@@ -133,12 +163,12 @@ void Canvas::onParentResize(const int widgetWidth, const int widgetHeight)
 
     //if (imgWidth < widgetWidth && imgHeight < widgetHeight) {
         //todo 100%
-        x = (widgetWidth - imgWidth) / 2;
-        y = (widgetHeight - imgHeight) / 2;
-        w = imgWidth;
-        h = imgHeight;
-        imgCanvas->setDevicePixelRatio(1.f);
-        imgBoard->setDevicePixelRatio(1.f);
+        //x = (widgetWidth - imgWidth) / 2;
+        //y = (widgetHeight - imgHeight) / 2;
+        //w = imgWidth;
+        //h = imgHeight;
+        //imgCanvas.setDevicePixelRatio(1.f);
+        //imgBoard.setDevicePixelRatio(1.f);
     //}
     //else
     //{
@@ -155,7 +185,7 @@ void Canvas::onParentResize(const int widgetWidth, const int widgetHeight)
     //    imgCanvas->setDevicePixelRatio(dpr);
     //    imgBoard->setDevicePixelRatio(dpr);
     //}
-    setGeometry(x, y, w, h);
+    //setGeometry(x, y, w, h);
 }
 
 void Canvas::toolChange(int toolType)

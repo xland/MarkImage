@@ -9,6 +9,8 @@ class SettingSize : public QWidget
 public:
 	SettingSize(QWidget *parent = nullptr);
 	~SettingSize();
+signals:
+	void valueChanged(int w, int h);
 protected:
 	void paintEvent(QPaintEvent* event) override;
 private:

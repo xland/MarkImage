@@ -12,8 +12,16 @@ SettingSize::SettingSize(QWidget *parent) : QWidget(parent)
 	auto layout = new QVBoxLayout(this);
 	layout->setSpacing(10);
 	layout->setContentsMargins(8, 38, 8, 8);
-	layout->addWidget(new BtnNumInput("高度", 30, this));
-	layout->addWidget(new BtnNumInput("宽度", 30, this));
+	auto w = new BtnNumInput("宽度", 30, this);
+	auto h = new BtnNumInput("高度", 30, this);
+	connect(h, &BtnNumInput::valueChanged, this, [this,w](int hVal) {
+		emit valueChanged(w->getVal(), hVal);
+		});
+	connect(w, &BtnNumInput::valueChanged, this, [this,h](int wVal) {
+		emit valueChanged(wVal, h->getVal());
+		});
+	layout->addWidget(w);
+	layout->addWidget(h);
 	setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
 }
 
